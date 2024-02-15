@@ -45,7 +45,8 @@
 			To accommodate supersampling, RasterizerImp::rasterize_triangle first had its points--P0 (x0, y0), P1 (x1, y1), and P2 (x2, y2)--scaled by sqrt(sample rate).
 			The functions determining whether a pixel in the sample buffer is inside of the triangle were unchanged.
 			This is because the sample buffer is already scaled, which means that each of the sample buffer pixels are a part of a single frame buffer pixel, which allows for simply checking the middle of each supersampled pixel comprising a single frame buffer pixel as opposed to checking checking fractional points of a single frame buffer pixel.
-			The last change to the triangle rasterizing function is setting the color of the sample buffer directly rather than calling RasterizerImp::fill_pixel directly. These changes allowed for rasterized triangles to support supersampling.
+			The last change to the triangle rasterizing function is setting the color of the sample buffer directly rather than calling RasterizerImp::fill_pixel directly.
+			These changes allowed for rasterized triangles to support supersampling.
 		</p>
 		<p>
 			The RasterizerImp::fill_pixel function was modified to support rasterizing lines and points.
@@ -109,6 +110,118 @@
 		<img src="../hw1/img/task4t7.png" width="600px">
 
 		<h1>Task 5</h1>
+		<p>
+			The two pixel sampling methods programmed in this task were used to implement texture mapping on a variety of images.
+			Pixel sampling involves taking one point from the sample space, converting it to its corresponding point in the texture space, and finding the corresponding texel color on the mipmap.
+			This allows us to avoid aliasing of the texture when sampling pixels.
+		</p>
+		<p>
+			Nearest pixel filtering simply works by taking in a texture value point, scaling it according to the dimensions of the current mipmap level (which for this task is level 0), and then returning the color of the corresponding texel on the given mipmap level.  
+		</p>
+		<p>
+			Bilinear filtering works a bit similarly to nearest pixel filtering, with one difference.
+			Given some texture value point, bilinear filtering involves taking the four closest sample points closest to the texture value point and effectively lerping them horizontally and vertically.
+			In the case for this project, the color values at these respective points were “lerped” together, and the final “lerped” color is returned.
+		</p>
+		<p>
+			In general, bilinear filtering produces a smoother “blur” effect when compared to nearest neighbor filtering, which typically retains the sharpness of an image.
+			Nearest pixel filtering may be preferred when dealing with pixel graphics, while bilinear filtering may be preferred when dealing with more realism-based graphics.
+		</p>
+		<img src="../hw1/img/task5-nearest-ssrate1.png" width="600px">
+		<p>
+			Pictured above is the Berkeley logo with a texture applied.
+			The supersample rate is 1 per pixel, using nearest pixel sampling, on mipmap level 0.
+			Note that the zoomed in pixel preview is of the distorted restricted trademark symbol ®.
+		</p>
+		<img src="../hw1/img/task5-nearest-ssrate16.png" width="600px">
+		<p>
+			Pictured above is the Berkeley logo with a texture applied.
+			The supersample rate is 16 per pixel, using nearest pixel sampling, on mipmap level 0.
+		</p>
+		<img src="../hw1/img/task5-bilin-ssrate1.png" width="600px">
+		<p>
+			Pictured above is the Berkeley logo with a texture applied.
+			The supersample rate is 1 per pixel, using bilinear sampling, on mipmap level 0. 
+		</p>
+		<img src="../hw1/img/task5-bilin-ssrate16.png" width="600px">
+		<p>
+			Pictured above is the Berkeley logo with a texture applied.
+			The supersample rate is 16 per pixel, using bilinear sampling, on mipmap level 0.
+		</p>
+		<p>
+			As seen above, nearest pixel sampling results in a more sharper blur when compared to the bilinear sample method.
+			In both of the nearest pixel sampling images, the restricted symbol remains relatively sharp, even when supersampling from 1 versus 16 pixels.
+		</p>
+		<p>
+			Bilinear sampling results in a much more blurred image overall, and when comparing the 1-pixel sampling rate versus the 16-pixel sampling rate, the image of the latter has much of the sharper elements of the original distorted image blurred out / softened.  
+		</p>
+		<p>
+			There will typically be a much more noticeable difference between the two methods when the original image is more pixelated, or when the texture map results in a sharpened version of the image.
+			This is due to the fact that bilinear sampling is effectively a weighted sum of four texel pixels (or more specifically, an average of their colors).
+			Thus, in images with more drastic color changes (such as in pixel art), bilinear sampling will result in a much stronger blurring effect when compared to nearest pixel sampling.
+			When images are more blurry, or have more gradual color changes between neighboring pixels, the visual difference between the two methods will decrease.
+		</p>
+
 		<h1>Task 6</h1>
+		<p>
+			Level sampling is a method of texture sampling that allows us to dynamically sample from different resolutions of the original sample image in order to avoid aliasing effects in the final textured, rendered image.
+			The data structure that stores all of the images with differing image resolutions is the mipmap, with level 0 containing the image at its original resolution, and the highest mipmap level containing a single 1x1 pixel.
+			Each pixel in sample space has a corresponding mipmap level D associated with it, which can be calculated using the following formula pictured below:
+		</p>
+		<img src="../hw1/img/task6level-formula.png">
+		<p>
+			The above formula effectively takes in a given point in sample space, and returns the corresponding mipmap level to sample texels from, based on the ideal sampling rate.
+		</p>
+		<p>
+			Once the level of the pixel is determined, level sampling then branches off into two “paths” depending on whether we are level sampling bilinearly versus level sampling linearly/at the zeroth level (as was done in Task 5).
+			If level sampling bilinearly, then we take the floor and ceiling of the corresponding level D and perform linear interpolation on the bilinear pixel sampling of the point at floor(D) and ceil(D) respectively.
+			The color produced by this operation is then returned. 
+		</p>
+		<p>
+			This implementation required the use of a get_level() function to find the D level of a pixel and a sample() method to return the appropriate color based on the level sampling and pixel sampling method passed in.
+		</p>
+		<p>
+			In regards to rendering speed, pixel sampling is the fastest, due to fewer computations and memory access operations required.
+			Supersampling is the second fastest, although this is highly dependent on the sampling rate; a 4 pixel sampling rate will render faster than a 16 pixel sampling rate.
+			Finally, level sampling is the “slowest”, especially when trilinearly or bilinearly sampling images.
+			Otherwise, if linearly level sampling, return the pixel sampling of the point, taking the texel color from the Dth level (after rounding).
+		</p>
+		<p>
+			There are trade-offs present in all three sample methods.
+			For example, level sampling may result in the over blurring of distant elements.
+			Level sampling may also cause storage issues depending on the resolution of the original image (and thus the total number of levels stored).
+			Trilinear and bilinear filtering (when used in level filtering) are also computationally costly when compared to just using the pixel sampling method of texture sampling, due to the number of lerp operations and texel reads necessary. 
+		</p>
+		<p>
+			Pixel sampling is the fastest and least costly method, but may result in moires and jaggies appearing in the final render.
+			Pixel sampling retains sharpness in images, and can even further highlight them, which may not be desired. 
+		</p>
+		<p>
+			Supersampling will result in higher quality renders, but is an expensive (and potentially time-consuming) operation.
+			Along with this, when textures are minified, there will be many texels per each pixel footprint, resulting in the need to take many samples, which is a time-consuming operation.
+			Supersampling requires far more memory look-ups when compared to the other methods.
+		</p>
+		<p>
+			In regards to anti-aliasing, super-sampling performs best, and pixel sampling alone (when using texels from the zeroth mipmap level) is the worst on average, especially when using nearest pixel sampling. 
+		</p>
+		<p>
+			Pictured below are a few examples of various rendered images:
+		</p>
+		<img src="../hw1/img/nearlev-nearpix-ssrate1.png">
+		<p>
+			Pictured above is a distorted image of the Wikipedia logo, using nearest level sampling, nearest pixel sampling, at an supersampling rate of 1 pixel.
+		</p>
+		<img src="../hw1/img/nearlev-bilinpix.png">
+		<p>
+			Pictured above is a distorted image of the Wikipedia logo, using bilinear level sampling, nearest pixel sampling, at an supersampling rate of 1 pixel.
+		</p>
+		<img src="../hw1/img/binlev-binpex.png">
+		<p>
+			Pictured above is a distorted image of the Wikipedia logo, using bilinear level sampling, bilinear pixel sampling, at an supersampling rate of 1 pixel.
+		</p>
+		<img src="../hw1/img/binlev-linpix-ssrate1.png">
+		<p>
+			Pictured above is a distorted image of the Wikipedia logo, using nearest level sampling, bilinear pixel sampling, at an supersampling rate of 1 pixel.
+		</p>
 	</body>
 </html>
