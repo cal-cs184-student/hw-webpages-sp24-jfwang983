@@ -1,7 +1,678 @@
-<html>
-	<head>
-	</head>
-	<body>
-		Homework 2 index.html here
-	</body>
-</html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS 184 - Assignment 2 Write-Up</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="dbacdbb1-3f6a-4c3f-a70a-0f8c60b89d76" class="page sans"><header><h1 class="page-title">CS 184 - Assignment 2 Write-Up</h1><p class="page-description"></p></header><div class="page-body"><p id="af399504-b4b6-467a-8c59-5d385e0f3c59" class="">
+</p><p id="7843ec90-f0fc-4485-aeeb-ec7dd5aab6ed" class="">By Ayra Jafri, Jonathan Wang</p><p id="677b92f1-a5bd-4d6f-b58b-fe67e7fc52c0" class="">
+</p><h1 id="95ef19e9-e630-4318-9096-2a71336e09ab" class="">Overview</h1><p id="c191efa7-7b6a-4bcf-9d4a-cba51d287481" class="">In this homework we explored 3-dimensional geometric modeling to create and modify meshes of various objects.</p><p id="ed2fa93d-7028-43df-9374-a8f5b575e479" class="">In section 1, we implemented the basic algorithm to create the mesh objects. First, we created smooth 2-dimensional Bezier curves with the de Casteljau algorithm. Then, we expanded upon the 2-dimensional Bezier curves to create 3-dimensional Bezier surfaces. Both Bezier curves and Bezier surfaces relied on the recursive nature of the de Casteljau algorithm to optimally create the line geometry. From here, we could create surfaces for the mesh.</p><p id="ce2769cd-06dd-4fa8-b6f1-c63c1498cd5b" class="">In section 2, we implemented features to our mesh edit program to improve the rendering of the mesh objects. First, we implemented Phong shading with area-weighted vertex normals. In this algorithm, we derived the unit vector for the weighted sum of every normal vector that is an adjacent face to a specific vertex. This implementation allowed the meshes to appear smoother. Then, we implemented edge flipping and edge splitting to provide more control to change the triangles within the mesh. Edge flipping moved the edge whereas edge splitting added a new vertex and new edges to add more detail to the mesh. Lastly, we implemented loop subdivision for mesh upsampling which combines all previous features to convert the mesh to higher-resolution. using the original mesh data, extra elements were added to reinforce the details of each triangle of the mesh, producing much smoother meshes.</p><p id="431121e7-5459-42f6-96f9-e090dbd7c907" class="">Overall, this homework introduced features to improve mesh generation.</p><h1 id="1807d6ea-3773-4c71-857c-885b153e2d7e" class="">Part 1</h1><p id="7fb635b0-a228-47ae-bf7a-e45384b9cb4d" class="">The de Casteljau&#x27;s algorithm is used to evaluate Bezier curves, given a set of control points and a parameter t. Given n control points, the algorithm starts by linearly interpolating (n - 1) intermediate control points with respect to the t parameter, a decimal between 0 and 1. So, given a set of control points P1, P2, … , PN, we can calculate the ith control point PI' at the next subdivision as follows:</p><figure id="f2eb4fa9-1cdc-4f6d-9db7-6d9bad0a1d6e" class="image"><a href="https://lh7-us.googleusercontent.com/_6d8Gwbw_RXtKK4vJVq2XN5pDXU6mpC41aBvBW1ILdOVaon9jX0EBcVmLSPNEMmabNv2CZNNWQrZVG-6mk4mEyCDMuBXheEMvmasP45WskawEjaxNsmEuKzdjDuv--e641cBiiZofmxMPT-UMP6Y9dY"><img style="width:624px" src="https://lh7-us.googleusercontent.com/_6d8Gwbw_RXtKK4vJVq2XN5pDXU6mpC41aBvBW1ILdOVaon9jX0EBcVmLSPNEMmabNv2CZNNWQrZVG-6mk4mEyCDMuBXheEMvmasP45WskawEjaxNsmEuKzdjDuv--e641cBiiZofmxMPT-UMP6Y9dY"/></a></figure><p id="56976273-bfd6-4387-86ac-3f80087b21a2" class="">We can apply this algorithm recursively on the resulting set of control points until there is only one control point remaining.</p><p id="83c16f15-d06c-425c-8a07-c566d812eccc" class="">For this assignment, the separable 1D case of the algorithm was implemented in one function, the 2DVector case of the evaluateStep() function. This function takes in a list of control points, represented as 2D vectors. It then iterates through the first (n - 1) points, lerping the ith and (i+1)th point and storing the result in an array. Once all points have been processed, the function returns the array containing the (n - 1) control points of the next subdivision level.</p><p id="0de91e69-f4d0-4a17-b558-792b5c45718f" class="">Pictured below is a 6 point bezier curve:</p><figure id="e3399de3-0d0d-4285-a2a9-02dcc50f28cd" class="image"><a href="https://lh7-us.googleusercontent.com/Nzx1t1MEYEvomaoU_4TTHKyHTVXksl-3-5FkfrIgjxBzE70fs-Ywj33zTdUWBY9ilCp5TFujnzzmY-aPcnW0sCjvupBaOmUG0IT54Bcu3IGisni93XCcSnqMPdJTX8XB0ZaaL3NzwcECLQBWCQX8h4g"><img style="width:624px" src="https://lh7-us.googleusercontent.com/Nzx1t1MEYEvomaoU_4TTHKyHTVXksl-3-5FkfrIgjxBzE70fs-Ywj33zTdUWBY9ilCp5TFujnzzmY-aPcnW0sCjvupBaOmUG0IT54Bcu3IGisni93XCcSnqMPdJTX8XB0ZaaL3NzwcECLQBWCQX8h4g"/></a></figure><p id="c5043405-620e-44b6-954c-44e55eb8e79f" class="">Let's step through each level of de Casteljau&#x27;s algorithm using this curve. Note that the white curve corresponds to the original control points, the blue curve corresponds to the curve evaluated at a respective level, and the green curve represents the completed Bezier curve.</p><p id="1f6842aa-f159-4386-9223-b935e2bd7fe3" class="">Level 1:</p><figure id="121ab98a-0e4e-4633-8071-a05076016091" class="image"><a href="https://lh7-us.googleusercontent.com/sZ4TrgY36Cl9blbp-kLhoZ42Jg_ZCELSBvIlwGRsHiuqEZtGxxmaPPKCGmpTm_zAWsaDHoeQhBY42Xid1QnIK8cdo5ukCo53SCvJzspznURnqgfZaTR3RW7uXpYcPG06iRMFYgEXq0AcYtR0SWMCwYc"><img style="width:624px" src="https://lh7-us.googleusercontent.com/sZ4TrgY36Cl9blbp-kLhoZ42Jg_ZCELSBvIlwGRsHiuqEZtGxxmaPPKCGmpTm_zAWsaDHoeQhBY42Xid1QnIK8cdo5ukCo53SCvJzspznURnqgfZaTR3RW7uXpYcPG06iRMFYgEXq0AcYtR0SWMCwYc"/></a></figure><p id="6eb027dd-0887-4147-b6f7-d9a36d113986" class="">Level 2:</p><figure id="a6c8d34d-6d30-431f-935d-548072096c3b" class="image"><a href="https://lh7-us.googleusercontent.com/5ZlPimCwFKTa0mEWf2yUDtCpWTHAGATj3Dn7tQHQvR2D6v8Ia7cwIqIDAebd6xwsy2F171x9BwzHj7nGn_GnCYAHDecX3e7rsRIuMV22mr2XCAxPUwm_2JFKpLTE3hmLNGukM7o7c6XGXyqP5zheqQE"><img style="width:624px" src="https://lh7-us.googleusercontent.com/5ZlPimCwFKTa0mEWf2yUDtCpWTHAGATj3Dn7tQHQvR2D6v8Ia7cwIqIDAebd6xwsy2F171x9BwzHj7nGn_GnCYAHDecX3e7rsRIuMV22mr2XCAxPUwm_2JFKpLTE3hmLNGukM7o7c6XGXyqP5zheqQE"/></a></figure><p id="4f1c4ec3-151d-4fe5-827c-6cfeb22c3fa4" class="">Level 3:</p><figure id="fc515198-b24a-44d9-93bf-17a685732616" class="image"><a href="https://lh7-us.googleusercontent.com/6M4Wxw9qgpw4pxjxePtK-DeSC8PEAgqyu-O-NBhAQzG-YWKPwOQUf1j2oZD4iBT9uufyo7IfxwbeE3GwwkcvQu_eMiPGZ7_-JzZOjEKJ1T0Sk_xc0GzdZ0hF2W44bE8Ff7CN2Z8QxvluLjd8jx-BFMg"><img style="width:624px" src="https://lh7-us.googleusercontent.com/6M4Wxw9qgpw4pxjxePtK-DeSC8PEAgqyu-O-NBhAQzG-YWKPwOQUf1j2oZD4iBT9uufyo7IfxwbeE3GwwkcvQu_eMiPGZ7_-JzZOjEKJ1T0Sk_xc0GzdZ0hF2W44bE8Ff7CN2Z8QxvluLjd8jx-BFMg"/></a></figure><p id="730ef38d-8bb2-4679-9a18-e49bdd8bc557" class="">Level 4:</p><figure id="1b50d632-5b9c-4ba2-b08f-93c5428dbe15" class="image"><a href="https://lh7-us.googleusercontent.com/YDDHOgYDvotHtdewf9_82iajTYkIwUkHL6d8VbUxRrt7ujJBjuu5T6ozXT3ow9hJtlWN-E3T-u0NSUby2PNLxm6OqzT98diJURkgD3m8y5WPfYhVeZCHP9OtW_ppJCIawcRnnPDaqMrwQwxNHxvk67g"><img style="width:624px" src="https://lh7-us.googleusercontent.com/YDDHOgYDvotHtdewf9_82iajTYkIwUkHL6d8VbUxRrt7ujJBjuu5T6ozXT3ow9hJtlWN-E3T-u0NSUby2PNLxm6OqzT98diJURkgD3m8y5WPfYhVeZCHP9OtW_ppJCIawcRnnPDaqMrwQwxNHxvk67g"/></a></figure><p id="45289cc9-8ed7-401e-b8aa-96c645985462" class="">Level 5 (final level):</p><figure id="c05f73ea-50bb-4627-8233-c459b19c3c87" class="image"><a href="https://lh7-us.googleusercontent.com/0MqqpTv_0XZikGgwx8fzsvnC8nRiyZSfJQNxyFRXRasgcaHumTZlKMPjLi5SGM0LWLul1dMO1VPrvNlNU9dfHbGZSpNgOWEDECPk_vL7zYVFO0TIsJLXuH6OpZuXKYQ_bXRzB_aRUrjHIEHtMlwjyeo"><img style="width:624px" src="https://lh7-us.googleusercontent.com/0MqqpTv_0XZikGgwx8fzsvnC8nRiyZSfJQNxyFRXRasgcaHumTZlKMPjLi5SGM0LWLul1dMO1VPrvNlNU9dfHbGZSpNgOWEDECPk_vL7zYVFO0TIsJLXuH6OpZuXKYQ_bXRzB_aRUrjHIEHtMlwjyeo"/></a></figure><p id="a316cc31-d8d7-4a9d-bfa6-6bb0588a43a1" class="">Pictured below is a different Bezier curve, which was created by moving the original control points around and adjusting the parameter t:</p><figure id="7a68e052-0249-430a-84e3-dc9f77299a96" class="image"><a href="https://lh7-us.googleusercontent.com/PHfakXrxSMNlCbVBtXHdGyXRi6cwWZBBZ1kyy1Ka-6emVxdfOiD6UtNWX0i5QZVgRZcIF5GBsF9Fjlumg6mK4xX1jPCdRYG4FCWG4IB61WlI8iL7Jv3bYbSUmLHqpR7kmd87254533qvKLO8KCltP_U"><img style="width:624px" src="https://lh7-us.googleusercontent.com/PHfakXrxSMNlCbVBtXHdGyXRi6cwWZBBZ1kyy1Ka-6emVxdfOiD6UtNWX0i5QZVgRZcIF5GBsF9Fjlumg6mK4xX1jPCdRYG4FCWG4IB61WlI8iL7Jv3bYbSUmLHqpR7kmd87254533qvKLO8KCltP_U"/></a></figure><h1 id="e8abdc8d-5441-425f-ba00-1d30dd72d48d" class="">Part 2</h1><p id="47326945-4b54-4ae8-a0ab-254ac1299cde" class="">Briefly explain how the de Casteljau algorithm extends to Bezier surfaces and how you implemented it in order to evaluate Bezier surfaces.</p><p id="9a9dfd9f-70e4-4b92-910d-e9e317e7f5f7" class="">In the following part, we extend the 1D separable case of de Casteljau's algorithm to 2D to generate Bezier surfaces. This is done by calculating Bezier curves with respect to the u parameter for each control point, retrieving the final control point of each respective curve, and then calculating the final position on the Bezier surface by calculating the Bezier curve of the final u-control points with respect to v.</p><p id="d1be676f-2025-4a84-905f-6445e974b1ee" class="">Pictured below is a visualization of how the 1D separable case of the algorithm can be extended to 2D. Note that the blue curve represents the final u-control points, and the black point is the final control point.</p><figure id="4bf07d7f-8326-49a6-b1d7-b47eb85fc40e" class="image"><a href="https://lh7-us.googleusercontent.com/J34uKVmeqR9E7JK5cgZqddx0SLF1OeBjyAKQReZSkni-zIvc_DGPpuk5X0oJbjYQr9HrvwHuH5PkLL5VS3uHsWYzonY0VBQG56f7iZwGytaamOCivKO7xEYJw4HJ5NXh21Mn2iA66isBDfgBFjM7Sd4"><img style="width:624px" src="https://lh7-us.googleusercontent.com/J34uKVmeqR9E7JK5cgZqddx0SLF1OeBjyAKQReZSkni-zIvc_DGPpuk5X0oJbjYQr9HrvwHuH5PkLL5VS3uHsWYzonY0VBQG56f7iZwGytaamOCivKO7xEYJw4HJ5NXh21Mn2iA66isBDfgBFjM7Sd4"/></a></figure><p id="0dfafdac-2759-46cc-bb36-2fac5b017dc5" class="">This implementation required the creation of three functions. The first is evaluateStep(), which takes in a list of 3D control points and the decimal parameter t, and returns the (n - 1) control points of the next subdivision level. These points are generated by lerping intermediate points together in the same manner as described in Part 1.</p><p id="12f6ecd8-ff2c-40b0-9e0f-5e35d20eb8fb" class="">The next function is evaluate1D(), which takes in a list of 3D control points and a parameter t, and recursively evaluates de Casteljau's algorithm on the list using evaluateStep(). The function returns when there is only one control point in the list and returns said point.</p><p id="05621a9b-1772-46cb-b1d3-982d0c3ae9c3" class="">The final function is evaluate2D(), which takes in two parameters u and v, and returns the point on the Bezier surface corresponding to the point (u, v) on the surface. This is done by finding all u-points on the surface, which is done by lerping the control points with respect to the parameter u. This functions identically to the evaluateStep() function from part 1. Once an array of u-points is generated, we return the final point evaluated by the evaluate1D() function, when passed in the u-points as control points and v as the parameter.</p><p id="726868f1-8edb-4da3-9c2e-43ad6a56162f" class="">Pictured below is a Bezier surface file of a teapot generated by this implementation:</p><figure id="19405d58-2cf6-415c-b56b-80c91d1b86ba" class="image"><a href="https://lh7-us.googleusercontent.com/0RqDi0lc74DiCYS3IFoXp4qSFlkq8RGaj-fE7Uh4fibqcj2D6CB2EnE8YZSuJKse0MOLQgx8DDL_IBY4hjl1tz1LTH3TTr5U8J60qPZVGkIgCM-ZOZ8ZEKJvhrpjQqKAtH3IwolXaKDIaMCV0jY-4cg"><img style="width:624px" src="https://lh7-us.googleusercontent.com/0RqDi0lc74DiCYS3IFoXp4qSFlkq8RGaj-fE7Uh4fibqcj2D6CB2EnE8YZSuJKse0MOLQgx8DDL_IBY4hjl1tz1LTH3TTr5U8J60qPZVGkIgCM-ZOZ8ZEKJvhrpjQqKAtH3IwolXaKDIaMCV0jY-4cg"/></a></figure><h1 id="9f0b61f0-7cfb-4259-9aba-3e1ab2ed1f12" class="">Part 3</h1><p id="1eccd272-dd08-4bbf-aeb5-def8740ec477" class="">For the area-weighted vertex normals algorithm, we initialize a vector, called weighted_sum, as &lt;0, 0, 0&gt; to store the sum of the vectors normal to each face that contains the vertex. Then, we loop through all of the halfedges belonging to faces that contain the given vertex. To do this, we start with this vertex's halfedge, called h, and visited h's twin's next halfedge to ensure that every iteration's halfedge belonged to a new face with the given vertex. The loop ends when halfedge h has finished looping around all halfedges and has come back to the starting halfedge. The following diagram shows the iterated halfedges:</p><figure id="12f88aa2-394a-46f3-b64a-b275ea176aef" class="image"><a href="https://lh7-us.googleusercontent.com/hcLMx6so3PGN9414v6CFEv9iqvU-u5QGu9TS_OJFnoTh5xxYPwGqqksE8wi-JfYZ_o-O5TunU06JcgjxLE7ZtVM38Usbn2TWSsMGPg7D89awIQj7HZjDD_727ylL-Kh8OXe8HET3qmMgRRW_CNMngQY"><img style="width:151px" src="https://lh7-us.googleusercontent.com/hcLMx6so3PGN9414v6CFEv9iqvU-u5QGu9TS_OJFnoTh5xxYPwGqqksE8wi-JfYZ_o-O5TunU06JcgjxLE7ZtVM38Usbn2TWSsMGPg7D89awIQj7HZjDD_727ylL-Kh8OXe8HET3qmMgRRW_CNMngQY"/></a></figure><p id="8f4f0d4f-1784-4048-96e6-4056e4bad642" class="">Inside of the loop, we calculate the normal vectors by doing a cross product on this vertex's halfedge and the next halfedge. These halfedges are converted to vectors by calculating the positions of all 3 vertices a, b, and c belonging to the face triangle. We define vertex a as the given vertex, determine vertex b by getting the next halfedge's associated vertex, and determine vertex c by getting the next's next haldedge's associated vertex. The halfedge vector is the position difference between vertex b and vertex a. The next halfedge vector is the position difference between vertex c and vertex b. This is visualized by the following diagram:</p><figure id="d4092611-da2d-467e-b48d-4bd35c70fa65" class="image"><a href="https://lh7-us.googleusercontent.com/2bqTdUoSqR0WIUNVQCT8Ratd2J9yzQARmnMi0RSiQJQ4gyGt30k-4zvxIrw5eH30WJzzffRHW4rvBGVLvtuYSD_y1O_eC8MwN5av6jd6tjmubhBBBq9gJbNa_KGkF0UbSyPCvki6cYeA7t4oPK9LREg"><img style="width:255px" src="https://lh7-us.googleusercontent.com/2bqTdUoSqR0WIUNVQCT8Ratd2J9yzQARmnMi0RSiQJQ4gyGt30k-4zvxIrw5eH30WJzzffRHW4rvBGVLvtuYSD_y1O_eC8MwN5av6jd6tjmubhBBBq9gJbNa_KGkF0UbSyPCvki6cYeA7t4oPK9LREg"/></a></figure><p id="9f8f1bfb-c0c6-4392-8ce7-d7e7e04fae62" class="">After all normal vectors are summed, we normalize by dividing by the magnitude of the weighted_sum vector.</p><p id="8d5656f6-5a33-4c32-a148-716579516d78" class="">Flat shading:</p><figure id="d18b82a0-cc18-42f5-ae31-b2c0710ab5ad" class="image"><a href="https://lh7-us.googleusercontent.com/wr2tMpzBuK9jfvZm7vw3Klc9CY5q7uk6LMh9J8nn2HgB8MVk2WkZxG164xuROq-NzBejRECxP2r7sLySwQYB_y9uVTfacZji7CZx9SwuVBSejJajBunurvGEIN09SBYOEEsFPWHuXJ3IDr2NQJiiWxY"><img style="width:624px" src="https://lh7-us.googleusercontent.com/wr2tMpzBuK9jfvZm7vw3Klc9CY5q7uk6LMh9J8nn2HgB8MVk2WkZxG164xuROq-NzBejRECxP2r7sLySwQYB_y9uVTfacZji7CZx9SwuVBSejJajBunurvGEIN09SBYOEEsFPWHuXJ3IDr2NQJiiWxY"/></a></figure><p id="c3c753e1-1184-4f0f-aa5b-3a31152dd420" class="">Phong shading:</p><figure id="bd283426-6024-4d38-a9bf-164ea40ca262" class="image"><a href="https://lh7-us.googleusercontent.com/j-pX9jEoUGvGDxJ9YDZTsYOag1CikIU7KY5pylLD-V54sxgQTB-8rP10IIn2F4Yo3irsGPQaWU3wIzBuMoS_5wFRsKmuRhex2P___Ifundz-6_DEbU7IEdO40wLq1XrmwNYxVxQZs14xIVH84nrUTNs"><img style="width:624px" src="https://lh7-us.googleusercontent.com/j-pX9jEoUGvGDxJ9YDZTsYOag1CikIU7KY5pylLD-V54sxgQTB-8rP10IIn2F4Yo3irsGPQaWU3wIzBuMoS_5wFRsKmuRhex2P___Ifundz-6_DEbU7IEdO40wLq1XrmwNYxVxQZs14xIVH84nrUTNs"/></a></figure><h1 id="caa6edd6-1678-4617-acac-c40e05e36188" class="">Part 4</h1><p id="cc31e1f5-cb86-44e1-ae62-53e0cb78fc7a" class="">For the edge flip, we defined all current halfedges, vertices, edges, and faces:</p><figure id="6f542ac7-be91-4531-b17b-33d272a4b835" class="image"><a href="https://lh7-us.googleusercontent.com/XnjOA8cAUzla13DwMCTIPyMEnZUOYqJaSOgFhhnUOX18gjWVJu2OP1EQH5c8550XV2rf8VwzPzHgfuTzb8dS9XrHdYJah5JzyaB8UfdpFf66nNREwJIwzgK9dsPtcIwRN1XX2cYc45t6LuIVZeA4iPU"><img style="width:624px" src="https://lh7-us.googleusercontent.com/XnjOA8cAUzla13DwMCTIPyMEnZUOYqJaSOgFhhnUOX18gjWVJu2OP1EQH5c8550XV2rf8VwzPzHgfuTzb8dS9XrHdYJah5JzyaB8UfdpFf66nNREwJIwzgK9dsPtcIwRN1XX2cYc45t6LuIVZeA4iPU"/></a></figure><ul id="e8f79457-337f-4124-8cc1-5849e29b96e3" class="bulleted-list"><li style="list-style-type:disc">Halfedges: halfedge_b_c, halfedge_c_a, halfedge_a_b, halfedge_c_b, halfedge_b_d, halfedge_d_c</li></ul><ul id="95cd76a8-11b6-4783-a687-b8c6798b1b3f" class="bulleted-list"><li style="list-style-type:disc">Vertices: b, c, a, d</li></ul><ul id="192c45ef-cbf6-4ab3-be65-01b7dbfa23a2" class="bulleted-list"><li style="list-style-type:disc">Edges: edge_b_c, edge_c_a. edge_a_b, edge_b_d, edge_d_c</li></ul><ul id="bc94e044-1568-4fc6-b9e0-b5691ca90e60" class="bulleted-list"><li style="list-style-type:disc">Faces: face_bca, face_cbd</li></ul><p id="ed49e40c-eb60-43f7-8fc1-4173c41e07b5" class="">After these definitions, face_bca and face_cbd are checked for boundary edges. If so, then the given edge pointer e0 is returned and nothing is changed.</p><p id="b09ea293-05f1-4f40-9ba5-b018ced674cd" class="">Then, all edges and faces are set to their new corresponding halfedge.</p><p id="82d38039-6bcd-4f02-b14b-fb0daa570046" class="">Through pointer reassignment, halfedge_b_c is changed to represent halfedge_a_d and halfedge_c_b is changed to represent halfedge_d_a.</p><figure id="dbe190e1-73fc-4986-8591-80edbb928724" class="image"><a href="https://lh7-us.googleusercontent.com/0a-n_0EyIw5zn-rTRzrN1nAaGmCjwAAiBovzAN5blKXRxc_HazD7mImGkyWFWar4Muqxq34e1LERMnzdIMwdmOStnikCxst1-bHfyO9hGrBqGBhDWR9Z1MTjGCLPyBTaIq-MXqtj7IDbl9_u81Ydh_w"><img style="width:624px" src="https://lh7-us.googleusercontent.com/0a-n_0EyIw5zn-rTRzrN1nAaGmCjwAAiBovzAN5blKXRxc_HazD7mImGkyWFWar4Muqxq34e1LERMnzdIMwdmOStnikCxst1-bHfyO9hGrBqGBhDWR9Z1MTjGCLPyBTaIq-MXqtj7IDbl9_u81Ydh_w"/></a></figure><p id="48532ec6-f6db-4560-afcc-be6d42d03605" class="">The given edge pointer e0 is defined as edge_b_c and changed to represent edge_a_d. edge_a_d is given halfedge_a_d as its corresponding halfedge. The rest of the edges did not change their corresponding halfedge.</p><figure id="f7f210ec-9e6d-410d-a63d-fa957b0d59f2" class="image"><a href="https://lh7-us.googleusercontent.com/X4Gi3LPTI5LX2P7_lJtJs_nEVV09lDaElLdTRQ5zDrhFdPoAzKjhjBxh62ZJmMfJ9DQ-zE-Nhkdx7mPFDHwkz8OHBWRAcsXd9J4LgqlCp_t3fseOauESwYLXEyLdcyNezTliWx4iKExVLSSo9UhZa3M"><img style="width:624px" src="https://lh7-us.googleusercontent.com/X4Gi3LPTI5LX2P7_lJtJs_nEVV09lDaElLdTRQ5zDrhFdPoAzKjhjBxh62ZJmMfJ9DQ-zE-Nhkdx7mPFDHwkz8OHBWRAcsXd9J4LgqlCp_t3fseOauESwYLXEyLdcyNezTliWx4iKExVLSSo9UhZa3M"/></a></figure><p id="9d54942f-bea5-4469-b621-97747f6e846c" class="">face_bca is changed to represent face_adc and face_dab is changed to represent face_cbd. face_adc is given halfedge_c_a as its corresponding halfedge and face_cbd is given halfedge_d_a as its corresponding halfedge.</p><figure id="ac6dcf2f-aedf-41e1-967d-e09f49eb9666" class="image"><a href="https://lh7-us.googleusercontent.com/FY3cmye9Us3uqt6OrU9uFGSOilHnv7WGW2q-nOur187aiUnBGGQiBHxTnLUWTJKF3u7kAV-rBDkf1xzDp2PfECgPeQKqwDEe2JmLvDNshfFYK97mr620hqEYb11VCy5RSZxd0kGN5RtiiNCOetKq2Mo"><img style="width:624px" src="https://lh7-us.googleusercontent.com/FY3cmye9Us3uqt6OrU9uFGSOilHnv7WGW2q-nOur187aiUnBGGQiBHxTnLUWTJKF3u7kAV-rBDkf1xzDp2PfECgPeQKqwDEe2JmLvDNshfFYK97mr620hqEYb11VCy5RSZxd0kGN5RtiiNCOetKq2Mo"/></a></figure><p id="d39d45c3-0ec3-4152-bde5-7b3f566a142f" class="">Lastly, all halfedges were reassigned next, twin, vertex, edge, and face values based on the new arrangement. After that, the given edge pointer e0 is returned with all the changes done.</p><p id="3e3db53e-64fe-4585-b1f2-2e39f37d9d73" class="">We did not encounter many bugs at all since we were careful to clearly specify which halfedges, vertices, edges, and faces would have their representations changed with new variables as intermediary elements. For example, a new pointer halfedge_a_d was created and set to halfedge_b_c because halfedge_b_c represents halfedge_a_d after flipping the edge.</p><p id="70b49c9d-a660-436a-a1fe-deb2ad151579" class="">Example edge flips:</p><figure id="81d879c7-80e4-4768-a60b-251c5be2e7f5" class="image"><a href="https://lh7-us.googleusercontent.com/Avnk7WWYG2CUlPdMqc2jfhs0ZAZy7EXDIqxs9ZXLVVG0aKve0V5HOly_Mp2YXEmle-Q7I4I6EZVjdfM5KpijXOy7bzlyTWHYV7Bcfl77QOZrvYsgAYRl-eY0RHKQkQuo2308tYz1RuvDyXdBcwLMF6A"><img style="width:624px" src="https://lh7-us.googleusercontent.com/Avnk7WWYG2CUlPdMqc2jfhs0ZAZy7EXDIqxs9ZXLVVG0aKve0V5HOly_Mp2YXEmle-Q7I4I6EZVjdfM5KpijXOy7bzlyTWHYV7Bcfl77QOZrvYsgAYRl-eY0RHKQkQuo2308tYz1RuvDyXdBcwLMF6A"/></a></figure><figure id="22f8e68a-500e-4ed3-875a-9e00106011e2" class="image"><a href="https://lh7-us.googleusercontent.com/m2w9lz28RqOHp82hDy_d8Inijyd5D2bBBiS7dMzgBSvd2dVUgNIpJ34HgDPQIp_spcWu-ko1PZ3He-F4i4O7K__k4NWNXazwHFHNGbPxaTRBd3bXhE3gwfezzxNPfg_IF6z860tlXXrG-jrJimAa7Oc"><img style="width:624px" src="https://lh7-us.googleusercontent.com/m2w9lz28RqOHp82hDy_d8Inijyd5D2bBBiS7dMzgBSvd2dVUgNIpJ34HgDPQIp_spcWu-ko1PZ3He-F4i4O7K__k4NWNXazwHFHNGbPxaTRBd3bXhE3gwfezzxNPfg_IF6z860tlXXrG-jrJimAa7Oc"/></a></figure><h1 id="c61b13e3-3edc-4821-83b4-62fb51802657" class="">Part 5</h1><p id="af8dc672-4c24-4526-9570-a293688fdbd3" class="">The overall approach to edge splits was very similar to edge flips, with the exception that new halfedges, vertices, edges, and faces were created as well. We defined all current halfedges, vertices, edges, and faces:</p><figure id="e6f270bb-69fa-4999-8582-609817d77184" class="image"><a href="https://lh7-us.googleusercontent.com/L20I-uPFEt2aS5WGPmD2rIhiXHLPl3_3oxd-knWDd2OP_dj3i2jJZBTNqYXhlwcPs1x9rY7x7JkyMAVpp9VnzOgY0XGBCO4_Shon4riJpaI5-2icUW0YcpdZYyAHvY5tCXkcpiSnq9oY7-_Ta5VmjbU"><img style="width:624px" src="https://lh7-us.googleusercontent.com/L20I-uPFEt2aS5WGPmD2rIhiXHLPl3_3oxd-knWDd2OP_dj3i2jJZBTNqYXhlwcPs1x9rY7x7JkyMAVpp9VnzOgY0XGBCO4_Shon4riJpaI5-2icUW0YcpdZYyAHvY5tCXkcpiSnq9oY7-_Ta5VmjbU"/></a></figure><ul id="79bb9dfc-2c78-4ceb-aad2-7705655885e7" class="bulleted-list"><li style="list-style-type:disc">Halfedges: halfedge_b_c, halfedge_c_a, halfedge_a_b, halfedge_c_b, halfedge_b_d, halfedge_d_c</li></ul><ul id="b0f53c70-7c63-4c31-9f88-59340eaba6af" class="bulleted-list"><li style="list-style-type:disc">Vertices: b, c, a, d</li></ul><ul id="62b6bbf9-e1f0-4cd5-b844-418e3d464a0c" class="bulleted-list"><li style="list-style-type:disc">Edges: edge_b_c, edge_c_a. edge_a_b, edge_b_d, edge_d_c</li></ul><ul id="54631035-6e0f-453e-ad83-cd196affd3e9" class="bulleted-list"><li style="list-style-type:disc">Faces: face_bca, face_cbd</li></ul><p id="f7b4e0a8-8b8e-4ab9-874e-30606e9f1bfd" class="">After these definitions, face_bca and face_cbd are checked for boundary edges. If so, then a new vertex pointer is returned and nothing is changed.</p><p id="7b797582-c040-43f7-900c-078057f03b37" class="">Then, new halfedges, vertices, edges, and faces are instantiated for edge splits.</p><p id="b30eb4d9-b87c-40c7-9be0-4659be7ca80c" class="">halfedge_m_a, halfedge_a_m, halfedge_m_c, halfedge_m_b, halfedge_d_m, and halfedge_m_d are created. Through pointer reassignment, halfedge_b_c is changed to represent halfedge_b_m and halfedge_c_b is changed to represent halfedge_c_m.</p><figure id="2cfbf07a-767e-4662-932c-9672edb585fd" class="image"><a href="https://lh7-us.googleusercontent.com/b4MuPKkUJfFe_bBI29A-aRaiISHWQw4k7BSbpeRhAxcA0S7u16FxB670DDCg9akdOmGJ5970zesalFz5O-ovaWCIyVrKb42qrWTvh6WROvI9HfkE6Cz_7lINjbHH-lBu82Dtu0FF0Vh392kzXcmlrJI"><img style="width:624px" src="https://lh7-us.googleusercontent.com/b4MuPKkUJfFe_bBI29A-aRaiISHWQw4k7BSbpeRhAxcA0S7u16FxB670DDCg9akdOmGJ5970zesalFz5O-ovaWCIyVrKb42qrWTvh6WROvI9HfkE6Cz_7lINjbHH-lBu82Dtu0FF0Vh392kzXcmlrJI"/></a></figure><p id="0a70cdb4-5b0a-4054-9c6c-775146a694c1" class="">vertex_m is created and its position is set to the midpoint between vertex_a, vertex_b, vertex_c, and vertex_d. vertex_b's corresponding halfedge does not technically change because its corresponding halfedge is halfedge_b_c which is already changed to represent halfedge_b_m. vertex_m is given halfedge_m_c as its corresponding halfedge. The rest of the vertices did not change their corresponding halfedge.</p><figure id="88622616-405a-4408-a78b-2b7fdf2f3a58" class="image"><a href="https://lh7-us.googleusercontent.com/ZbcThYd-sQEkDAKfR34PuMgjzY9nDY9WuV7tVLS5Z_eKNTaDbingsCX6HIj2DYQaR3XS0JPjJiFvjgk2TMYEFEffN-nxVwgODiEkKObQWJ09jiYxQu0gw2w2E0LR3Ac8tfhV_fb00_0MxJF3LLfcEVA"><img style="width:624px" src="https://lh7-us.googleusercontent.com/ZbcThYd-sQEkDAKfR34PuMgjzY9nDY9WuV7tVLS5Z_eKNTaDbingsCX6HIj2DYQaR3XS0JPjJiFvjgk2TMYEFEffN-nxVwgODiEkKObQWJ09jiYxQu0gw2w2E0LR3Ac8tfhV_fb00_0MxJF3LLfcEVA"/></a></figure><p id="e00bded8-7ebd-429f-861d-7a885fd6cfa5" class="">The given edge pointer e0 is defined as edge_b_c. edge_m_a, edge_m_c, and edge_d_m are created. Through pointer reassignment, edge_b_c is changed to represent edge_b_m. edge_m_a is given halfedge_a_m as its corresponding halfedge, edge_m_c is given halfedge_m_c as its corresponding halfedge, and edge_d_m is given halfedge_m_d as its corresponding halfedge. edge_b_c's corresponding halfedge does not technically change because its corresponding halfedge is halfedge_b_c which is already changed to represent halfedge_b_m. The rest of the edges did not change their corresponding halfedge.</p><figure id="a3b0d3ab-3179-4282-94d7-628a94d22cad" class="image"><a href="https://lh7-us.googleusercontent.com/DYDyU5FPFL4lblU_n53eCvW9NmQWZL3nfsHZewrmnXajVLMkpq1GLeByJt9TS4A6IJYjgGobNmQbfw_7FXK57t8diVscRa4xkg4Yj8fJPm_reyLVUtdvITX2DLGIDfqtPJ4T5LqrAqkf5voGVoA49R4"><img style="width:624px" src="https://lh7-us.googleusercontent.com/DYDyU5FPFL4lblU_n53eCvW9NmQWZL3nfsHZewrmnXajVLMkpq1GLeByJt9TS4A6IJYjgGobNmQbfw_7FXK57t8diVscRa4xkg4Yj8fJPm_reyLVUtdvITX2DLGIDfqtPJ4T5LqrAqkf5voGVoA49R4"/></a></figure><p id="cea74332-4329-44fd-bdf0-e7eeb35473cc" class="">face_mca and face_mbd are created. Through pointer reassignment, face_bca is changed to represent face_bma and face_cbd is changed to represent face_cmd. face_bma is given halfedge_a_b as its corresponding halfedge, face_mca is given halfedge_a_m as its corresponding halfedge, face_mbd is given halfedge_m_b as its corresponding halfedge, and face_cmd is given halfedge_c_m as its corresponding halfedge. face_bma's corresponding halfedge does not change.</p><figure id="d45ba860-1996-49bf-9817-a72790fe3336" class="image"><a href="https://lh7-us.googleusercontent.com/2OfsLHFnFSOBsuRR5OefEff8DjONEZ7DURosLnLiylvZlg0GygvoOcWWhMsHMtMBYwLdEHFAvM0FVUv3kf69_7gRVx4JDmPcP0Gt9Jkl5mnqgGuxcnkYcIFwTJGG1UGPPn7ef55wW8KhXKyu9WaN5f4"><img style="width:624px" src="https://lh7-us.googleusercontent.com/2OfsLHFnFSOBsuRR5OefEff8DjONEZ7DURosLnLiylvZlg0GygvoOcWWhMsHMtMBYwLdEHFAvM0FVUv3kf69_7gRVx4JDmPcP0Gt9Jkl5mnqgGuxcnkYcIFwTJGG1UGPPn7ef55wW8KhXKyu9WaN5f4"/></a></figure><p id="acf5aaac-6f73-4dfc-8e9d-9717b9bbd9fb" class="">Lastly, all halfedges were reassigned next, twin, vertex, edge, and face values based on the new arrangement. After that, the new vertex, vertex_m, is returned with all the changes done.</p><p id="ba8b3537-ddb4-458e-9ed6-354a266b909d" class="">Like edge flips, we did not encounter many bugs at all since we were careful to clearly specify which halfedges, vertices, edges, and faces would have their representations changed with new variables as intermediary elements. For example, a new pointer halfedge_b_m was created and set to halfedge_b_c because halfedge_b_c represents halfedge_b_m after splitting the edge.</p><p id="c59efab7-8ae5-4101-b550-4385f09c41f7" class="">Example edge splits:</p><figure id="b1e4eb9f-e22c-429a-b434-79d75a2f9e06" class="image"><a href="https://lh7-us.googleusercontent.com/tlC3ykyizUusoZ4cswnsz77mu8BNcRiOgVwv4AofDZwBJf7sx7zIFwOhfnnYW9cUK52m5NeLKfqioN_gTbyYDvb7pr0fd3lYZs3BTy1WE6LrISf3carBIB-dMVEsLva4y7iixiJQjfCsp1bgrEzfpDo"><img style="width:624px" src="https://lh7-us.googleusercontent.com/tlC3ykyizUusoZ4cswnsz77mu8BNcRiOgVwv4AofDZwBJf7sx7zIFwOhfnnYW9cUK52m5NeLKfqioN_gTbyYDvb7pr0fd3lYZs3BTy1WE6LrISf3carBIB-dMVEsLva4y7iixiJQjfCsp1bgrEzfpDo"/></a></figure><figure id="9126d4d6-6593-41d6-b224-218704c5201a" class="image"><a href="https://lh7-us.googleusercontent.com/HdL4EUoSOkO427FUuvxmBEHB8jUYCACeoxaee7tuaaIwOF-NRN9JE0Ss_cuNRmnGXJ4mpIVXtN-jViWQ6R1OEbqcLzm9xm-mnTGWD2wKNa5yxzI_kwNQDXzqlM49LdLr2DEqMRCN92Y5jOAyzTlC9Qc"><img style="width:624px" src="https://lh7-us.googleusercontent.com/HdL4EUoSOkO427FUuvxmBEHB8jUYCACeoxaee7tuaaIwOF-NRN9JE0Ss_cuNRmnGXJ4mpIVXtN-jViWQ6R1OEbqcLzm9xm-mnTGWD2wKNa5yxzI_kwNQDXzqlM49LdLr2DEqMRCN92Y5jOAyzTlC9Qc"/></a></figure><p id="58cbcd95-2d9c-4352-aa3a-ab2c41ca3390" class="">Example edge splits and edge flips:</p><figure id="cedf015e-fe39-4bc0-919f-5cc75a26c00c" class="image"><a href="https://lh7-us.googleusercontent.com/4BvfcB5UNnkvCYti9cRi0WmX0ZMzevmeb1ZS-T8-F4ZarLU2hlVKgrUp2kkGhwpcrIAQMT3NA9XMOO2PQVfjVGXgxJWsNcJ9jrIYvKb2qnP85iBAR8BipLTxh50MOdNyopijjeOyVa_McjXX2NyK6lw"><img style="width:624px" src="https://lh7-us.googleusercontent.com/4BvfcB5UNnkvCYti9cRi0WmX0ZMzevmeb1ZS-T8-F4ZarLU2hlVKgrUp2kkGhwpcrIAQMT3NA9XMOO2PQVfjVGXgxJWsNcJ9jrIYvKb2qnP85iBAR8BipLTxh50MOdNyopijjeOyVa_McjXX2NyK6lw"/></a></figure><figure id="0e9cd853-068c-4985-8d40-b3c215ca558a" class="image"><a href="https://lh7-us.googleusercontent.com/HFBZkm6E_eUdqTB6SGyTPsecUx32cLIbikCaLEvaQc7hkehg9NkUn3rvxJ9Te0OS-qKu6WelTuE-LU7dErqLpgAI2G0fgOZLF9v9Qbeu6ZiVFDI7xyAA08h16APSflF8PZT6BmqHy7gn5atFtC022I4"><img style="width:624px" src="https://lh7-us.googleusercontent.com/HFBZkm6E_eUdqTB6SGyTPsecUx32cLIbikCaLEvaQc7hkehg9NkUn3rvxJ9Te0OS-qKu6WelTuE-LU7dErqLpgAI2G0fgOZLF9v9Qbeu6ZiVFDI7xyAA08h16APSflF8PZT6BmqHy7gn5atFtC022I4"/></a></figure><h1 id="e16ad789-b50a-4173-81b4-7af487f42146" class="">Part 6</h1><p id="e7e8b1bc-2b40-4dc8-922f-5e25aa29a374" class="">After implementing the flipEdge and splitEdge functions in the mesh edit simulation, we can now implement loop division for mesh upsampling, a common subdivision rule for triangle meshes. The algorithm itself is simple: 4-1 subdivide each triangle in the mesh, and then assign new vertex positions determined by a weighted sum of the vertices surrounding it. A visual of what 4-1 subdivision entails is pictured below:</p><figure id="b45259b5-998d-4636-a222-667831984461" class="image"><a href="https://lh7-us.googleusercontent.com/uFc_skwzbmt7Vw-R1eCLfPjZeQr3KEYzgdswju4RUICZLEkVUNbD38Dycq031r_KqXfSpRz5Ove1Qv9eF6A8eoZ6wiawU9-P740CtkR7LyhPuJ2rJso3P06wvBy_vwbOoB3-zm_DkRE6NmpXTASXbbw"><img style="width:556px" src="https://lh7-us.googleusercontent.com/uFc_skwzbmt7Vw-R1eCLfPjZeQr3KEYzgdswju4RUICZLEkVUNbD38Dycq031r_KqXfSpRz5Ove1Qv9eF6A8eoZ6wiawU9-P740CtkR7LyhPuJ2rJso3P06wvBy_vwbOoB3-zm_DkRE6NmpXTASXbbw"/></a></figure><p id="3b564d81-70e9-40f5-9495-0abdd73b77f2" class="">Note that this operation requires the splitEdge and flipEdge operations described above.</p><p id="4f36679d-0a12-4525-8cd8-011e2bea48f6" class="">Below is a more in-depth description of this project's implementation of loop subdivision:</p><ol type="1" id="3ff45697-253c-4bc3-833a-d76e9c425c7d" class="numbered-list" start="1"><li>Traverse through all vertices in the mesh and calculate their new vertex position in the upsampled mesh using the following rule:<ol type="a" id="84a192d1-9beb-4048-8941-2823c40e0705" class="numbered-list" start="1"><li>new_vertex_position = (1 - n * u) * original_vertex_position + u * original_neighbor_position_sum<ol type="i" id="28b7a313-6dab-49d1-9514-daf4860e7433" class="numbered-list" start="1"><li>Where n is the degree of the current vertex, u is the scaling value, original_vertex_position stores a 3DVector storing the vertex's original position, and original_neighbor_position_sum is a 3D vector storing the sum of the positions of the neighboring vertices.</li></ol><ol type="i" id="0503ffab-6898-4852-935b-381011e91c32" class="numbered-list" start="2"><li>Note that u is ⅜ if n is 3, and 3/ (8 * n) otherwise.</li></ol></li></ol><ol type="a" id="c44091f8-5c17-4bec-a1f9-826c2e0938ea" class="numbered-list" start="2"><li>Store this new position in the newPosition attribute of the vertex, and mark all vertices in the mesh as “old”.</li></ol></li></ol><figure id="c161ebca-6659-4330-9847-69776582a14d" class="image"><a href="https://lh7-us.googleusercontent.com/3Z-m1ZmHwP9MzVV4-4vmGj7lLiS65QOslimSouMJyXrBoBZ3JOo6st1YF_7SJMRtiBz--_HV_CDlPK0NF5ugib2_hJexwAI33wXc0CTMWS_GXr8IkuWKNmSi9xDx-OKC8OW0apMpvWH6VmIiP0Qg_Vk"><img style="width:624px" src="https://lh7-us.googleusercontent.com/3Z-m1ZmHwP9MzVV4-4vmGj7lLiS65QOslimSouMJyXrBoBZ3JOo6st1YF_7SJMRtiBz--_HV_CDlPK0NF5ugib2_hJexwAI33wXc0CTMWS_GXr8IkuWKNmSi9xDx-OKC8OW0apMpvWH6VmIiP0Qg_Vk"/></a></figure><ol type="1" id="6ece0074-d128-4dda-912e-e8152504f164" class="numbered-list" start="1"><li>Traverse through all edges in the mesh and calculate the new position of each vertex at the midpoint of each, and store this value in the newPosition attribute of the respective edge. Mark each edge traversed as “old”.<ol type="a" id="86764882-a6b6-48dc-8ad5-ad68710df62e" class="numbered-list" start="1"><li>The formula for calculating this new position is as follows, with respect to the image below:<ol type="i" id="6f99a5f0-100e-4efd-b5e0-98b87bf88ae7" class="numbered-list" start="1"><li>3/8 * (A + B) + 1/8 * (C + D)</li></ol><ol type="i" id="8c9fb538-185c-4f39-ac2e-bfa51a94804e" class="numbered-list" start="2"><li><figure id="d1ef2cd9-297c-42d8-9e7a-775d4c5bff0b" class="image"><a href="https://lh7-us.googleusercontent.com/aJIM0vmm9NrgWEWGVx3dw3TUsBF6T8wQR-oplyqMOYsoFhGuv7Kp-Fr5pQLJeZCK94c8nH7wseNyQ_nKmzeYrP8fGaKajREnx_Smpln7nC6FPsHN2uvZoQ9OZ78ED1_wklLYRoT1YVklOCIgeTE2zW4"><img style="width:623px" src="https://lh7-us.googleusercontent.com/aJIM0vmm9NrgWEWGVx3dw3TUsBF6T8wQR-oplyqMOYsoFhGuv7Kp-Fr5pQLJeZCK94c8nH7wseNyQ_nKmzeYrP8fGaKajREnx_Smpln7nC6FPsHN2uvZoQ9OZ78ED1_wklLYRoT1YVklOCIgeTE2zW4"/></a></figure></li></ol><ol type="i" id="f72ccb6a-8e08-4d55-9bc1-953fb51ab2fa" class="numbered-list" start="3"><li>Note that this calculation is effectively a weighted sum.</li></ol></li></ol></li></ol><ol type="1" id="6935744a-5243-4ca7-bc48-a5132058f223" class="numbered-list" start="2"><li>Split all edges in the mesh that have old vertices on both sides. When splitting edges, mark all newly created edges by setting the isNew attribute to “true”.</li></ol><ol type="1" id="8fb79417-917e-4cca-ba13-dea418a281bc" class="numbered-list" start="3"><li>Flip all new edges in the mesh that are connected to an old and new vertex. Whether or not an edge or vertex is new can be seen by checking the respective isNew attribute. Note that these new edges that will be flipped correspond to the blue edges in the photo below.</li></ol><figure id="73f40376-09aa-4fce-a00f-e28a3df74543" class="image"><a href="https://lh7-us.googleusercontent.com/7MgHcLDGIvxMnVKR1_gS9QPxWX2uyGnVUD_NXlNyREv3gjZnM3xQVRZ-aoGeD4I2NOw1CDU_jOgJT-yqj2yHupDfrJ8R2ZZslOD1d-jDoRj58o1REdEPaawWo9NiztRy8lV2hdSO1524P3Dr32QnGFU"><img style="width:624px" src="https://lh7-us.googleusercontent.com/7MgHcLDGIvxMnVKR1_gS9QPxWX2uyGnVUD_NXlNyREv3gjZnM3xQVRZ-aoGeD4I2NOw1CDU_jOgJT-yqj2yHupDfrJ8R2ZZslOD1d-jDoRj58o1REdEPaawWo9NiztRy8lV2hdSO1524P3Dr32QnGFU"/></a></figure><figure id="6e79065c-e95a-4cde-986f-7610da61f2ef" class="image"><a href="https://lh7-us.googleusercontent.com/a0e83Yo8by6wT1laLqzf5WIQWYqLGW33R20AEzv2t0bmSJjFvLeXo3t2910avX79b9LVxHaSm4bjmvDGPXdsnQW_5P_-QZufoZMJyCMSci7dcBee8TgsNx9Dat9Pey9Qzk0ZuLh8A2ZAnPC-J6YM8WA"><img style="width:624px" src="https://lh7-us.googleusercontent.com/a0e83Yo8by6wT1laLqzf5WIQWYqLGW33R20AEzv2t0bmSJjFvLeXo3t2910avX79b9LVxHaSm4bjmvDGPXdsnQW_5P_-QZufoZMJyCMSci7dcBee8TgsNx9Dat9Pey9Qzk0ZuLh8A2ZAnPC-J6YM8WA"/></a></figure><ol type="1" id="3662d212-bb64-48f4-89db-728bdd1a0551" class="numbered-list" start="1"><li>Finally, update all vertex positions with their new positions calculated in steps 2 and 3, and set their isNew attribute to “false” to ensure proper behavior on the next subdivision.</li></ol><p id="acae8d49-ade4-4e40-be41-fa75a4e64950" class="">As seen above, one very helpful attribute featured in this implementation of the loop subdivision algorithm is the isNew attribute, which the Edge and Vertex data structures (technically EdgeIter and VertexIter) have. This allows us to mark whether vertices and edges are part of the original mesh or not, which is crucial in edge splitting and edge flipping the correct edges. The newPosition attribute shared between both data structures was equally helpful, as it allowed us to re-assign all vertices in the mesh their new positions in the subdivided regime at the very end of the loop subdivision operation without changing their position attribute (which stores a 3DVector tracking their current position). The usage of these two attributes ensured less memory usage (due to not needing to create any new edges and only one new variable in upsample()) and a much faster runtime.</p><p id="f72c0a35-4955-49f1-88f3-15f19fa812ab" class="">The debugging journey for implementing loop subdivision was smoother than expected, although there were bugs present throughout. The general strategy for debugging involved taking advantage of the debugging overlay, as pictured below:</p><figure id="e8d1da59-0b85-4d99-a51c-a88bb4357cc5" class="image"><a href="https://lh7-us.googleusercontent.com/fe_JShQ8J0OkFT4hrlAeXD85i9l2dsTI7hBAg48uJWCRKk2FeFEtkVIDuk82afowKxdwDvU70wWXURyW_1A0erRnwe4vvIbAYKm96qODjYEKG-12kfQfw59CGEpzg-ulLgNYpImLRB3m_tHe1K90Yuk"><img style="width:624px" src="https://lh7-us.googleusercontent.com/fe_JShQ8J0OkFT4hrlAeXD85i9l2dsTI7hBAg48uJWCRKk2FeFEtkVIDuk82afowKxdwDvU70wWXURyW_1A0erRnwe4vvIbAYKm96qODjYEKG-12kfQfw59CGEpzg-ulLgNYpImLRB3m_tHe1K90Yuk"/></a></figure><figure id="e29f0b23-d0a2-45ec-8d43-404aeb136213" class="image"><a href="https://lh7-us.googleusercontent.com/BVo3i0IbbHx73y6d_MHDaOpPbZOclDoirr0BozUCX4nMKPagiG27j4KWaeaVo8wSsJ6dILpDegkAm4uUYKB5Wnpdyw_RZxkadtHf4uMwYLeAtDYNEBNyFKIslFaivO2ZiuTkUwjotOiMY5uSCW2B_yc"><img style="width:624px" src="https://lh7-us.googleusercontent.com/BVo3i0IbbHx73y6d_MHDaOpPbZOclDoirr0BozUCX4nMKPagiG27j4KWaeaVo8wSsJ6dILpDegkAm4uUYKB5Wnpdyw_RZxkadtHf4uMwYLeAtDYNEBNyFKIslFaivO2ZiuTkUwjotOiMY5uSCW2B_yc"/></a></figure><p id="b0114b7f-5245-482d-a6df-bc576c99285c" class="">These overlays were especially helpful when debugging issues relating to half edges, splitting edges, and flipping edges.</p><p id="5a5ae143-4fcf-4926-9ca2-507ee5795582" class="">Other debugging tricks included taking advantage of breakpoints to check variable values and attributes, which was helpful when debugging issues relating to vertex position updates, and rubber duck debugging, which helped spotlight any missing base cases when splitting and flipping edges. As a last resort, print statements were used to print out variable values (specifically newPosition values of vertices) when needed.</p><p id="4bd9d677-bbbc-45e4-bbf4-f4a2574b0f5d" class="">Take some notes, as well as some screenshots, of your observations on how meshes behave after loop subdivision. What happens to sharp corners and edges? Can you reduce this effect by pre-splitting some edges?</p><p id="af93d5d7-f82f-4e3f-95d4-105811809c9b" class="">Below is a (sped-up) gif of a cube, before and after upsampling:</p><figure id="9608730e-d605-49cb-8588-09541a834ca8" class="image"><a href="https://lh7-us.googleusercontent.com/eyy0RAh4rsH-pcsNLXWRSGefLVm8-1VQhD5eGOb13DTFybVIBkhYRpHnmPKgkuqMUNM_TbWWB_pHsfxuPVTuQubic1kEOSd-DzPRiRp1TAph7kSCxdYWBYc5yvA-X-jzue1WL58RJplv8vfM2DIgRW8"><img style="width:624px" src="https://lh7-us.googleusercontent.com/eyy0RAh4rsH-pcsNLXWRSGefLVm8-1VQhD5eGOb13DTFybVIBkhYRpHnmPKgkuqMUNM_TbWWB_pHsfxuPVTuQubic1kEOSd-DzPRiRp1TAph7kSCxdYWBYc5yvA-X-jzue1WL58RJplv8vfM2DIgRW8"/></a></figure><p id="5770fccb-df89-4ccc-8568-ef9e38262c0a" class="">Notice that although the vertices of the cube remain somewhat recognizable after a few levels of upsampling, the cube's overall shape becomes squircular, and is slightly asymmetrical.</p><p id="d5c5af4a-269f-4b85-a000-a86d350bf72e" class="">Let us demonstrate upsampling with a more complex model:</p><figure id="17807194-42e5-45bd-b59b-a4b9454c191f" class="image"><a href="https://lh7-us.googleusercontent.com/wZHwT_n6HLquMpwm8RC7yWLa5tQaJz74808K-krEA5Bm_BhtSBgfEZ5lj3NtcKFE8SAuG5iZAb6Tk9J0HPPseaJL6SDpsJw7aP8VF-CkeioOWSiC0ppHu46Up7oFAF8CQnl6SzmfaRWZZ6BgcBgkTWM"><img style="width:624px" src="https://lh7-us.googleusercontent.com/wZHwT_n6HLquMpwm8RC7yWLa5tQaJz74808K-krEA5Bm_BhtSBgfEZ5lj3NtcKFE8SAuG5iZAb6Tk9J0HPPseaJL6SDpsJw7aP8VF-CkeioOWSiC0ppHu46Up7oFAF8CQnl6SzmfaRWZZ6BgcBgkTWM"/></a></figure><p id="074279ab-c636-4a8b-b151-55ec560db659" class="">Typically, sharp corners and edges are smoothed out, and in some cases, rounded out entirely, as seen above with the cube model. The teapot model above demonstrates the loop subdivision's excellent results when subdividing a smoother mesh with few sharp edges, as the teapot retains much of its original shape even after subdividing three times (increasing the number of triangles in the mesh to 64 times that amount.</p><p id="c4d6261e-9a31-4318-bbcc-cbc5eced17cc" class="">Now, let us observe the following torus model before and after loop subdivision:</p><figure id="5cb19f28-9831-4e2c-9a6a-49ea9935db45" class="image"><a href="https://lh7-us.googleusercontent.com/cydZw1iKsbdme4POd19Bdla3ghKmgRY1ZYWp19kW8sAI6UxfEn9yy8G_Yg59ozPE3JOI3X9TqRIhIuArtSeTl4juSn09uKJFBu1BPSI_eLoYYFEsw_eLPu0nQrXG4WGSk3icKg_PDkqLe6vp4Y8kNJw"><img style="width:538px" src="https://lh7-us.googleusercontent.com/cydZw1iKsbdme4POd19Bdla3ghKmgRY1ZYWp19kW8sAI6UxfEn9yy8G_Yg59ozPE3JOI3X9TqRIhIuArtSeTl4juSn09uKJFBu1BPSI_eLoYYFEsw_eLPu0nQrXG4WGSk3icKg_PDkqLe6vp4Y8kNJw"/></a></figure><figure id="0e6ba3cd-f651-46b5-8738-2be2996afc2d" class="image"><a href="https://lh7-us.googleusercontent.com/AoA0G4DgDDrdKxmlIV1vs_pkqNHcd1YrxD64Z2y40EcOPrhIAvfT0hNs1xFBiEEmlBqrDWbAJOcFFbhxEAWDhE5jSHIi5gEBwcJut23xf3Tx_z-If-HJu-XJ0CAFO9z9F-VYK1Z6V0m7XgDRVxkAa00"><img style="width:541px" src="https://lh7-us.googleusercontent.com/AoA0G4DgDDrdKxmlIV1vs_pkqNHcd1YrxD64Z2y40EcOPrhIAvfT0hNs1xFBiEEmlBqrDWbAJOcFFbhxEAWDhE5jSHIi5gEBwcJut23xf3Tx_z-If-HJu-XJ0CAFO9z9F-VYK1Z6V0m7XgDRVxkAa00"/></a></figure><p id="6d02602b-4e7d-4978-905c-d6f5bc62478a" class="">Notice that the sharp outer and inner edges have been rounded out significantly after upscaling once. The inner and outer shapes, once hexagonal, are now more circular. If we upscale again, we end up with the following donut:</p><figure id="e28bf907-0ea4-4177-bc02-8439b8608c28" class="image"><a href="https://lh7-us.googleusercontent.com/Gs4X39UDhhA-cBQd8ArjM2A5ubPWFjAkmL-jmk3iQGdbE4VJoqyW1IxcF-vZbTYaOuZdhoYWJaWU3Cr2HuksMQjqmj8x1UEMq3TuvcZ1M0hVqFWaXA8H3Dd39gUlwEokCmKAwaIlVxH19kwUaWsLRM0"><img style="width:624px" src="https://lh7-us.googleusercontent.com/Gs4X39UDhhA-cBQd8ArjM2A5ubPWFjAkmL-jmk3iQGdbE4VJoqyW1IxcF-vZbTYaOuZdhoYWJaWU3Cr2HuksMQjqmj8x1UEMq3TuvcZ1M0hVqFWaXA8H3Dd39gUlwEokCmKAwaIlVxH19kwUaWsLRM0"/></a></figure><p id="52750b5c-a592-45ec-b23e-c304a7b7280d" class="">If we wish to preserve the sharpness/hexagonal shape of the inner and outer edges, we can pre-split the edges and then upsample. Observe the following torus shape, before and after the inner and outer edges are split.</p><figure id="a5a4f488-77cd-4b8f-9ac8-ff20aae05952" class="image"><a href="https://lh7-us.googleusercontent.com/cydZw1iKsbdme4POd19Bdla3ghKmgRY1ZYWp19kW8sAI6UxfEn9yy8G_Yg59ozPE3JOI3X9TqRIhIuArtSeTl4juSn09uKJFBu1BPSI_eLoYYFEsw_eLPu0nQrXG4WGSk3icKg_PDkqLe6vp4Y8kNJw"><img style="width:538px" src="https://lh7-us.googleusercontent.com/cydZw1iKsbdme4POd19Bdla3ghKmgRY1ZYWp19kW8sAI6UxfEn9yy8G_Yg59ozPE3JOI3X9TqRIhIuArtSeTl4juSn09uKJFBu1BPSI_eLoYYFEsw_eLPu0nQrXG4WGSk3icKg_PDkqLe6vp4Y8kNJw"/></a></figure><p id="98766e9f-6fd6-4a6b-b5ba-31e825f61c73" class="">After splitting the inner and outer edges (splitting a total of 18 edges):</p><figure id="beef907f-0742-4607-85be-ac15bdc6b797" class="image"><a href="https://lh7-us.googleusercontent.com/MrtjTd5pssClF0iLi8vcm4JLcHXHtArHff17xxVCfm3RS6xwAmnm5-Ge8RMgwqBtwsN7ctMjzSRS4Ko2aMftlI7C9yoivi7BImL_K8j-eyueZqDIeOILjn3EC2v3Eo0tJWVGujbQomFw1cOrt25yC7s"><img style="width:550px" src="https://lh7-us.googleusercontent.com/MrtjTd5pssClF0iLi8vcm4JLcHXHtArHff17xxVCfm3RS6xwAmnm5-Ge8RMgwqBtwsN7ctMjzSRS4Ko2aMftlI7C9yoivi7BImL_K8j-eyueZqDIeOILjn3EC2v3Eo0tJWVGujbQomFw1cOrt25yC7s"/></a></figure><p id="1e440ece-d416-4651-a027-e6a95e0b02e1" class="">Now we upsample:</p><figure id="fd4db29b-ddbd-4e99-abd0-d6254f97dbca" class="image"><a href="https://lh7-us.googleusercontent.com/zp-qQZ4rXjheGjlreN8dy1b3YqjRz4f6xCP8AtRFbfyt3JRRXnOqOWp3WbHf1dMRUHSXJ9HrVnt167-q0DsgcDAJ7IduDMbiA7V6F82-NcwQhgt6w4jeYN5t7T-eR7AdyYen0FA4LPuoAB1PrPRUvjg"><img style="width:561px" src="https://lh7-us.googleusercontent.com/zp-qQZ4rXjheGjlreN8dy1b3YqjRz4f6xCP8AtRFbfyt3JRRXnOqOWp3WbHf1dMRUHSXJ9HrVnt167-q0DsgcDAJ7IduDMbiA7V6F82-NcwQhgt6w4jeYN5t7T-eR7AdyYen0FA4LPuoAB1PrPRUvjg"/></a></figure><p id="49bc905c-1e51-475b-9da1-bc0dd4d435f8" class="">And notice that the hexagonal shape of the inner and outer edges are preserved. If we upsample again:</p><figure id="5da2abd3-17cf-485d-bcc6-c5f3c628c4f8" class="image"><a href="https://lh7-us.googleusercontent.com/TLnUM4HRZ72cEy8eh5OdrUVUeEJof6Q9eKSg-EU0_tu9NUge0Oa9b1EAmtlXTZnvKYvoII46jddoAauI1s3Df7yoi_HszoiX0z-I3r0vtBDS-P1E-HhxY8ShMYIZ1HneVpAUHD1zuIR9inkR8itIiDE"><img style="width:569px" src="https://lh7-us.googleusercontent.com/TLnUM4HRZ72cEy8eh5OdrUVUeEJof6Q9eKSg-EU0_tu9NUge0Oa9b1EAmtlXTZnvKYvoII46jddoAauI1s3Df7yoi_HszoiX0z-I3r0vtBDS-P1E-HhxY8ShMYIZ1HneVpAUHD1zuIR9inkR8itIiDE"/></a></figure><p id="ccb22a55-ffb4-49c4-8c5b-30c556c7e617" class="">The torus is now smoothed out, while maintaining its hexagonal shape.</p><p id="a835c7e6-fc26-4bf5-a8f8-2778a92bd7fb" class="">Let's take a look at the cube model again. From the gif above, we notice that the cube becomes slightly asymmetrical after repeated subdivisions. Pictured below are these subdivisions as reference:</p><p id="02f3d8fa-4845-4e72-89a9-a5b254fc89a2" class="">The original cube:</p><figure id="63c16295-1437-4383-9308-1cb054af75d8" class="image"><a href="https://lh7-us.googleusercontent.com/Ns0FbMXxGVfnw5Q5HQ2YLMi9pKzWa0uW2a8TWdhiTaRvyENTq0sJA1AG34osurIIKqoEGJ6BipgjaSl_pMm5PxRocjvXDIqLb6ytpQkgTkixPUSJhSGlluKw0d5Ol8IV7d-b5bzR938XIaJi9uXsqyU"><img style="width:595px" src="https://lh7-us.googleusercontent.com/Ns0FbMXxGVfnw5Q5HQ2YLMi9pKzWa0uW2a8TWdhiTaRvyENTq0sJA1AG34osurIIKqoEGJ6BipgjaSl_pMm5PxRocjvXDIqLb6ytpQkgTkixPUSJhSGlluKw0d5Ol8IV7d-b5bzR938XIaJi9uXsqyU"/></a></figure><p id="a86354ca-9033-4746-881f-b95223e3ccf3" class="">After one loop subdivision:</p><figure id="3e2c652f-2e4c-44a8-b0a2-451ee7d5ac9c" class="image"><a href="https://lh7-us.googleusercontent.com/HzjB4zAG7oA__bz08YniHPdDyV-419FTMCKyySZHHl5_0sU933PdkX4daWbG5CX_rvC6xxaqcFXVgdtMDns8BVcsDlNeqkmjgM75h0u9zb3IRY5sqHrQq-M04FFeh6bzULTJwcWyEbYt6m2oeJtLFJw"><img style="width:624px" src="https://lh7-us.googleusercontent.com/HzjB4zAG7oA__bz08YniHPdDyV-419FTMCKyySZHHl5_0sU933PdkX4daWbG5CX_rvC6xxaqcFXVgdtMDns8BVcsDlNeqkmjgM75h0u9zb3IRY5sqHrQq-M04FFeh6bzULTJwcWyEbYt6m2oeJtLFJw"/></a></figure><p id="51217b18-606b-4f02-b512-f796aa5df0cc" class="">After two loop subdivisions:</p><figure id="22195cad-e4c7-4e66-bbd7-901f438db4ac" class="image"><a href="https://lh7-us.googleusercontent.com/IGsLNi03BmE0Ou0r1mydrSxSnq7S_VqY96is424-STXoqRW1pfpvt8F-sGfgMjj99ijSQYCbQ1QK3_-_OgUjkoISs4GB5LeTxU7U_gm0deafHpWoIwg0AtcAmlzozvnfabDEVAiSjG2HxK4Z9kxCGgk"><img style="width:624px" src="https://lh7-us.googleusercontent.com/IGsLNi03BmE0Ou0r1mydrSxSnq7S_VqY96is424-STXoqRW1pfpvt8F-sGfgMjj99ijSQYCbQ1QK3_-_OgUjkoISs4GB5LeTxU7U_gm0deafHpWoIwg0AtcAmlzozvnfabDEVAiSjG2HxK4Z9kxCGgk"/></a></figure><p id="59af532f-d49d-4f73-8be5-a4686bfb3c22" class="">After three loop subdivisions:</p><figure id="188517ae-0846-4db2-a989-29a703a521b2" class="image"><a href="https://lh7-us.googleusercontent.com/tyHM8gj0NrCwhYp39Lv17X0OiM-TagJLdob3X5ZqGzid0f2W6zruoKxFtM6vfLtM8W7CW5vx2RaK7e6U-T0wcbEEkgLzSja_7qzEmaYClWEoLXWLIb1wX55rlimT_fQopYYCt8JhzoDvZvwFaQsg-2g"><img style="width:624px" src="https://lh7-us.googleusercontent.com/tyHM8gj0NrCwhYp39Lv17X0OiM-TagJLdob3X5ZqGzid0f2W6zruoKxFtM6vfLtM8W7CW5vx2RaK7e6U-T0wcbEEkgLzSja_7qzEmaYClWEoLXWLIb1wX55rlimT_fQopYYCt8JhzoDvZvwFaQsg-2g"/></a></figure><p id="c8862aec-563d-489d-8ae7-6d30fa640cb1" class="">This asymmetry is caused by the fact that the faces of the cube are split from one diagonal to the other, forming two triangles on each face. Notice how there is only one edge that lies diagonally on each face of the cube:</p><figure id="88619e65-3c30-43ec-a848-3a6254ebfd58" class="image"><a href="https://lh7-us.googleusercontent.com/XGOZ95D6YMaIL2xaGDnoc_GYchBgibyTFnCGwnVx66eB-lHP5hLrg3enkazuJ7iB4A6ttH3QA-GSrimnA1MUhxovYmLSFXI9DNAg6d3DwRojXF--7OC2eSweyMLKtdCboExboX_4-TTWGnjqPnbftTU"><img style="width:624px" src="https://lh7-us.googleusercontent.com/XGOZ95D6YMaIL2xaGDnoc_GYchBgibyTFnCGwnVx66eB-lHP5hLrg3enkazuJ7iB4A6ttH3QA-GSrimnA1MUhxovYmLSFXI9DNAg6d3DwRojXF--7OC2eSweyMLKtdCboExboX_4-TTWGnjqPnbftTU"/></a></figure><p id="0d44b2cd-4498-4b95-acd0-58b807cbcfd3" class="">We can address this asymmetry by splitting the diagonal edge along each face of the cube to form two diagonal edges along each face, thus forming four triangles. This allows for the preservation (relatively speaking) of the square shape of the face as we subdivide the mesh. A visual of the cube's faces after forming this split is pictured below:</p><figure id="506d0c5d-6bd8-4760-9b74-c94c90f89891" class="image"><a href="https://lh7-us.googleusercontent.com/SqzR889q01cNrIL7bSC1yPgz8FWVqROYTafoM5d3vCS0QIkYFeJXUHTOXERTJr3_a1H9-eA9oHiYBdQUwAoSOcnscg85dssoZWOfyLaErN-SXDAn2vbPfaI5tGh2oGAmCwJ5t8qTG59wFbdTs2w6ykY"><img style="width:624px" src="https://lh7-us.googleusercontent.com/SqzR889q01cNrIL7bSC1yPgz8FWVqROYTafoM5d3vCS0QIkYFeJXUHTOXERTJr3_a1H9-eA9oHiYBdQUwAoSOcnscg85dssoZWOfyLaErN-SXDAn2vbPfaI5tGh2oGAmCwJ5t8qTG59wFbdTs2w6ykY"/></a></figure><p id="80652a09-f67c-492f-9706-a81266bbd8fb" class="">Now let us subdivide this cube and see the results. After subdividing once we have the following:</p><figure id="d311a324-95bf-4eaf-9218-3cfe3ec83f1c" class="image"><a href="https://lh7-us.googleusercontent.com/rvxwYQqbW7EfqbEHKBdvVmD4sPhw7yi43EkND2F9XLNF9cVdH4fpmYfpXi7-mmol8yQDO4nLUsrEdEJi_QDkufTl-Kux01yCJgnOekd0pw6fb1QqHnsLCiXPB2UmIGZqydGgOLOHKY8yrqABKvqkBv0"><img style="width:624px" src="https://lh7-us.googleusercontent.com/rvxwYQqbW7EfqbEHKBdvVmD4sPhw7yi43EkND2F9XLNF9cVdH4fpmYfpXi7-mmol8yQDO4nLUsrEdEJi_QDkufTl-Kux01yCJgnOekd0pw6fb1QqHnsLCiXPB2UmIGZqydGgOLOHKY8yrqABKvqkBv0"/></a></figure><p id="f9aaf19f-fa4f-4fcb-b56b-c22afc32ecca" class="">Notice how the “squareness” of the cube is retained in this model, resulting in a symmetric squircle.</p><p id="d7c77554-9bc7-4042-a31e-191b9cfdecb4" class="">After the second subdivision:</p><figure id="08dec679-dc15-4315-92dc-de0eff94af5d" class="image"><a href="https://lh7-us.googleusercontent.com/zJBxxV6CSJCsQqlHpgFWyvuCO5jf_js4lDLRQGxu5ujQt3KsSFfOfHxmbnKhb3KilTm0UMInwakQj00W2HSGg19e_Cw0S2NHgo9Kf-guwJV772Fq3qfeCLEyUj8KnO5ArVwb5uxq41nWA7Tadpxwzy8"><img style="width:601px" src="https://lh7-us.googleusercontent.com/zJBxxV6CSJCsQqlHpgFWyvuCO5jf_js4lDLRQGxu5ujQt3KsSFfOfHxmbnKhb3KilTm0UMInwakQj00W2HSGg19e_Cw0S2NHgo9Kf-guwJV772Fq3qfeCLEyUj8KnO5ArVwb5uxq41nWA7Tadpxwzy8"/></a></figure><p id="5bccc88f-1519-4dc4-9e97-6bb19dbbd259" class="">We note that the cube now appears to resemble a smoothed out dice.</p><p id="b497feb4-5f38-41d4-914e-7c435f2c0518" class="">And after the third subdivision:</p><figure id="a041a11e-ded2-4e17-b000-aa12bb0b2f54" class="image"><a href="https://lh7-us.googleusercontent.com/Ng7vdfe-ceaRmGYssCO10ydkMudHkjQKAuA6gQLMwuszqWT3YkJGZtxmyZm7r4M1Tt3GRJ9iwWZyuH-hE8jrEpNflWDmcxzBIvIEGrB4xQHWEXtzaYNmfgRG6hNxjfxbrT4-D7QX9vDBCMdWR5m4a-w"><img style="width:598px" src="https://lh7-us.googleusercontent.com/Ng7vdfe-ceaRmGYssCO10ydkMudHkjQKAuA6gQLMwuszqWT3YkJGZtxmyZm7r4M1Tt3GRJ9iwWZyuH-hE8jrEpNflWDmcxzBIvIEGrB4xQHWEXtzaYNmfgRG6hNxjfxbrT4-D7QX9vDBCMdWR5m4a-w"/></a></figure><p id="c7f595f8-7b68-4e24-9ae3-c812687c4cea" class="">After subdividing six times, we end up with the following mesh:</p><figure id="50b20e75-7c1c-4c24-83cf-0a60b306af79" class="image"><a href="https://lh7-us.googleusercontent.com/34YCPFqoa1u6E4nr-_wMzkQbgmmPv4JN_IXnXvmtJa6DDM85h2C0PNzYCqr5kIrPVeEZwQ2w0pFqhU4tVDnMEZIM7ZsuMS234YRSj1szfdGkM8H4nkAGnGkmK1U6BD7Q5BcKlrDJMf30Doh9TbKw2PU"><img style="width:624px" src="https://lh7-us.googleusercontent.com/34YCPFqoa1u6E4nr-_wMzkQbgmmPv4JN_IXnXvmtJa6DDM85h2C0PNzYCqr5kIrPVeEZwQ2w0pFqhU4tVDnMEZIM7ZsuMS234YRSj1szfdGkM8H4nkAGnGkmK1U6BD7Q5BcKlrDJMf30Doh9TbKw2PU"/></a></figure><p id="d9fd16ea-2ba6-4d48-8109-7d27e369b75b" class="">We note that this mesh is now starting to resemble a circle, rather than a squircle. As the number of subdivisions approaches infinity, the shape of this mesh should approach a circle.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
