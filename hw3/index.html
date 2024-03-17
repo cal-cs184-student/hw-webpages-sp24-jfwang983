@@ -1,7 +1,690 @@
-<html>
-	<head>
-	</head>
-	<body>
-		Homework 3 index.html here
-	</body>
-</html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS 184 - Project 3 Write-Up</title><style>
+	/* cspell:disable-file */
+	/* webkit printing magic: print all background colors */
+	html {
+		-webkit-print-color-adjust: exact;
+	}
+	* {
+		box-sizing: border-box;
+		-webkit-print-color-adjust: exact;
+	}
+	
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	@media only screen {
+		body {
+			margin: 2em auto;
+			max-width: 900px;
+			color: rgb(55, 53, 47);
+		}
+	}
+	
+	body {
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+	
+	a,
+	a.visited {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	.pdf-relative-link-path {
+		font-size: 80%;
+		color: #444;
+	}
+	
+	h1,
+	h2,
+	h3 {
+		letter-spacing: -0.01em;
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-top: 0;
+		margin-bottom: 0.75em;
+	}
+	
+	h1 {
+		font-size: 1.875rem;
+		margin-top: 1.875rem;
+	}
+	
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 1.5rem;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin-top: 1.25rem;
+	}
+	
+	.source {
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		padding: 1.5em;
+		word-break: break-all;
+	}
+	
+	.callout {
+		border-radius: 3px;
+		padding: 1rem;
+	}
+	
+	figure {
+		margin: 1.25em 0;
+		page-break-inside: avoid;
+	}
+	
+	figcaption {
+		opacity: 0.5;
+		font-size: 85%;
+		margin-top: 0.5em;
+	}
+	
+	mark {
+		background-color: transparent;
+	}
+	
+	.indented {
+		padding-left: 1.5em;
+	}
+	
+	hr {
+		background: transparent;
+		display: block;
+		width: 100%;
+		height: 1px;
+		visibility: visible;
+		border: none;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+	}
+	
+	img {
+		max-width: 100%;
+	}
+	
+	@media only print {
+		img {
+			max-height: 100vh;
+			object-fit: contain;
+		}
+	}
+	
+	@page {
+		margin: 1in;
+	}
+	
+	.collection-content {
+		font-size: 0.875rem;
+	}
+	
+	.column-list {
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.column {
+		padding: 0 1em;
+	}
+	
+	.column:first-child {
+		padding-left: 0;
+	}
+	
+	.column:last-child {
+		padding-right: 0;
+	}
+	
+	.table_of_contents-item {
+		display: block;
+		font-size: 0.875rem;
+		line-height: 1.3;
+		padding: 0.125rem;
+	}
+	
+	.table_of_contents-indent-1 {
+		margin-left: 1.5rem;
+	}
+	
+	.table_of_contents-indent-2 {
+		margin-left: 3rem;
+	}
+	
+	.table_of_contents-indent-3 {
+		margin-left: 4.5rem;
+	}
+	
+	.table_of_contents-link {
+		text-decoration: none;
+		opacity: 0.7;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+	}
+	
+	table,
+	th,
+	td {
+		border: 1px solid rgba(55, 53, 47, 0.09);
+		border-collapse: collapse;
+	}
+	
+	table {
+		border-left: none;
+		border-right: none;
+	}
+	
+	th,
+	td {
+		font-weight: normal;
+		padding: 0.25em 0.5em;
+		line-height: 1.5;
+		min-height: 1.5em;
+		text-align: left;
+	}
+	
+	th {
+		color: rgba(55, 53, 47, 0.6);
+	}
+	
+	ol,
+	ul {
+		margin: 0;
+		margin-block-start: 0.6em;
+		margin-block-end: 0.6em;
+	}
+	
+	li > ol:first-child,
+	li > ul:first-child {
+		margin-block-start: 0.6em;
+	}
+	
+	ul > li {
+		list-style: disc;
+	}
+	
+	ul.to-do-list {
+		padding-inline-start: 0;
+	}
+	
+	ul.to-do-list > li {
+		list-style: none;
+	}
+	
+	.to-do-children-checked {
+		text-decoration: line-through;
+		opacity: 0.375;
+	}
+	
+	ul.toggle > li {
+		list-style: none;
+	}
+	
+	ul {
+		padding-inline-start: 1.7em;
+	}
+	
+	ul > li {
+		padding-left: 0.1em;
+	}
+	
+	ol {
+		padding-inline-start: 1.6em;
+	}
+	
+	ol > li {
+		padding-left: 0.2em;
+	}
+	
+	.mono ol {
+		padding-inline-start: 2em;
+	}
+	
+	.mono ol > li {
+		text-indent: -0.4em;
+	}
+	
+	.toggle {
+		padding-inline-start: 0em;
+		list-style-type: none;
+	}
+	
+	/* Indent toggle children */
+	.toggle > li > details {
+		padding-left: 1.7em;
+	}
+	
+	.toggle > li > details > summary {
+		margin-left: -1.1em;
+	}
+	
+	.selected-value {
+		display: inline-block;
+		padding: 0 0.5em;
+		background: rgba(206, 205, 202, 0.5);
+		border-radius: 3px;
+		margin-right: 0.5em;
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+		white-space: nowrap;
+	}
+	
+	.collection-title {
+		display: inline-block;
+		margin-right: 1em;
+	}
+	
+	.page-description {
+		margin-bottom: 2em;
+	}
+	
+	.simple-table {
+		margin-top: 1em;
+		font-size: 0.875rem;
+		empty-cells: show;
+	}
+	.simple-table td {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table th {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table-header-color {
+		background: rgb(247, 246, 243);
+		color: black;
+	}
+	.simple-table-header {
+		font-weight: 500;
+	}
+	
+	time {
+		opacity: 0.5;
+	}
+	
+	.icon {
+		display: inline-block;
+		max-width: 1.2em;
+		max-height: 1.2em;
+		text-decoration: none;
+		vertical-align: text-bottom;
+		margin-right: 0.5em;
+	}
+	
+	img.icon {
+		border-radius: 3px;
+	}
+	
+	.user-icon {
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 100%;
+		margin-right: 0.5rem;
+	}
+	
+	.user-icon-inner {
+		font-size: 0.8em;
+	}
+	
+	.text-icon {
+		border: 1px solid #000;
+		text-align: center;
+	}
+	
+	.page-cover-image {
+		display: block;
+		object-fit: cover;
+		width: 100%;
+		max-height: 30vh;
+	}
+	
+	.page-header-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+	
+	.page-header-icon-with-cover {
+		margin-top: -0.72em;
+		margin-left: 0.07em;
+	}
+	
+	.page-header-icon img {
+		border-radius: 3px;
+	}
+	
+	.link-to-page {
+		margin: 1em 0;
+		padding: 0;
+		border: none;
+		font-weight: 500;
+	}
+	
+	p > .user {
+		opacity: 0.5;
+	}
+	
+	td > .user,
+	td > time {
+		white-space: nowrap;
+	}
+	
+	input[type="checkbox"] {
+		transform: scale(1.5);
+		margin-right: 0.6em;
+		vertical-align: middle;
+	}
+	
+	p {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	.image {
+		border: none;
+		margin: 1.5em 0;
+		padding: 0;
+		border-radius: 0;
+		text-align: center;
+	}
+	
+	.code,
+	code {
+		background: rgba(135, 131, 120, 0.15);
+		border-radius: 3px;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 85%;
+		tab-size: 2;
+	}
+	
+	code {
+		color: #eb5757;
+	}
+	
+	.code {
+		padding: 1.5em 1em;
+	}
+	
+	.code-wrap {
+		white-space: pre-wrap;
+		word-break: break-all;
+	}
+	
+	.code > code {
+		background: none;
+		padding: 0;
+		font-size: 100%;
+		color: inherit;
+	}
+	
+	blockquote {
+		font-size: 1.25em;
+		margin: 1em 0;
+		padding-left: 1em;
+		border-left: 3px solid rgb(55, 53, 47);
+	}
+	
+	.bookmark {
+		text-decoration: none;
+		max-height: 8em;
+		padding: 0;
+		display: flex;
+		width: 100%;
+		align-items: stretch;
+	}
+	
+	.bookmark-title {
+		font-size: 0.85em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 1.75em;
+		white-space: nowrap;
+	}
+	
+	.bookmark-text {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.bookmark-info {
+		flex: 4 1 180px;
+		padding: 12px 14px 14px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.bookmark-image {
+		width: 33%;
+		flex: 1 1 180px;
+		display: block;
+		position: relative;
+		object-fit: cover;
+		border-radius: 1px;
+	}
+	
+	.bookmark-description {
+		color: rgba(55, 53, 47, 0.6);
+		font-size: 0.75em;
+		overflow: hidden;
+		max-height: 4.5em;
+		word-break: break-word;
+	}
+	
+	.bookmark-href {
+		font-size: 0.75em;
+		margin-top: 0.25em;
+	}
+	
+	.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+	.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+	.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+	.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+	.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+	.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+	.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+	.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+	.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+	.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+	.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+	.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+	.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.highlight-default {
+		color: rgba(55, 53, 47, 1);
+	}
+	.highlight-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.highlight-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.highlight-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.highlight-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.highlight-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.highlight-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.highlight-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.highlight-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.highlight-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.highlight-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.highlight-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.highlight-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.highlight-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.highlight-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.highlight-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.highlight-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.highlight-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.highlight-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.block-color-default {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.block-color-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.block-color-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.block-color-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.block-color-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.block-color-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.block-color-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.block-color-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.block-color-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.block-color-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.block-color-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.block-color-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.block-color-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.block-color-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.block-color-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.block-color-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.block-color-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.block-color-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+	.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+	.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+	.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+	.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+	.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+	.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+	.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+	.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+	.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+	.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+	.select-value-color-pageGlass { background-color: undefined; }
+	.select-value-color-washGlass { background-color: undefined; }
+	
+	.checkbox {
+		display: inline-flex;
+		vertical-align: text-bottom;
+		width: 16;
+		height: 16;
+		background-size: 16px;
+		margin-left: 2px;
+		margin-right: 5px;
+	}
+	
+	.checkbox-on {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+	
+	.checkbox-off {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+		
+	</style></head><body><article id="293e5d2f-a869-4626-b0b2-33da196b2516" class="page sans"><header><h1 class="page-title">CS 184 - Project 3 Write-Up</h1><p class="page-description"></p></header><div class="page-body"><h1 id="ccc4aa7f-e2f5-45ff-beba-eb1eb0ab45fa" class="">Spring 2024</h1><h1 id="76de8236-dfb6-40c5-8c8f-b4d237323216" class="">Assignment 3 - Pathtracer</h1><h1 id="4680c191-eb4c-434b-ba82-8345b976103b" class="">Ayra Jafri, Jonathan Wang</h1><h1 id="e8038515-c60c-4acc-b53f-931176779ead" class="">Overview</h1><p id="2c0a92bd-7b29-41b4-bfd0-16e7daf87741" class="">In this homework we explored path tracing for a physically-based renderer through multiple algorithms and optimization techniques as a survey for raytracing.</p><p id="a7445cbc-d6af-4b63-a34e-ce327b423e19" class="">In part 1, we generated the rays and ray-primitive intersection checks. To generate the rays, we converted the coordinates from an object’s object space to the ray-generating camera’s camera space, and to the reference world space. This enabled us to create a ray from the camera to the object. To allow objects to be rendered, we implemented ray-triangle and ray-sphere intersection. From here, we could now render shapes.</p><p id="adbfcdd8-3d96-4564-ad1e-3117ba4a9938" class="">In part 2, we found that path tracing is very slow! To optimize rendering, we created a BVH tree with each node of the tree containing a bounding box and each leaf node containing the primitives. With more restrictive regions of iterating through primitives for ray-primitive intersection, we noticed a significant speedup in rendering shapes.</p><p id="2c5d9d56-57d1-4145-8de7-56d8f4d0f447" class="">In part 3, we implemented direct lighting to enable realistic shading. First, we implemented zero-bounce illumination, where we could only see the light emitter. From here, we implemented two flavors of one-bounce illumination: uniform hemisphere sampling and importance sampling lights. We found that importance sampling lights enabled less noise in the renders.</p><p id="a8329120-482f-4d62-a2e7-082b705d62dd" class="">In part 4, we implemented indirect global illumination to reflect between objects and themselves. First, we implemented “at least one bounce” illumination to support more than one-bounce illumination. This allowed us to see colors from the Cornell Box reflect onto the objects. To terminate the bounces faster, we also implemented Russian Roulette to produce random termination of bounces because later bounces contribute less to the image.</p><p id="94c1c74d-eae0-43e9-bd2b-982b5413033b" class="">Lastly, in part 5, we implemented adaptive sampling to reduce the rendering latency by using statistical methods to determine whether a pixel has converged before iterating through the maximum number of samples allocated per pixel. This enabled us to generate denoised renders without having to wait for each pixel to needlessly iterate over all samples. If a pixel converges, there should be no difference if more samples are iterated over.</p><p id="5e8506d5-3f8d-4197-86d2-76d345d5e72f" class="">Overall, this homework gave us a great introduction to producing 3-dimensional renders of geometric objects.</p><h1 id="e4c2870c-c2aa-4be7-8639-e33b5cb5673e" class="">Part 1</h1><p id="ff4a692f-16dc-4364-9e92-e0d07fa6ea58" class="">For generating camera rays, we first convert the given coordinates (x_i, y_i), which belong to the image space, to coordinates in the camera space (x_c, y_c, -1). Since the image space is centered at (0.5, 0.5), we subtract x_i and y_i by 0.5 to center the points at (0, 0). Now, with the center at (0, 0), x_min = y_min = -0.5, and x_max = y_max = 0.5, we can now change the bounds to the camera space’s x_min = -tan(0.5 * hFov), x_max = tan(0.5 * hFov), y_min = -tan(0.5 * vFov), and x_max = tan(0.5 * vFov). This is done by multiplying the subtracted x_i and y_i points by 2 * tan(0.5 * hFov) and 2 * tan(0.5 * vFov), respectively. Lastly, since the camera space is 3-dimensional, the z-coordinate is set at -1 because the image is off by 1 in the negative direction with respect to the camera origin (0, 0, 0).</p><figure id="572330f3-5f40-403f-89c4-cf7b35ad64e7" class="image"><a href="https://lh7-us.googleusercontent.com/lh9qGs7s5IEHZx0s0bBrfhfV74iSwSJTwM7K5H0xmkhRM_q0bitbsqYj-mIHJPLwVKHaz7h9cIyUiD0_b9vLg9BveiR63fXUYClMk3VYLB5cXkDSP-l_0ZWKqAkuWYM8A_5OUWj-gnrxgy8ILUO30-Y"><img style="width:624px" src="https://lh7-us.googleusercontent.com/lh9qGs7s5IEHZx0s0bBrfhfV74iSwSJTwM7K5H0xmkhRM_q0bitbsqYj-mIHJPLwVKHaz7h9cIyUiD0_b9vLg9BveiR63fXUYClMk3VYLB5cXkDSP-l_0ZWKqAkuWYM8A_5OUWj-gnrxgy8ILUO30-Y"/></a></figure><p id="09e011c2-6f81-47f4-8503-ed9e30374ed1" class="">
+	</p><p id="3656285e-dc1b-44ac-ad7f-77d3a1e2bfa8" class="">To convert the camera space points to world space points, we multiply (x_c, y_c, -1) by the camera to the worldspace matrix. Lastly, we normalize the worldspace points.</p><p id="07082aed-371d-4342-ada5-cf28d28c1343" class="">With the correct worldspace points, we generate a ray based on the camera’s position (o) and the worldspace point (d). The min_t and max_t are set to the nclip and fclip, respectively. The ray is then returned.</p><p id="9649404c-d305-4581-b992-37cc13e3d738" class="">For ray-triangle intersection, the ray (o+t*d) is set equal to the plane representation of the triangle. Through this method, the normals of the triangle are used to calculate barycentric coordinates of the triangle ((1-b1-b2)*n1 + b1*n2 + b2*n3). Thus, find the t at which the ray intersects the triangle by computing: o + t*d = (1-b1-b2)*n1 + b1*n2 + b2*n3. Using the Möller Trumbore Algorithm, we can solve for t, b1, and b2. Once these values are computed we check to ensure that the ray’s intersection is valid. If the intersection is invalid, we return false. Otherwise, we modify the ray and intersection variables and return true. The ray’s max_t is set to the closest intersection. The intersection’s t is set to this ray-triangle intersection, n is set to the normal plane (n =  (1-b1-b2)*n1 + b1*n2 + b2*n3), primitive is set to this triangle, and bsdf is set to this triangle’s bsdf.</p><p id="15026a8c-a5ec-4d1b-b5db-c7c21bb80f40" class="">
+	</p><figure id="81494652-ac29-4050-bc20-1d313205abcf" class="image"><a href="https://lh7-us.googleusercontent.com/9PhvLAeJrbTUgfN2aoeUG_Q1uaic5YE-e5QGEffJugnYf8W1vyG3RXrkVBi0dM4NssKG6vDgMJlUt2-5EVJHqhhyfXczs8LGJh2X7lOmGYPy2HLBdT1UiijTU_FXVa_kOPDrQmAeJJbOg7ywu8PGKjg"><img style="width:624px" src="https://lh7-us.googleusercontent.com/9PhvLAeJrbTUgfN2aoeUG_Q1uaic5YE-e5QGEffJugnYf8W1vyG3RXrkVBi0dM4NssKG6vDgMJlUt2-5EVJHqhhyfXczs8LGJh2X7lOmGYPy2HLBdT1UiijTU_FXVa_kOPDrQmAeJJbOg7ywu8PGKjg"/></a></figure><p id="faa1c1c1-1e1d-441a-ac40-e92c4d16ac34" class="">
+	</p><p id="1c4f4b8c-0db7-46b3-858f-15c26d58d3d4" class="">For ray-sphere intersection, we followed a similar approach, but with a different equation for the sphere primitive. Setting o + t*d = (p - c)^2 - R^2 where p is the point of intersection, c is the center of the sphere, and R is the radius of the sphere. Solving for the intersection, we notice that there are two possible points of intersection. We check whether each of the 2 t-values are valid and return true if either t-values are valid. If no t-values are valid, we return false. Again, the ray’s max_t is set to the closest intersection. The intersection’s t is set to this ray-sphere intersection, n is set to the normal plane (n =  (1-b1-b2)*n1 + b1*n2 + b2*n3), primitive is set to this sphere, and bsdf is set to this sphere’s bsdf.</p><p id="28194807-4c0a-4043-bda0-1799fc13c9cc" class="">
+	</p><figure id="abcb58d9-6b2d-4d67-8606-eb60cbad0896" class="image"><a href="https://lh7-us.googleusercontent.com/_vfh4-7AU0FVsM9zwg2DZTGgU9TiLKv8wDnO8m11K0SoPbK7Dwplr5_LaVt9k2UeBrfhZPGD8q7Tu-3WFesomSMEazxGIJY7q-iNLvpbxf4VCxPAngtc5iAmUK7EH3H5f39TYWO459F0vpUvxF1x5qQ"><img style="width:478px" src="https://lh7-us.googleusercontent.com/_vfh4-7AU0FVsM9zwg2DZTGgU9TiLKv8wDnO8m11K0SoPbK7Dwplr5_LaVt9k2UeBrfhZPGD8q7Tu-3WFesomSMEazxGIJY7q-iNLvpbxf4VCxPAngtc5iAmUK7EH3H5f39TYWO459F0vpUvxF1x5qQ"/></a></figure><p id="4d67fa58-f26a-4397-b007-112ede4bb1de" class="">
+	</p><p id="6f4c2052-df1b-48e8-bbe2-80d0405779a0" class="">Ray-Triangle Intersection:</p><figure id="0077df7d-1bf6-4e4e-8189-1f07ea933c07" class="image"><a href="https://lh7-us.googleusercontent.com/sOVJ-uviOBA3Ui6qMQcI3aH6A-PTRiryDmyDITOJkzQJorsTvKkHAZAb1n038ejSBNcPnbstmNwjTwIgUeO5P_mWsS2nff-CW7dx3reHUIiedoY3YSK-4tZFrzlFxQVDBclxMHRdMiBPBJR7ILGf-uc"><img style="width:624px" src="https://lh7-us.googleusercontent.com/sOVJ-uviOBA3Ui6qMQcI3aH6A-PTRiryDmyDITOJkzQJorsTvKkHAZAb1n038ejSBNcPnbstmNwjTwIgUeO5P_mWsS2nff-CW7dx3reHUIiedoY3YSK-4tZFrzlFxQVDBclxMHRdMiBPBJR7ILGf-uc"/></a></figure><p id="e737a31a-d8d2-4797-bcce-7f1e3c3620cf" class="">
+	</p><p id="9fc49414-36c9-4373-9c13-2265cedbfaa4" class="">Ray-Sphere Intersection:</p><figure id="d898ffc2-8975-46a9-a740-5e90001d5007" class="image"><a href="https://lh7-us.googleusercontent.com/cww7szT3vc8YU4mWnGqnGaozW21QGGgL7-gyLEh5DmNyt1FB1Ln1Kr1D8sbC0Xy8oFn2BzVRznwi1IvNfhdLnxZXLnkDJ375bsQjIbMpE1vrgPFItg4E2HsuDMHjYxza3QBYuh_G59OmJdNcol_mW8E"><img style="width:624px" src="https://lh7-us.googleusercontent.com/cww7szT3vc8YU4mWnGqnGaozW21QGGgL7-gyLEh5DmNyt1FB1Ln1Kr1D8sbC0Xy8oFn2BzVRznwi1IvNfhdLnxZXLnkDJ375bsQjIbMpE1vrgPFItg4E2HsuDMHjYxza3QBYuh_G59OmJdNcol_mW8E"/></a></figure><p id="41c508aa-7d77-4693-ac53-0d0441bad818" class="">
+	</p><h1 id="438beefe-1cae-423f-9688-e0b528b192b0" class="">Part 2</h1><p id="fe7e04a2-5e41-44f2-a4a5-8e8a3e85a907" class="">This implementation of the BHV hierarchy uses a linked-list approach to construct the tree structure required for constructing BVHs. The BVH construction algorithm used is relatively straightforward. The construct_bvh function takes in two iterators called start and end, and an integer* max_leaf_size. The start parameter is a primitive pointer iterator which points to the beginning of a list of primitives, and the end parameter similarly flags the end of this list. The max_leaf_size parameter is self-explanatory – it stores the maximum number of primitives allowed in a leaf node of the BVH tree.</p><p id="57dcd181-e006-4c74-be63-54c30baf6fbe" class="">When called, the function will first process all primitives from the start to the end in a for loop, and will compute a bounding box containing all these primitives. While in this for loop, we keep a sum of the centroids of each primitive in a 3D vector called mean_split_point. As per its name, this will be relevant to the splitting heuristic discussed later.</p><p id="56e646be-76a2-4bc0-a4a6-8620c40834fe" class="">Once all primitives have been processed, we calculate the mean centroid and store this in mean_split_point. We also create a new node in the BVH tree (with an apt data type of BVHNode), with its start and end parameters initially set to the start and end parameters passed into the main function. We then check if this node is a leaf node by comparing the number of primitives in the bounding box to max_leaf_size. If the number of primitives is smaller, then the node is a leaf node. We set the node’s left and right parameters to null, and then return the node.</p><p id="7d79537f-8a07-419f-9be5-54e32c985eec" class="">If the BVHNode is not a leaf node, we must split the node’s bounding box (containing the primitives) in our node into two groups such that the primitives are split into a “left” and “right” BVHNode respectively. See the images below for a visual aid:</p><p id="75823d28-02bb-4b9b-bf0a-8574ccef7d32" class="">
+	</p><figure id="d2ed8491-dffa-4449-95fd-8f3f7344ade5" class="image"><a href="https://lh7-us.googleusercontent.com/Ve4b_zaV6dssNkYlGaCJ_-ZL_bGg5Gv8YtcpgP1US2rhfDiB82U6OlgdMTmfmjU5eoWY54oMNbiAi5yj_r97wOtNkgCH2g2Mhc7fnHlmtLaFfF_oNjtf95N3jp1AJqIIoII_vrnHrdq1HDabe8_vlLA"><img style="width:590px" src="https://lh7-us.googleusercontent.com/Ve4b_zaV6dssNkYlGaCJ_-ZL_bGg5Gv8YtcpgP1US2rhfDiB82U6OlgdMTmfmjU5eoWY54oMNbiAi5yj_r97wOtNkgCH2g2Mhc7fnHlmtLaFfF_oNjtf95N3jp1AJqIIoII_vrnHrdq1HDabe8_vlLA"/></a></figure><p id="0f16830d-a30f-4893-be76-9c1f491ea759" class="">[Before splitting the root node into two branches.]</p><p id="04a7d504-2775-4178-88a8-74ea8ffb00f1" class="">
+	</p><figure id="09ef38cf-d73f-4c9c-a4a0-230eb15a659b" class="image"><a href="https://lh7-us.googleusercontent.com/99q86Z0hPMfJ2NI_m4jP7lZm1KQjsDMLdwtWSD5ox6D82gHxJKTLcmmrXew-wJIPn_IYKGDwGx9eFZwCLF2SUhZZolvftayqNRwZkPEHttsmguJQvl4JGq-r1ibeqpbS0_rT868qPFxCtqldlJyyq_E"><img style="width:624px" src="https://lh7-us.googleusercontent.com/99q86Z0hPMfJ2NI_m4jP7lZm1KQjsDMLdwtWSD5ox6D82gHxJKTLcmmrXew-wJIPn_IYKGDwGx9eFZwCLF2SUhZZolvftayqNRwZkPEHttsmguJQvl4JGq-r1ibeqpbS0_rT868qPFxCtqldlJyyq_E"/></a></figure><p id="ce1fabe5-d0d7-4e74-b8b6-b7337efd2084" class="">[After splitting the root node into two branches, and assigning primitives according to the heuristic.]</p><p id="579a4910-fe18-4c27-a336-699af18c1abf" class="">In order to determine how to split the bounding box of the root node, we compare the extent of the bounding box along the x, y, and z directions, and split along the largest of these; the axis to split along is stored in the split_axis variable. Then, we sort the list of primitives from smallest to largest based on what axis we are splitting the bounding box by. This will make assigning primitives to the left and right nodes faster.</p><p id="ea5d4749-d7ab-42fa-a564-1ba6630e7934" class="">As mentioned above, the mean_split_point variable is a 3D vector which stores the average centroid of all primitives in the list. This is because this version of BVH incorporates the mean centroid split as its splitting heuristic. Primitives are assigned into left and right collections based on their position (stored as their centroid in a 3DVector) relative to the mean centroid. If, for example, the box is set to be split along the x-axis, then all primitives that have their centroid’s x-coordinate as less than the mean centroid’s x-coordinate will be assigned to the left collection. All other primitives will then be assigned to the right collection. In this case, we only need to find the first primitive in the main collection whose split_axis coordinate is greater than the mean centroid’s split_axis coordinate. This can easily be done by iterating through all primitives in a for loop and breaking out when this condition is met. We can then assign a primitive pointer iterator to this value, which we call midpoint.</p><p id="44c966e2-bae6-4d53-a14a-a5bf066c78e6" class="">Note that there is an edge case to take care of, which is when there are no primitives assigned to the left or right collections. This was accounted for by decrementing the midpoint if the right collection was empty, and incrementing the midpoint if the left collection was empty. This ensures that the bounding boxes of all nodes contain at least one primitive.</p><p id="aabaa8c3-9703-417e-b68c-ae444e89387b" class="">We also note that the function originally used the median primitive as the split point. However, this resulted in strange collection assignments and splits, which was especially noticeable on smaller, simpler meshes. Thus, this implementation uses the mean centroid heuristic to split collections.</p><p id="7429e733-b417-4f3f-ac24-388674550c5a" class="">Finally, we can set the root node’s left and right BVHNodes by recursively calling construct_bvh(start, midPoint, max_leaf_size) and construct_bvh(midPoint + 1, end, max_leaf_size) respectively. We then return the root node initialized near the beginning of the function.</p><p id="8cf0e30b-1217-48d7-a3e0-b5ee72a9e83a" class="">Below are some complex meshes that were only reasonably renderable after implementing BVH acceleration:</p><p id="b62c731d-b312-4040-b4f6-d81f34d2d588" class="">
+	</p><figure id="86673056-c7b2-42bc-8e27-52fc6a63e544" class="image"><a href="https://lh7-us.googleusercontent.com/7-VgUZS2L1lW7oJDKcYn05Gg2ATdVtjTgnMSsBbRXRldJe4u4dGV325SKBUTYYPm4s-vwQtI2Qd6caMIImgbKm6J9DKNvZGRvx8s2iVsE21o2NpF8J6QFVmF1WsH7c8ND1rqkNVhuHj2ov_I5q7K_-o"><img style="width:624px" src="https://lh7-us.googleusercontent.com/7-VgUZS2L1lW7oJDKcYn05Gg2ATdVtjTgnMSsBbRXRldJe4u4dGV325SKBUTYYPm4s-vwQtI2Qd6caMIImgbKm6J9DKNvZGRvx8s2iVsE21o2NpF8J6QFVmF1WsH7c8ND1rqkNVhuHj2ov_I5q7K_-o"/></a></figure><p id="82c22f1e-cf21-4c9a-9a7c-c2eba18098ef" class="">[ A render of Max Plank’s face, (maxplanck). This is his legacy now. ]</p><p id="392d36fc-e784-4774-b044-f5eb139cf12a" class="">
+	</p><figure id="2c9a2f72-6c47-44ab-b833-660286a13d29" class="image"><a href="https://lh7-us.googleusercontent.com/RiIwmaXYRQFizkdvylaqsQwRSY65jYDSwtaAfQ6hAJXnwlfi-Ir2K4bbDnWOrG6kTKFeNfOQ4AA8X-eFfR-V__ox_zGUQvLPYyNWLgTt_GzaXIXJnp0i7TLIvJuAB69Wbk8cCcJME-I-_q5oLXise6g"><img style="width:624px" src="https://lh7-us.googleusercontent.com/RiIwmaXYRQFizkdvylaqsQwRSY65jYDSwtaAfQ6hAJXnwlfi-Ir2K4bbDnWOrG6kTKFeNfOQ4AA8X-eFfR-V__ox_zGUQvLPYyNWLgTt_GzaXIXJnp0i7TLIvJuAB69Wbk8cCcJME-I-_q5oLXise6g"/></a></figure><p id="67b99c55-fe87-41a6-8ccc-5ad06f9daa1e" class="">[ A render of CBlucey. Very vaporwave.]</p><p id="b37b21bc-3e3c-418d-b553-70618d88a11c" class="">
+	</p><p id="3ed8d095-7c0a-4d59-993b-30e7b200e360" class="">Runtimes before implementing BVH acceleration:</p><figure id="2840423c-36db-426d-9487-9ac55417cc90" class="image"><a href="https://lh7-us.googleusercontent.com/9lFxv4T-97xfPfKPrP6EfjLkshxb3LsOX-VuR4KpbV-8vRMfykbuAii9JEzt2mkX6ukfQYWcnY2N91kO6VGGM_KPqOQsjwRRXkQUHJsaIO0Oz1vGHsPeT8ZLU13u_A-e-rexGOL01h47nKfVYACDLPs"><img style="width:624px" src="https://lh7-us.googleusercontent.com/9lFxv4T-97xfPfKPrP6EfjLkshxb3LsOX-VuR4KpbV-8vRMfykbuAii9JEzt2mkX6ukfQYWcnY2N91kO6VGGM_KPqOQsjwRRXkQUHJsaIO0Oz1vGHsPeT8ZLU13u_A-e-rexGOL01h47nKfVYACDLPs"/></a></figure><p id="3d72d067-a77a-4229-8581-b122ea5f9d23" class="">
+	</p><p id="861aa0a6-b6ba-4c3f-a3a1-b81cf64ffd96" class="">Runtimes after implementing BVH acceleration:</p><figure id="db403af7-392a-4cc7-ae03-09534f347d1f" class="image"><a href="https://lh7-us.googleusercontent.com/08qmoJp755wuJPwBZyWSLVKpvsidGNcH63pZiOqTFJBPjrNG9jDE2cnDLtbCOffSd4SDljNjgXMupJqx03MP7Xa3jx9Sxtk90WB2l6IttWTXfGUcsfu5ejDsadTMsBzaM1Tk1BBrNEzP2q-PqW4zYwQ"><img style="width:624px" src="https://lh7-us.googleusercontent.com/08qmoJp755wuJPwBZyWSLVKpvsidGNcH63pZiOqTFJBPjrNG9jDE2cnDLtbCOffSd4SDljNjgXMupJqx03MP7Xa3jx9Sxtk90WB2l6IttWTXfGUcsfu5ejDsadTMsBzaM1Tk1BBrNEzP2q-PqW4zYwQ"/></a></figure><p id="b8bd6be0-c82b-49b5-85cf-0f4da24972ba" class="">
+	</p><p id="689b1239-fb1a-4f22-b0b8-656495af951c" class="">BVH acceleration greatly improves the rendering speed, which is to be expected due to the O(n) runtime without BVH acceleration and O(logn) runtime with it. The maxplanck mesh, with approximately 51,000 primitives, takes 45 seconds to render without acceleration, and 0.04 seconds with acceleration. The CBlucey mesh, with approximately 133,000 primitives, takes 181 seconds (3 minutes!) to render without acceleration, and 0.03 seconds with acceleration. We note that a significant part of the speed-up involves cutting down the number of rays traced, and cutting down the number of intersection tests per ray, which occurs due to the implementation of a tree-like structure used by BVH acceleration.</p><h1 id="30eb3aa3-ab86-4e4f-8778-74968bc924f8" class="">Part 3</h1><p id="3c2b5014-7181-4750-b4af-2bcac78e7aea" class="">For the following task, we implemented two direct lighting estimation schema for our path tracer, toggled by a simple boolean variable to use one or the other. The first lighting heuristic programmed involves sampling radiance estimates uniformly from a unit hemisphere, in a method called estimate_direct_lighting_hemisphere, which takes in a constant Ray object named r and a constant Intersect object called isect. For a high level overview, this function estimates the amount of light/the radiance that hits the intersection point. This intersection point, hit_p, is a 3D vector and  is defined by the Ray parameter and the isect parameter passed in. We then estimate how much light (from the light source) hits this intersection point, assuming it arrives in a hemisphere around hit_p, using a Monte Carlo estimator. We are effectively trying to measure the outgoing radiance L_r.</p><figure id="1a13f3c2-f9b8-48a6-9855-88fd181e51fd" class="image"><a href="https://lh7-us.googleusercontent.com/7Jvyy9x38lCgQBlKbM_F6Fz9NAQwe1xblkf5kNLJKvBI3Q-T58TpD3HFVeOBqwt9hDHLk5S4ICQxtAQOGjEhXmJEQKdLgPZRWAw8fFSEnEEJNVOozBdn3vD7BEJj-dwHTk0mxHi1drt0JxH7NgXFBw0"><img style="width:459px" src="https://lh7-us.googleusercontent.com/7Jvyy9x38lCgQBlKbM_F6Fz9NAQwe1xblkf5kNLJKvBI3Q-T58TpD3HFVeOBqwt9hDHLk5S4ICQxtAQOGjEhXmJEQKdLgPZRWAw8fFSEnEEJNVOozBdn3vD7BEJj-dwHTk0mxHi1drt0JxH7NgXFBw0"/></a></figure><p id="7d67c8d3-43a8-46c7-8dcc-e50a00a0836d" class="">[ A figure demonstrating estimated direct lighting via a hemisphere. We are trying to estimate the L_i value, and we are effectively given the intersection point hit_p and the outgoing light ray L_r (passed in as the r parameter). This is defined in the code as L_out. ]</p><p id="42ef7a57-3612-4fe6-b8fe-8f6f2a44ae5a" class="">Pictured below is the Monte Carlo estimator we will be using:</p><figure id="5ddf7c14-813b-4aa2-8011-574358df3f80" class="image"><a href="https://lh7-us.googleusercontent.com/ZcMZIZLBf_AXIlab-WTJNdrNos-rgHWLatW--LsVTGSTQCovdH8uoKt3ry8AAbH5zzAfS3VjxFdqxMMB_psD0jCEGtKrIhkJvvkBUQmhPBAzk4z9YOM2r_giJpsBfYBY-53nmZMQAAF1Oa2pX3gwaxI"><img style="width:482px" src="https://lh7-us.googleusercontent.com/ZcMZIZLBf_AXIlab-WTJNdrNos-rgHWLatW--LsVTGSTQCovdH8uoKt3ry8AAbH5zzAfS3VjxFdqxMMB_psD0jCEGtKrIhkJvvkBUQmhPBAzk4z9YOM2r_giJpsBfYBY-53nmZMQAAF1Oa2pX3gwaxI"/></a></figure><p id="bf3fd05e-7c94-44ea-98ad-609fedb13bc3" class="">[ Note: the w_j in this equation is referred to as w_i, and w_r is referred to as w_out. ]</p><p id="a94e5f61-9283-45dc-a692-691c84631847" class="">Note that based on the parameters passed in, we must calculate the following values:</p><ul id="6363f7ed-4383-4334-a024-c045653af8f6" class="bulleted-list"><li style="list-style-type:disc">The BSDF (bi-drectional scattering distribution function) of the outgoing light ray L_r evaluated at the incoming and outgoing directions w_i and w_out. For this project, the BSDF represents a diffuse material.</li></ul><ul id="c8d7f1f1-ede3-424b-b426-20f788fafcc4" class="bulleted-list"><li style="list-style-type:disc">The incoming radiance L_i, determined by the sampling distribution and an incoming direction w_i</li></ul><ul id="da7fe90c-6f9e-4885-a066-ee284d6da689" class="bulleted-list"><li style="list-style-type:disc">The cosine between each sampled direction w_i and the normal of the isect</li></ul><ul id="02817273-70f5-4c2d-930a-e979ee6eb945" class="bulleted-list"><li style="list-style-type:disc">The PDF of the sampling distribution with respect to w_i</li></ul><ul id="295e5d4a-ceae-4054-a39b-7e54e646d1e7" class="bulleted-list"><li style="list-style-type:disc">N, the number of samples taken overall</li></ul><p id="d895da4f-7c4b-4ce0-be72-6ab3d3db305b" class="">Let us explore this implementation further. Note the above figures; it may be referenced further in this portion of the write-up.</p><p id="cf05c4d3-fe52-4f8a-a854-166fbd9c7ec2" class="">We start our function by initializing a few key values: the world-space 3D vector hit_p defined by the ray parameter and the time of intersection (as stored in isect), an empty 3D vector L_out which is meant to store the overall outgoing radiance, an integer num_samples which is derived from the product of the number of lights in the scene and the number of light samples per unit area, and the 3D vector w_out which represents the direction of the outgoing light ray (which is derived from the r parameter). Following this, we generate the pdf function for hemisphere sampling, which tells us the probability of sampling some direction from the distribution. In this case, it is simply a double equal to 1 / Pi.</p><p id="7d6f5396-b93e-4ef4-a7fa-a61d4413cbfa" class="">We are now ready to uniformly sample incoming ray directions in the hemisphere. We establish a for loop which will iterate num_sample times (allowing us to sample that many ray directions). In each iteration of the for loop, we first sample a ray direction from the hemisphere distribution, which is stored in an object space 3D vector w_i. We cast w_i into world space, and call this direction w_i_worldspace. We then calculate the angle between w_i_worldspace and the normal of the isect parameter by taking the dot product of these (normalized) vectors, and store this value in a double called cos_theta_i. Finally, we calculate the BSDF of L_r with respect to w_i and w_out by using the isect parameter passed in. We store this value as a 3D vector called bsdf_f.</p><p id="4e856521-7643-4867-8a20-c3e32dbb45d3" class="">Following this, we construct a Ray denoted as incoming_ray, with its origin defined as hit_p and its direction defined as w_i_worldpsace. This ray is meant to simulate an incoming light ray with its direction reversed (it starts at the intersection point and travels in the direction of the sampled direction). Note that we set this ray’s min_t attribute to EPS_F to avoid floating point precision errors. We then create an aggregate Intersection object called next_isect, which will store any necessary intersection information if incoming_ray intersects any light source in the BVH.</p><p id="3306bbac-5f69-42a6-b985-5179ca3206b1" class="">We now check if incoming_ray intersects a light source, which is done through BVH’s intersect() function, which takes in the incoming ray and next_isect. If there is no intersection, we add nothing to L_out. If there is an intersection, we can calculate the incoming radiance (aptly named incoming_radiance) through next_isect’s bsdf paramter’s get_emission() function.</p><p id="016736fa-7def-4209-b7fb-6732163ff94a" class="">Finally, we can calculate the Monte Carlo estimate for the outgoing radiance using the formula (pictured below for your convenience):</p><figure id="d39f1a46-46c3-46a7-82d7-361eedc31e3f" class="image"><a href="https://lh7-us.googleusercontent.com/ZcMZIZLBf_AXIlab-WTJNdrNos-rgHWLatW--LsVTGSTQCovdH8uoKt3ry8AAbH5zzAfS3VjxFdqxMMB_psD0jCEGtKrIhkJvvkBUQmhPBAzk4z9YOM2r_giJpsBfYBY-53nmZMQAAF1Oa2pX3gwaxI"><img style="width:482px" src="https://lh7-us.googleusercontent.com/ZcMZIZLBf_AXIlab-WTJNdrNos-rgHWLatW--LsVTGSTQCovdH8uoKt3ry8AAbH5zzAfS3VjxFdqxMMB_psD0jCEGtKrIhkJvvkBUQmhPBAzk4z9YOM2r_giJpsBfYBY-53nmZMQAAF1Oa2pX3gwaxI"/></a></figure><p id="07b580ba-e4c1-4218-b0fc-827ecb9c5535" class="">We calculate the above value, where:</p><ul id="ddf9d6f4-906b-4e21-b20a-0f6cf0754748" class="bulleted-list"><li style="list-style-type:disc">f_r is bsdf_f</li></ul><ul id="b399b90c-295c-4296-bab8-09ee18f7fc08" class="bulleted-list"><li style="list-style-type:disc">L_i is incoming_radiance</li></ul><ul id="f21557ff-1fea-4500-94ce-6fac64d45b89" class="bulleted-list"><li style="list-style-type:disc">cos(theta_j) is cos_theta_i</li></ul><ul id="c1d64d14-d54d-439d-ba41-ebab5d303735" class="bulleted-list"><li style="list-style-type:disc">p(w_j) is the pdf</li></ul><ul id="2b0c79b9-bc5b-400f-919b-a9185ef2c89a" class="bulleted-list"><li style="list-style-type:disc">N is num_samples</li></ul><p id="05df60a2-bd03-4a9f-9458-aee50af70ee3" class="">We add this value to L_out, and continue until all samples have been processed. We then return the final estimate of the overall outgoing radiance. We have now reached the end of our uniform hemisphere sampling algorithm.</p><p id="19e5f222-f81d-47f5-a02f-d4013ee4d344" class="">Light importance sampling follows a similar approach to uniform hemisphere sampling, with the main difference being in how we sample w_i. This is because light importance sampling samples directions between each light source in the current scene and hit_p, the intersection point.</p><p id="c6b4f4ae-ebb2-49ab-9962-af64c392d0f6" class="">We begin the algorithm by declaring an empty 3DVector L_out. We then construct a for loop to iterate through each light source in the scene. Inside this for loop, we declare three empty 3DVectors: w_i, L_samps, and emitted_radiance. L_samps will be used to store the total outgoing radiance of each light source. The emitted_radiance variable stores the radiance emitted by the light source onto the intersection point hit_p. We also initialize two empty doubles: pdf and dist_to_light. The dist_to_light variable will be used to store the distance between hit_p and the light source. Finally, we declare an integer epic_num_samps, which is used to determine the number of times we sample from a given light source. If the light source is a point light source, we only sample one. Otherwise, we sample over ns_area_light, or the number of samples per area light source.</p><p id="7a26d475-6997-4d26-8ae4-9380a7935785" class="">Once we have initialized these variables, we establish a for loop that will iterate epic_num_samps times, so we can sample each light source that amount. Inside of this second for loop, we sample a direction w_i (in world-space) between hit_p and the light source, set the pdf variable to the pdf of the current distribution, set the dis_to_light variable value, and finally retrieve the value of emitted_radiance. This is all done through the sample_L function, which sets the w_i, pdf, and dist_to_light values, and returns the emitted radiance (relative to hit_p and the light source). We then calculate cos_theta_i similar to before, and initialize a Ray object called shadow_ray. This is also assigned similarly as before. Note that we assign the min_t parameter EPS_F and also assign shadow_ray’s max_t parameter to dist_to_light - EPS_F, for reasons outlined previously. We retrieve bsdf_f the same as before as well.</p><p id="65608981-7045-43e0-b49d-6c7a8fe5f89d" class="">We now check if shadow_ray intersects any object between hit_p and the light source, and if the light is behind the surface at the hit point. If neither of these conditions are met, we can calculate the Monte Carlo estimator as outlined previously, and sum this value to L_samps. If these conditions are met, then we add nothing to L_samps.</p><p id="e38c51f1-5245-42b3-9ff0-bd244bbfb65c" class="">Once we terminate the second for loop, we add L_samps to L_out. Finally, we can then return L_out.</p><p id="2589b54b-eacd-4ade-a974-ec0f1ef3b492" class="">Pictured below are scenes sampled with both methods, run on an M1 Mac (2020):</p><p id="751f3051-255b-439d-bbe1-7a6e867dd592" class="">Rendering CB_Bunny.dae:</p><p id="4f5fa648-4cdf-48e8-a9eb-c0a3d861d286" class="">Generating a 480x360px image using 64 samples per pixel, 32 samples of light, a bounce ray depth of 6 (not seen when rendering with direct illumination only), and allocating 8 threads:</p><p id="80ff3563-5f11-4913-940b-dddd31374b87" class="">Using hemisphere sampling:</p><figure id="1b062c90-3cff-47e0-a9ae-cbd99be6ff69" class="image"><a href="https://lh7-us.googleusercontent.com/08SmpwrhY9s_liTR6eWyfqK7YtT0WgIDrL9SSRXLk1h9sbm-WUxi4NPgp44nErb16koc4-2j9Y9h-KtSwcBcfrveWJQvnieWFO1Hjc5qJMFkBzKotfqTG-sbM95MQ4x6B8o64bDUdOFWMeZlJ3JnloA"><img style="width:480px" src="https://lh7-us.googleusercontent.com/08SmpwrhY9s_liTR6eWyfqK7YtT0WgIDrL9SSRXLk1h9sbm-WUxi4NPgp44nErb16koc4-2j9Y9h-KtSwcBcfrveWJQvnieWFO1Hjc5qJMFkBzKotfqTG-sbM95MQ4x6B8o64bDUdOFWMeZlJ3JnloA"/></a></figure><p id="a833fe87-37d8-4938-9a8c-22b1c51c754d" class="">Runtime:</p><figure id="8e961438-a1ac-421e-8064-aec9eb48adee" class="image"><a href="https://lh7-us.googleusercontent.com/WUGXnqm36iRvb7V1J1NBVB4Kz9GzzWoAKKcwoW0RsycWGLhTg5kCMPuL5U6lDeA-nvtYrYPkFR7pfatr0VvdXJuA8_oLlBPHTo8i0p57sK-cedjpVNrqQ9BlIgOhUJCv2y7Xh73SKVJKyzBK0BmgN3Y"><img style="width:427px" src="https://lh7-us.googleusercontent.com/WUGXnqm36iRvb7V1J1NBVB4Kz9GzzWoAKKcwoW0RsycWGLhTg5kCMPuL5U6lDeA-nvtYrYPkFR7pfatr0VvdXJuA8_oLlBPHTo8i0p57sK-cedjpVNrqQ9BlIgOhUJCv2y7Xh73SKVJKyzBK0BmgN3Y"/></a></figure><p id="d5089710-c441-4dfa-a4ed-fdc7cfc1051d" class="">Using direct sampling:</p><figure id="b7d84477-ecd0-45a3-83c2-66f99d313581" class="image"><a href="https://lh7-us.googleusercontent.com/bDwL4ea2MfnhzmUvyBshvhetTVIL2Qt_0VxkIm0rSYruxLEtfC1vVA-kkzekpCvRrVsYVJS3ljD0OiwrZth9lMxm7EAqxc3fFvQwhCx07Ac1R7uTF0Ft32_zl6RwHNHYNmQePBYKAYTc-ugQ2TxLey8"><img style="width:480px" src="https://lh7-us.googleusercontent.com/bDwL4ea2MfnhzmUvyBshvhetTVIL2Qt_0VxkIm0rSYruxLEtfC1vVA-kkzekpCvRrVsYVJS3ljD0OiwrZth9lMxm7EAqxc3fFvQwhCx07Ac1R7uTF0Ft32_zl6RwHNHYNmQePBYKAYTc-ugQ2TxLey8"/></a></figure><p id="7bd321ef-a583-4ffb-9934-37342f59ba23" class="">Runtime:</p><figure id="412fbac7-ad8b-487a-9a39-020bfee2f2bb" class="image"><a href="https://lh7-us.googleusercontent.com/cDwwVTJAE3arkStDBY6mHxlQm3AuqljLYn45ossSzWThjrs80jPocmCAWCE1CjeyouZ7BftZL3B2UYnXeDODiMe4TMD3mtjYHXLZpkhCUmaBsSHMVXF6neyFfNvCfpyfGrx2TGxeH3t2pg1R2MwR4PE"><img style="width:437px" src="https://lh7-us.googleusercontent.com/cDwwVTJAE3arkStDBY6mHxlQm3AuqljLYn45ossSzWThjrs80jPocmCAWCE1CjeyouZ7BftZL3B2UYnXeDODiMe4TMD3mtjYHXLZpkhCUmaBsSHMVXF6neyFfNvCfpyfGrx2TGxeH3t2pg1R2MwR4PE"/></a></figure><p id="113d2133-9a36-43c9-ae4b-b994aa56f75f" class="">Rendering dragon.dae:</p><p id="7a773746-4c14-41e9-a48c-b9f059729d2a" class="">Generating a 480x480px image using 64 samples per pixel, 32 samples of light, a bounce ray depth of 6 (not seen when rendering with direct illumination only), and allocating 8 threads:</p><p id="2eac550a-807c-43e4-b8db-222d5c2de61f" class="">Direct sampling:</p><figure id="a3f460ca-a9f7-43de-b095-646c5d172991" class="image"><a href="https://lh7-us.googleusercontent.com/1MReP_hSsxWCOPKnFQNrysa_Iq8U36Q4FEcrPd0GOq70UVlm3a8ubGIcToBaPZTxg6ZARVp8jRlxwN5eC8SfmUcZgjg_k7ydNM7yhmTR5xasBMRdXmYelZP568Ne8xtPRPqqCjbmEtBJgSgObwlDxTQ"><img style="width:480px" src="https://lh7-us.googleusercontent.com/1MReP_hSsxWCOPKnFQNrysa_Iq8U36Q4FEcrPd0GOq70UVlm3a8ubGIcToBaPZTxg6ZARVp8jRlxwN5eC8SfmUcZgjg_k7ydNM7yhmTR5xasBMRdXmYelZP568Ne8xtPRPqqCjbmEtBJgSgObwlDxTQ"/></a></figure><p id="fab9df9f-a98d-4070-861c-57fe3fd6d36e" class="">Runtime:</p><figure id="52f6022e-f48c-4d7f-9d01-a53e8b5e26b4" class="image"><a href="https://lh7-us.googleusercontent.com/eKflzPcMquf0LVbR82dfCgS252d20MUHPm1LlyJfBj93C97MOQ224yiz2U7ocCZ4d4mZD8A8RSFSWcjrb7_z2km-jJV3QOSi4HgAabaYCq_6cUELuUs0jU7-kM8jBKEYiiIbOx6QxZYIlEY_aACWJpA"><img style="width:428px" src="https://lh7-us.googleusercontent.com/eKflzPcMquf0LVbR82dfCgS252d20MUHPm1LlyJfBj93C97MOQ224yiz2U7ocCZ4d4mZD8A8RSFSWcjrb7_z2km-jJV3QOSi4HgAabaYCq_6cUELuUs0jU7-kM8jBKEYiiIbOx6QxZYIlEY_aACWJpA"/></a></figure><p id="a60a4f45-717a-4234-a3af-0aa177079fb9" class="">Rendering CBSpheres_lambertian:</p><p id="69a62d8a-0f99-4176-a265-7156c09d1c80" class="">Generating a 480x360px image using 64 samples per pixel, 32 samples of light, a bounce ray depth of 6 (not seen when rendering with direct illumination only), and allocating 8 threads:</p><p id="8f4321b6-18b6-4a4e-8633-0a70b12adb85" class="">Hemisphere sampling:</p><figure id="3976790d-35c6-4b2d-94ed-4e5c5391ff92" class="image"><a href="https://lh7-us.googleusercontent.com/BNoRxpE5xe1kMt8YStK2-QvXa6XEVFt55lLk29OA0oLimu6sjYx3ObGuM5sE_DihD4J-BrOxjWSZu-RC5-TBwLrwIsrBtPfcwkb-CVtfMWwbWpjPKY42FodGN4Nsa7jBqg70JczsVBZgVw38UF2Wg0U"><img style="width:480px" src="https://lh7-us.googleusercontent.com/BNoRxpE5xe1kMt8YStK2-QvXa6XEVFt55lLk29OA0oLimu6sjYx3ObGuM5sE_DihD4J-BrOxjWSZu-RC5-TBwLrwIsrBtPfcwkb-CVtfMWwbWpjPKY42FodGN4Nsa7jBqg70JczsVBZgVw38UF2Wg0U"/></a></figure><p id="40b89b71-4731-4c3b-92fe-59b8e2fba9ea" class="">Runtime:</p><figure id="a79e0fc1-0a15-41b4-abe4-4dcb211308f9" class="image"><a href="https://lh7-us.googleusercontent.com/eJgoaQ5wo2fOyLcLqWpR8IuDN2rW8DSb64LXYoFMdpIuQBePY1gxv9USAFSD6dAGXE7crCZJgtIfb1XuZGvrTYK8RDprH4qMgD5XGTzkcjMEk6Q_TOo-s7skg77qOynXvVDako7bFt7o-Bjx02xH7XM"><img style="width:427px" src="https://lh7-us.googleusercontent.com/eJgoaQ5wo2fOyLcLqWpR8IuDN2rW8DSb64LXYoFMdpIuQBePY1gxv9USAFSD6dAGXE7crCZJgtIfb1XuZGvrTYK8RDprH4qMgD5XGTzkcjMEk6Q_TOo-s7skg77qOynXvVDako7bFt7o-Bjx02xH7XM"/></a></figure><p id="601818ef-c3b0-4a12-8d42-a0d99c4ed614" class="">Direct sampling:</p><figure id="4f31e52d-1ab3-438f-b56b-ab38db45e47f" class="image"><a href="https://lh7-us.googleusercontent.com/AS-KoDHBqXEoWbL0CT9SWHVpl7br_NliW1A56iOMbpSYr6YFas7bnngl2IzQ7noETK_ujf-T2c5agruUdolOXr02LyXmd0G00XEyrondbKDtt4b0nortVQmG8qQ2ZWEFCr-3mDJwyA-Irb3zB0rLl2k"><img style="width:480px" src="https://lh7-us.googleusercontent.com/AS-KoDHBqXEoWbL0CT9SWHVpl7br_NliW1A56iOMbpSYr6YFas7bnngl2IzQ7noETK_ujf-T2c5agruUdolOXr02LyXmd0G00XEyrondbKDtt4b0nortVQmG8qQ2ZWEFCr-3mDJwyA-Irb3zB0rLl2k"/></a></figure><p id="d43c3d94-d6cf-4ea3-a685-ec99f6dae244" class="">Runtime:</p><figure id="587e358f-5a87-47ff-a4d1-392524f3a9f5" class="image"><a href="https://lh7-us.googleusercontent.com/iHzH6zVvniqIhr8v7IqaqotLkEV8ENTLlOAlbxAT3itVyTBoxjDBpDqOa1XHPwpogPzxxupr4MP1cEcGMD5H7Jr9aaoxYs88922_y-wv_PIpEi5cJislldp7bnwP92K797omdjt4b2uxO74VhGXarSE"><img style="width:442px" src="https://lh7-us.googleusercontent.com/iHzH6zVvniqIhr8v7IqaqotLkEV8ENTLlOAlbxAT3itVyTBoxjDBpDqOa1XHPwpogPzxxupr4MP1cEcGMD5H7Jr9aaoxYs88922_y-wv_PIpEi5cJislldp7bnwP92K797omdjt4b2uxO74VhGXarSE"/></a></figure><p id="55d9b994-c104-4ed6-aab9-8a6378eb38f9" class="">As seen in the above images, uniform hemisphere sampling generally takes longer to run compared to importance sampling, and also results in noisier images. When comparing the importance sampling renders, the images appear far smoother and also rendered faster. When comparing the two algorithms, this outcome makes sense, as in hemisphere sampling, we sampling in directions from all over a hemisphere distribution, which results in more radiance values of zero, since not every direction will hit a light source. In importance sampling, we only sample in directions between the light sources and the intersection point, resulting in fewer cases where the emission is equal to zero. For each light source, we also sample multiple times per unit area, which also decreases the chances of returning a radiance of exactly zero. Pictured below are two visual aids for this explanation:</p><figure id="b51a85dc-26b2-4121-9aa1-a49631358aab" class="image"><a href="https://lh7-us.googleusercontent.com/qp9d4l6m8T78Z2KqeauYGmqV-Gqf_jhbPLEDFYLYNvZ2hchSiVsVMlbfnRdJJA31-D4XMArK1zFUP-diTn1ncGxq7TZU_yy1zDIzm8MjCwK8_jaDUFIVt6-ELSR-1hv8wh5XlcgY0FctXN1DH5CMsss"><img style="width:264px" src="https://lh7-us.googleusercontent.com/qp9d4l6m8T78Z2KqeauYGmqV-Gqf_jhbPLEDFYLYNvZ2hchSiVsVMlbfnRdJJA31-D4XMArK1zFUP-diTn1ncGxq7TZU_yy1zDIzm8MjCwK8_jaDUFIVt6-ELSR-1hv8wh5XlcgY0FctXN1DH5CMsss"/></a></figure><p id="93b40f82-9184-4bd2-bb8e-0eaf25f115ef" class="">[ Hemisphere sampling ]</p><figure id="77f08484-1f19-4d57-9cf8-253c0d806249" class="image"><a href="https://lh7-us.googleusercontent.com/HUTDvqQMUVVDUfteB-PCEPd7aLlGlGwDPijlxA9fu2ZxRxcReZZXXaoybZZ-5VDzDjetgEiw8PLFuyuDQWPH3flLSN0VSJ3d79HHxykwZVTPOH5u7cv4Yie3_7HF1P9P_vIyExrzWr48IweKet6iwGw"><img style="width:316px" src="https://lh7-us.googleusercontent.com/HUTDvqQMUVVDUfteB-PCEPd7aLlGlGwDPijlxA9fu2ZxRxcReZZXXaoybZZ-5VDzDjetgEiw8PLFuyuDQWPH3flLSN0VSJ3d79HHxykwZVTPOH5u7cv4Yie3_7HF1P9P_vIyExrzWr48IweKet6iwGw"/></a></figure><p id="fb4e7c03-826b-41c0-864a-d2b616eda988" class="">[ Image describing how importance sampling works, where we sample over the area O in the direction of the light source. ]</p><p id="cbcff97f-b467-42f3-9e9f-8672e5be8bf3" class="">Comparing the number of samples per area light (denoted as L), with 1 camera ray per pixel, using direct importance sampling:</p><p id="c2db9484-c04b-4ce0-86d7-2aae48700af1" class="">Rendering CBBunny:</p><p id="661cca17-4a7d-4b44-a4ad-3ab8f5b4863c" class="">L = 1:</p><figure id="540ae152-e77d-485f-ae88-4b8e8e01c892" class="image"><a href="https://lh7-us.googleusercontent.com/fs4zSvVYs1E-sBCTvWjz3w3a8zum9pDh8i8_vWQHp0qp_3qly4mZgDc_7txjtBtI-RyhM7y6ikx4T_eirL0DSjmUPgIIBqHaHW1hcoAuAVXMEqlOFW5VMluo3SoYEt3GBVvefHDuoeUE63y8z5NHHdU"><img style="width:480px" src="https://lh7-us.googleusercontent.com/fs4zSvVYs1E-sBCTvWjz3w3a8zum9pDh8i8_vWQHp0qp_3qly4mZgDc_7txjtBtI-RyhM7y6ikx4T_eirL0DSjmUPgIIBqHaHW1hcoAuAVXMEqlOFW5VMluo3SoYEt3GBVvefHDuoeUE63y8z5NHHdU"/></a></figure><p id="432c6c04-cd2b-4c36-8a93-076102f86b25" class="">L = 4:</p><figure id="25832eca-d808-4efc-b50e-35b540c07a33" class="image"><a href="https://lh7-us.googleusercontent.com/MDjsQ2SmJLg9vIAAVDHiVpd0Zb652ylJIt5pnbl3n69aqo4tocKsIGo9E5sPlPHA0VUKJD0_qFQvtc0C4e9LZjVQy6D9SsHKCP0coHIfIjzcmU6hLcm5YUZMgzdDbpZR5HLFkDqpnF9kPetinQUUk-U"><img style="width:480px" src="https://lh7-us.googleusercontent.com/MDjsQ2SmJLg9vIAAVDHiVpd0Zb652ylJIt5pnbl3n69aqo4tocKsIGo9E5sPlPHA0VUKJD0_qFQvtc0C4e9LZjVQy6D9SsHKCP0coHIfIjzcmU6hLcm5YUZMgzdDbpZR5HLFkDqpnF9kPetinQUUk-U"/></a></figure><p id="a11c7345-23d4-48a9-a3c1-96f652437708" class="">L = 16:</p><figure id="4f762f32-faee-4f20-8a8b-15a2fc27ecf1" class="image"><a href="https://lh7-us.googleusercontent.com/A0GhqW87m8WiBICaVNbGj2oNogs6gIjzAn-TlbLRPb1l1tqiV0I1vMqKMCDa5EQXCw6VqxLRF76gLuSdRzQEaWtsR_BIL0iQbaTetMTe0dOrn2U-u_g-cqejzF5NwSpXTkRvD-V4EdPQiYyg2_PETuo"><img style="width:480px" src="https://lh7-us.googleusercontent.com/A0GhqW87m8WiBICaVNbGj2oNogs6gIjzAn-TlbLRPb1l1tqiV0I1vMqKMCDa5EQXCw6VqxLRF76gLuSdRzQEaWtsR_BIL0iQbaTetMTe0dOrn2U-u_g-cqejzF5NwSpXTkRvD-V4EdPQiYyg2_PETuo"/></a></figure><p id="02e6b2d6-71be-44f3-a02e-5d040d7f4273" class="">L = 64:</p><figure id="4f9aa400-9d0a-4967-8dee-fbf0da544bb1" class="image"><a href="https://lh7-us.googleusercontent.com/w_r5oWnzjZnrpTV3U5zoAVa6gfrG0wNqsV3yMPVxgpI9aDF2vrdsy2Sn57EXpc5bDNHwcDSvH7w3nqBadRlsR2DIp1JjK8bX2h-QMOPa6cnBp7Z6SV2sI52DGfgFxY00SENIfzRr7Bp_wo9igdAfbHI"><img style="width:480px" src="https://lh7-us.googleusercontent.com/w_r5oWnzjZnrpTV3U5zoAVa6gfrG0wNqsV3yMPVxgpI9aDF2vrdsy2Sn57EXpc5bDNHwcDSvH7w3nqBadRlsR2DIp1JjK8bX2h-QMOPa6cnBp7Z6SV2sI52DGfgFxY00SENIfzRr7Bp_wo9igdAfbHI"/></a></figure><p id="00083101-1de8-4729-82ea-d5b6344f2866" class="">Note that as we increase the number of samples per area light, otherwise known as our L value, the shading and shadows of the bunny gradually grow smoother, and the noise reduced. This makes sense, as the L value directly corresponds to the ns_area_light parameter used in the algorithm for importance sampling, which determines the number of times we sample from a particular light source. In the first case where L = 1, we sample once per pixel, resulting in a very pixelated render. As we increase L, we “smooth out” these radiance values, thanks to summing over and averaging over more samples, resulting in smoother blends between different regions of the image. This can be seen when comparing the L=1 case to the succeeding cases, where the image is gradually denoised and lighting regions more blurred.</p><h1 id="91a6ec6c-5f83-4e28-9957-2c37270f0c6c" class="">Part 4</h1><p id="3241246c-fd73-4556-8d41-18058587a6bc" class="">In part three of this write-up, we discussed and implemented two different heuristics for direct lighting, which assumes that light only bounces once off of a surface before dissipating. However, in the real world, light bounces off of many surfaces multiple times before dissipating in enough energy to no longer be visible. This means that the radiance of any outgoing ray is dependent on the radiance of any incoming ray, leading to some recursion in the Monte Carlo estimate for the outgoing radiance. Thus, part four of this write-up will discuss how we implemented global illumination, or multiple light bounces (otherwise known as indirect lighting), in our path tracer.</p><figure id="748635d3-4f80-4ae7-90b7-a4faca2a382b" class="image"><a href="https://lh7-us.googleusercontent.com/DqoLKc7XEBcCi-Ag9HD_E6pmztSfCFfjPZBuTZJh5NuqwR4jNPAUOY4Oc4XO97vkCxkJ2YJZLYdsKadP4lxKmaf4febwNM775KK_tQAUm3WuWxZkx5Zmq6GsZS1SZd4cK4b64Kzz4dOHE3T3dNJQQAg"><img style="width:624px" src="https://lh7-us.googleusercontent.com/DqoLKc7XEBcCi-Ag9HD_E6pmztSfCFfjPZBuTZJh5NuqwR4jNPAUOY4Oc4XO97vkCxkJ2YJZLYdsKadP4lxKmaf4febwNM775KK_tQAUm3WuWxZkx5Zmq6GsZS1SZd4cK4b64Kzz4dOHE3T3dNJQQAg"/></a></figure><p id="87527951-b0cb-4271-bbc6-cb698b32f1e9" class="">[ The above image demonstrates the potential paths a given ray can take once it hits the intersection point (aka hit_p), assuming the ray starts from the camera. It can hit a light source, or it might hit another surface. From there, we check again to see if that light ray hits a surface or light ray, and therein lies the recursive aspect of global illumination. The number of times we check for this is dependent on the value of max_ray_depth. ]</p><p id="e0dbff98-ee51-4481-99ee-dd5e4981f746" class="">In this implementation, we implement Russian Roulette as an unbiased method of random termination for the light rays, regardless of the current recursion depth. Also note that this function includes a check to a parameter called isAccumBounces. This value is a boolean that signals whether or not the function should accumulate light as it traverses the recursion or not. If isAccumBounces is true, we will accumulate light through each recursive call. If not, we will not accumulate / sum light recursively, and instead only consider the emission from the current ray depth.</p><p id="f10fe941-0445-4322-8bf2-a3beb10ad16a" class="">Before we begin walking through the at_least_one_bounce_radiance() function, we must assign every ray a depth value called max_ray_depth, which will determine the number recursive calls / the recursive depth of the at_least_one_bounce_radiance() function. In other words, max_ray_depth is the highest number of ray bounces we will consider per light ray.</p><p id="e0a8d933-9943-4aaa-beb8-ca8104a8f269" class="">Now let us begin breaking down at_least_one_bounce_radiance(), which takes in a Ray object r and an Intersection object isect. Identical to the algorithms in part 3, we set the pdf, hit_p, w_out, bsdf_f, and L_out (an empty vector for now) variables accordingly. In this case, we set basdf_f, w_i, pdf through the sample_f function of isect’s bsdf parameter. For this function, we also create a 3D vector w_i_worldspace, since w_i is in object space, and will need to be casted to world space. We can then calculate cos_theta_i using the dot product of w_i_worldpspace and the normal vector of isect, the Intersection parameter passed in.</p><p id="444d1f0f-8d5f-4f98-969f-a47d7c33e632" class="">At this point, we have our pdf, w_i, w_out, bsdf_f, and cos_theta_i values defined for use in the Monte Carlo estimate. Now, our approach from the previous parts will differ.</p><p id="5816da45-05c4-400c-b2a3-77af83995e1d" class="">After setting the above values, we declare a variable cpdf, which represents the continuation probability used in implementing Russian Roulette, and set it equal to 0.6. This means that there is a 40% chance that the algorithm will terminate, regardless of the current recursion depth.</p><p id="8794cd29-bb90-487f-b82c-601ac441ed5d" class="">Now, we declare a Ray object called light_ray, which similarly to the direct illumination algorithms, is defined with respect to hit_p (its origin) and w_i_worldspace (its direction). We set its min_t attribute to EPS_F, and set its depth attribute to r.depth - 1, where r is the Ray parameter passed in. We also initialize a new Intersection object ray_isect to be used in the intersection check. Finally, we declare a Vector3D direct_illum, which stores the direct illumination of the current ray r. As per its name, direct_illum represents the direct lighting emission for the current recursion level based on the r and isect parameters passed in. This value is determined by the one_bounce_radiance() function described above.</p><p id="c5085c17-8625-4b5e-8f40-0d3b1ef0041c" class="">Now we flip a coin with the probability of heads equal to cpdf. If this coin flips heads, we check light_ray’s current depth. If this depth is greater than 0, we then check if the light ray intersects any objects. If both of these conditions are true, we can continue to our final check: whether or not isAccumBounces is true or false. As mentioned above, isAccumBounces signifies whether we consider the previous depth levels’ emission values along with the current depth’s direct illumination value. If isAccumBounces is true, we calculate the radiance returned by at_least_one_bounce_radiance() with the parameters light_ray and ray_isect passed in. We then multiply this value by bsdf_f and cos_theta_i, and divide this value by the pdf and cpdf. (Note that this operation is practically identical to the Monte Carlo estimate formula, excluding the averaging over the number of samples, N). We then add this final value to direct_illum and return it.</p><p id="d1a73688-37d0-432a-8f57-c5c2f8a81893" class="">In the case where isAccumBounces is false, we simply override direct_illum’s previous value and set it directly equal to the radiance calculated above, instead of summing it. We then return as usual.</p><p id="1e093dc6-264f-47fd-8b93-c3429397bb68" class="">Finally, if the ray does not intersect, we return an empty 3DVector to signify a radiance value of 0.</p><p id="bf1bb486-92f6-435f-a748-1c8b225c7bd0" class="">Final note: in the case where the max ray depth is zero, we simply return the zero-bounce illumination case.</p><p id="2c34fc6b-8abd-4314-ae5e-4ce6f3f4bc13" class="">Global Illumination Examples:</p><figure id="9739f2e0-8347-49c3-a639-93f0e80300cc" class="image"><a href="https://lh7-us.googleusercontent.com/mQ5WGSUIB1eFanMeWhBrfAhp8cIS2wpEhzcXoTMBBtN9R16zll2lJZ-QeUmFoAOJfRbf5jyOjjQCP1Zp5CHa17litUGr_dpUubDaPnX40DmKGj6hIAYcuo7U_pOfJwwzl3IzaLAiIVioa9mb0-DD1d8"><img style="width:480px" src="https://lh7-us.googleusercontent.com/mQ5WGSUIB1eFanMeWhBrfAhp8cIS2wpEhzcXoTMBBtN9R16zll2lJZ-QeUmFoAOJfRbf5jyOjjQCP1Zp5CHa17litUGr_dpUubDaPnX40DmKGj6hIAYcuo7U_pOfJwwzl3IzaLAiIVioa9mb0-DD1d8"/></a></figure><figure id="7b8cc959-9e00-426e-9fc7-00ea67f9c5b8" class="image"><a href="https://lh7-us.googleusercontent.com/kV4PZ9-lOEz6qj7WlOkirNBYp9FwwReWwbbuJTU2MjZJM3Pp3xWXZi3HSWqHf7jQ75GQcE3NB9aM3Lm5Bb2QZjeO-BYWh3BIGcwClJe2U6-FIOmrqnfCejCmnX3VFV7HVLWTKPTYnKXbez7CMxuIfQM"><img style="width:480px" src="https://lh7-us.googleusercontent.com/kV4PZ9-lOEz6qj7WlOkirNBYp9FwwReWwbbuJTU2MjZJM3Pp3xWXZi3HSWqHf7jQ75GQcE3NB9aM3Lm5Bb2QZjeO-BYWh3BIGcwClJe2U6-FIOmrqnfCejCmnX3VFV7HVLWTKPTYnKXbez7CMxuIfQM"/></a></figure><figure id="4e9b2ef9-28df-4217-b0d6-bfba8f874e5f" class="image"><a href="https://lh7-us.googleusercontent.com/7mA8HwOpejG7dD7hWQiHIrovWjNh0nyMRBq2cZyStAtu2XG0pQQrPSzTBeNFwZk_l2QcadpiIPu5vFmADKbVPkhGRXfIJMs6wiyPkaqrEXppEgm4lFfXYjwYooRXnfeSix0i7NKWT0gSGEcJVdFJ3jQ"><img style="width:480px" src="https://lh7-us.googleusercontent.com/7mA8HwOpejG7dD7hWQiHIrovWjNh0nyMRBq2cZyStAtu2XG0pQQrPSzTBeNFwZk_l2QcadpiIPu5vFmADKbVPkhGRXfIJMs6wiyPkaqrEXppEgm4lFfXYjwYooRXnfeSix0i7NKWT0gSGEcJVdFJ3jQ"/></a></figure><p id="f9e259d3-ee9d-4a4a-9d5b-a0898fccb2f3" class="">Only Direct Illumination vs. Only Indirect Illumination:</p><p id="e2b6aa4f-8d67-49ca-b12c-7ed4f5f6244a" class="">Direct Only:</p><figure id="26d60696-e403-4cfa-a644-c5f747caa013" class="image"><a href="https://lh7-us.googleusercontent.com/-_gsoNXaYcyFD31xv3Zugz9uiTS90Rikrx8RkSpb9IvwaFYPo98rlGMaBJaCXnReaTuUxrlnfoxK7ziGOnDkoKtT0Z6S7mwXNYtHxoaHv0R3NxYwyvUpfRAPFLxTWSb9uZ6zhP-z6JZNgWBi733WVzI"><img style="width:480px" src="https://lh7-us.googleusercontent.com/-_gsoNXaYcyFD31xv3Zugz9uiTS90Rikrx8RkSpb9IvwaFYPo98rlGMaBJaCXnReaTuUxrlnfoxK7ziGOnDkoKtT0Z6S7mwXNYtHxoaHv0R3NxYwyvUpfRAPFLxTWSb9uZ6zhP-z6JZNgWBi733WVzI"/></a></figure><p id="357ccad6-5139-43e0-a7fc-8a2cdc332d33" class="">Indirect Only:</p><figure id="3c286017-f727-44fe-a500-da219a60a35a" class="image"><a href="https://lh7-us.googleusercontent.com/WnwGDA5FjUhS1pHZPDJNx3OL6eDuOp3_1dDmY6V8hxaFnZ8c1p9A7SnJ4TX9j0nHHH0CmJii5dfeTGPGRFzmF1TSqcfqrIHSOLAZsFaOIOW328UoVeWxUPzbUZVTVjRXQs8lYl0M27iwMyTAadbrNM8"><img style="width:480px" src="https://lh7-us.googleusercontent.com/WnwGDA5FjUhS1pHZPDJNx3OL6eDuOp3_1dDmY6V8hxaFnZ8c1p9A7SnJ4TX9j0nHHH0CmJii5dfeTGPGRFzmF1TSqcfqrIHSOLAZsFaOIOW328UoVeWxUPzbUZVTVjRXQs8lYl0M27iwMyTAadbrNM8"/></a></figure><p id="78785c27-f9ad-4893-963e-bbb5fbd4be99" class="">isAccumBounces=false, max_ray_depth=0, 1, 2, 3, 4, and 5:</p><figure id="64049ae9-171c-4694-b9a0-b8aacdcd5485" class="image"><a href="https://lh7-us.googleusercontent.com/7RplIXj3P7UO3Tv7N0ACd2Tv6atAS1oSh762uFSjbRyF0JOyaxz2mbbCHX6T7EuOorMOR0h_GeiFuF3kbI6jgn8kAV6iUtPMzR8fEzbuUx8scMHc_kCGDz1Ny49JYySsrPeVQBOswutWkU8zMDK_Duo"><img style="width:480px" src="https://lh7-us.googleusercontent.com/7RplIXj3P7UO3Tv7N0ACd2Tv6atAS1oSh762uFSjbRyF0JOyaxz2mbbCHX6T7EuOorMOR0h_GeiFuF3kbI6jgn8kAV6iUtPMzR8fEzbuUx8scMHc_kCGDz1Ny49JYySsrPeVQBOswutWkU8zMDK_Duo"/></a></figure><figure id="61505346-088c-4a4f-af04-c9da429de7ff" class="image"><a href="https://lh7-us.googleusercontent.com/KvPIIao_pxjTofaQyDm3PiELPgEhLJAwsSuk80t1VypVuSqPtG3B6U8zp8zo7oIuYgFRcZGEadnJarkR50RJbQIHyw1wyCm_w0C8Bb-gnPbRddykBQ1DHo8NB0Sz-5QehpIyr8Jnw5fh6OGyFfmMjio"><img style="width:480px" src="https://lh7-us.googleusercontent.com/KvPIIao_pxjTofaQyDm3PiELPgEhLJAwsSuk80t1VypVuSqPtG3B6U8zp8zo7oIuYgFRcZGEadnJarkR50RJbQIHyw1wyCm_w0C8Bb-gnPbRddykBQ1DHo8NB0Sz-5QehpIyr8Jnw5fh6OGyFfmMjio"/></a></figure><figure id="08b22ab7-3e26-4c99-ab98-b0aba58b0d8e" class="image"><a href="https://lh7-us.googleusercontent.com/NjhMalb0_UVHvUO3JwCyBYPDovqG3seAWeirgroiWdbXcMnIh_ZKaA1dEvjaFWfLfB04Edf37I_JP8YgfyQpKLdmqKSmr-UnDU2C9_cKXPA681j-WTt8Qtx2wFuRT6_Op1cVCk6wpd72pX9D4VuWmwI"><img style="width:480px" src="https://lh7-us.googleusercontent.com/NjhMalb0_UVHvUO3JwCyBYPDovqG3seAWeirgroiWdbXcMnIh_ZKaA1dEvjaFWfLfB04Edf37I_JP8YgfyQpKLdmqKSmr-UnDU2C9_cKXPA681j-WTt8Qtx2wFuRT6_Op1cVCk6wpd72pX9D4VuWmwI"/></a></figure><figure id="fd5273a4-619d-451c-b765-9876d072d1ce" class="image"><a href="https://lh7-us.googleusercontent.com/UrQ1yGt3s0zzAeeRDr2qJWCyG_xcgnh1sn4TLOs-srR6n90HC4_9fGnKDzcVX_9_KwM45kQ6ObfEWwtiZPFqMc48yUp3MGYblLuJ1mC_Bgg_4l_BgvhQTBeHJOts0-c_YDwr2MosLqoROrkZa0fK3ZE"><img style="width:480px" src="https://lh7-us.googleusercontent.com/UrQ1yGt3s0zzAeeRDr2qJWCyG_xcgnh1sn4TLOs-srR6n90HC4_9fGnKDzcVX_9_KwM45kQ6ObfEWwtiZPFqMc48yUp3MGYblLuJ1mC_Bgg_4l_BgvhQTBeHJOts0-c_YDwr2MosLqoROrkZa0fK3ZE"/></a></figure><figure id="1a65142a-99b8-4420-b71a-22c5f4dd5f9a" class="image"><a href="https://lh7-us.googleusercontent.com/9dgPGXzBrES46y42bblP6jnOIyN3I4XbFUsCIi5i-6bQ3PpfYdXTJyFqVY1tEfqq0R-8QdsttDwz11jFBH7NYt2Plyj8I0J4roSRSRt00ucEM9kfyNFQ2ChPCdgRs8ZUxplsvO45tubfCJ5nZHDez00"><img style="width:480px" src="https://lh7-us.googleusercontent.com/9dgPGXzBrES46y42bblP6jnOIyN3I4XbFUsCIi5i-6bQ3PpfYdXTJyFqVY1tEfqq0R-8QdsttDwz11jFBH7NYt2Plyj8I0J4roSRSRt00ucEM9kfyNFQ2ChPCdgRs8ZUxplsvO45tubfCJ5nZHDez00"/></a></figure><figure id="ec44481c-03ee-43bf-bce8-633869a2955a" class="image"><a href="https://lh7-us.googleusercontent.com/WWh0c_d1FhZg79gDGvMpI1XwxFNnd2PYSbihcuitwpXqoWx6-yNU-JYbcj3McH36pnCXgIqoQ2mOKVgl12PASHdMO7fCg8kQ2AXzHNkuFGDEt30g9_IbtAnqX-DVfkpTpcfF-AyBBytobhZecvSIViU"><img style="width:480px" src="https://lh7-us.googleusercontent.com/WWh0c_d1FhZg79gDGvMpI1XwxFNnd2PYSbihcuitwpXqoWx6-yNU-JYbcj3McH36pnCXgIqoQ2mOKVgl12PASHdMO7fCg8kQ2AXzHNkuFGDEt30g9_IbtAnqX-DVfkpTpcfF-AyBBytobhZecvSIViU"/></a></figure><p id="12e664a7-6ea3-4e9c-b3d4-aa2aba52dfca" class="">Comparison of max_ray_depth=2 and max_ray_depth=3 when isAccumBounces=false:</p><p id="0ea4df59-7b4f-4955-b78f-e0dc1d5bd726" class="">In both pictures we can see that the ceiling light is dark and the wall colors are being reflected onto the bunny. Going from max_ray_depth=2 to max_ray_depth=3, we can see that the light that hit the bunny then hits the wall has hit the bunny again. This is why we can see some spots on the bunny, such as the ear and back, that are lit more in max_ray_depth=3. Moreover, the light that hit the wall then hits the bunny has hitten the wall again. This is why we can see some spots of the wall less bright, but instead a darker, deeper red.</p><p id="3526fdd6-ed17-4093-af98-4660bd0590e5" class="">isAccumBounces=true, max_ray_depth=0, 1, 2, 3, 4, and 5:</p><figure id="5560cfa1-bd97-449e-97a7-09d43ae0f2eb" class="image"><a href="https://lh7-us.googleusercontent.com/F81tL_qbfovdYDvBxrGaapeASEn6hYM1O5cGj1_EyUKpHkHqy_WfZQ_pCXtQ58am4yXOySREpTCDVJ8UsJMgGuXrP-1Koo4SkLZ9KHtMpmnFQFOIPVbg8H62F63MyAffC8_KmV_PvGb6cncPUInZiak"><img style="width:480px" src="https://lh7-us.googleusercontent.com/F81tL_qbfovdYDvBxrGaapeASEn6hYM1O5cGj1_EyUKpHkHqy_WfZQ_pCXtQ58am4yXOySREpTCDVJ8UsJMgGuXrP-1Koo4SkLZ9KHtMpmnFQFOIPVbg8H62F63MyAffC8_KmV_PvGb6cncPUInZiak"/></a></figure><figure id="43411d02-ce8d-4af2-9582-c50cbd6315c6" class="image"><a href="https://lh7-us.googleusercontent.com/B47PnSImP-ZJciogXYXUF52APB460dC-bm-lZwMuwD19FKgaErApYKC12xO_CcbU2GX9P92dgZEyve9OjgdAOBTI0yn7Zf-4F6wzepApBuCVvRXpAsHm7mOpz6sr2pp8cuN6f2NxjgmuBOxNjzVPZPY"><img style="width:480px" src="https://lh7-us.googleusercontent.com/B47PnSImP-ZJciogXYXUF52APB460dC-bm-lZwMuwD19FKgaErApYKC12xO_CcbU2GX9P92dgZEyve9OjgdAOBTI0yn7Zf-4F6wzepApBuCVvRXpAsHm7mOpz6sr2pp8cuN6f2NxjgmuBOxNjzVPZPY"/></a></figure><figure id="351a24a6-9d4d-407b-bf7e-f6d2b40ab18c" class="image"><a href="https://lh7-us.googleusercontent.com/lbUOSaSupS8zfxePuKPedHVIJsdr0wJPetGK_qRYQnSA_L_TuopAzrlNPdfacEN7PdOcHwi4eJwD4rAvNSrhkFZQBdj9obKBJFCSyRay_NvxqvM9x0YaM1unSzCVofEHqwNJhjdED-9qxPJ_4STEArI"><img style="width:480px" src="https://lh7-us.googleusercontent.com/lbUOSaSupS8zfxePuKPedHVIJsdr0wJPetGK_qRYQnSA_L_TuopAzrlNPdfacEN7PdOcHwi4eJwD4rAvNSrhkFZQBdj9obKBJFCSyRay_NvxqvM9x0YaM1unSzCVofEHqwNJhjdED-9qxPJ_4STEArI"/></a></figure><figure id="2deda71f-5559-487d-b8b1-54dada7a84c9" class="image"><a href="https://lh7-us.googleusercontent.com/8KEUxMRWjgenPm7_wBNs5b-HoGyt-5QTcheaIRYP22En8Pix72EYtNy1Ti1iAFU6INvc7tvHlSaJzzDX5nCG3J18S0C5op-vS5VYa-fXuWvEKMXfvIGc-CSo3isPC-qx_Scp6fE-OeCd9EPad7Iz0sw"><img style="width:480px" src="https://lh7-us.googleusercontent.com/8KEUxMRWjgenPm7_wBNs5b-HoGyt-5QTcheaIRYP22En8Pix72EYtNy1Ti1iAFU6INvc7tvHlSaJzzDX5nCG3J18S0C5op-vS5VYa-fXuWvEKMXfvIGc-CSo3isPC-qx_Scp6fE-OeCd9EPad7Iz0sw"/></a></figure><figure id="84c7b562-a8a8-4794-9315-1e47fdd23ad2" class="image"><a href="https://lh7-us.googleusercontent.com/WspZKRw8HiveULx7EfYCGbPGEWPlr_YqrA6CcsEwdvdqO5IbX1rMLywDPiBmQB9FqZvx_-CgxHKA1jtYGb_TXdO4bxxEQPFCU2HCGN0hZ_xYmuRc2KP7H-nc-EmOl1Rs62iuQdxtGix3SZrwqRxfq8k"><img style="width:480px" src="https://lh7-us.googleusercontent.com/WspZKRw8HiveULx7EfYCGbPGEWPlr_YqrA6CcsEwdvdqO5IbX1rMLywDPiBmQB9FqZvx_-CgxHKA1jtYGb_TXdO4bxxEQPFCU2HCGN0hZ_xYmuRc2KP7H-nc-EmOl1Rs62iuQdxtGix3SZrwqRxfq8k"/></a></figure><figure id="1bb9f7a8-29f5-4c40-9f54-32769c3022bc" class="image"><a href="https://lh7-us.googleusercontent.com/nqJH82oSfDY1C_B2N64PgUAkFpA_qed0mvlv3uJeqUf_s_KW1AhS-UVwjN5quspRShe8dF0Jt__8xGyBlAWT8y9gZ4Fw9MyCUDNoz2vS1N_GeVr1XE4n6xKLMno7R9i5whMpjRd9vpoV8b-EDQW3C8Q"><img style="width:480px" src="https://lh7-us.googleusercontent.com/nqJH82oSfDY1C_B2N64PgUAkFpA_qed0mvlv3uJeqUf_s_KW1AhS-UVwjN5quspRShe8dF0Jt__8xGyBlAWT8y9gZ4Fw9MyCUDNoz2vS1N_GeVr1XE4n6xKLMno7R9i5whMpjRd9vpoV8b-EDQW3C8Q"/></a></figure><p id="a8c02fb4-3a77-48ba-b932-3432eba686be" class="">Russian Roulette, max_ray_depth=0, 1, 2, 3, 4, and 100:</p><figure id="de05190d-3db1-42d1-b909-1c343c94e3fb" class="image"><a href="https://lh7-us.googleusercontent.com/hBT7jLhgsGJhBnkQnvWoy2WTLTAveaG-0OAk67RSjVNGjl920BoeyU8_rYvkz9TrBh_EgSmmzDdwnvJMf9RUC3SDMOUUZmUbJ3TZCUoZRtPSiYcY_EFqgl62LOuVr4E8Ox22adO9K6zvuKS61a9qjT0"><img style="width:480px" src="https://lh7-us.googleusercontent.com/hBT7jLhgsGJhBnkQnvWoy2WTLTAveaG-0OAk67RSjVNGjl920BoeyU8_rYvkz9TrBh_EgSmmzDdwnvJMf9RUC3SDMOUUZmUbJ3TZCUoZRtPSiYcY_EFqgl62LOuVr4E8Ox22adO9K6zvuKS61a9qjT0"/></a></figure><figure id="682c6360-1bf2-4d66-a255-0517f9cef2a2" class="image"><a href="https://lh7-us.googleusercontent.com/E3WnCIdUZBoiMWprkHzJNaii3GSdv_UcGQEbxndSi1mindtd1HleCep3rVlFc4B2ltIfOyd--G8yQDti7vW9c3B-oCpTuXoaUj0NjtgvrCFfhn2PWwDqOgxV99_f6tkZI4OIPVeYSgzm_7gHl5zSC7c"><img style="width:480px" src="https://lh7-us.googleusercontent.com/E3WnCIdUZBoiMWprkHzJNaii3GSdv_UcGQEbxndSi1mindtd1HleCep3rVlFc4B2ltIfOyd--G8yQDti7vW9c3B-oCpTuXoaUj0NjtgvrCFfhn2PWwDqOgxV99_f6tkZI4OIPVeYSgzm_7gHl5zSC7c"/></a></figure><figure id="e2fc6b20-546e-495a-ba62-74c2ce874b7d" class="image"><a href="https://lh7-us.googleusercontent.com/GL9In3pe0WF2jNBLY6STItkzP44N3JkK712NPrOuVoYpkU8nwgH-e5uVqgWqJTf52iaFBsgLA276Jghcx6cAqH63TUH0ETJg120Wxdrkica3y66c11sQ6NG_k-bg2Q2D7CZwP5o36Jg0SmSvCMIwETk"><img style="width:480px" src="https://lh7-us.googleusercontent.com/GL9In3pe0WF2jNBLY6STItkzP44N3JkK712NPrOuVoYpkU8nwgH-e5uVqgWqJTf52iaFBsgLA276Jghcx6cAqH63TUH0ETJg120Wxdrkica3y66c11sQ6NG_k-bg2Q2D7CZwP5o36Jg0SmSvCMIwETk"/></a></figure><figure id="67d9779d-5731-401b-bd9e-a5a591e619c1" class="image"><a href="https://lh7-us.googleusercontent.com/6OXjPNGXR6DMS8d6JaPIT3xkXUtpu7CbsGtQA0nFwtuaIbiPH56YCBH9E7UMCZ8Ld7GbDoGA1iLGHi9gz9TZ1bbZ1YOxjMsAT9BNEu_1FzLv1LswjGZS-cBQTxCMOxPELYO3RXh_3mb9-COKBfHaHHI"><img style="width:480px" src="https://lh7-us.googleusercontent.com/6OXjPNGXR6DMS8d6JaPIT3xkXUtpu7CbsGtQA0nFwtuaIbiPH56YCBH9E7UMCZ8Ld7GbDoGA1iLGHi9gz9TZ1bbZ1YOxjMsAT9BNEu_1FzLv1LswjGZS-cBQTxCMOxPELYO3RXh_3mb9-COKBfHaHHI"/></a></figure><figure id="dd745ede-6cc0-45dc-a5a8-9f179abbbb35" class="image"><a href="https://lh7-us.googleusercontent.com/lFPQ_3UDhWmxQTqMNtJwoY7uEoEahFtD6CSu1KX-9edlpbHOt0wG2Go03kKpuRDK3GqyU1aQWZ0Na06SU7dN5h11JP9Fbi8VHqDOjkgLFA4Rku7tRTaDBaCv6r3RMBW-l-Dfa1NvihUNhn1L6W-fuGE"><img style="width:480px" src="https://lh7-us.googleusercontent.com/lFPQ_3UDhWmxQTqMNtJwoY7uEoEahFtD6CSu1KX-9edlpbHOt0wG2Go03kKpuRDK3GqyU1aQWZ0Na06SU7dN5h11JP9Fbi8VHqDOjkgLFA4Rku7tRTaDBaCv6r3RMBW-l-Dfa1NvihUNhn1L6W-fuGE"/></a></figure><figure id="5d304e52-0834-496d-b574-26bc6f8e66bf" class="image"><a href="https://lh7-us.googleusercontent.com/psBwrGUNy2rhYore8qG3QOtcVc89HHVHlNCQGSTATmTL_Z79OhYPwUYUK05Xt74Vi4leQn345mI8p3E_XFelktYByBmhHeDrAk7Ym3lzH6IzDj0ZQQ4tFl1ONRN7XaOo8wSsK1kJLm61p8coBdE2nSo"><img style="width:480px" src="https://lh7-us.googleusercontent.com/psBwrGUNy2rhYore8qG3QOtcVc89HHVHlNCQGSTATmTL_Z79OhYPwUYUK05Xt74Vi4leQn345mI8p3E_XFelktYByBmhHeDrAk7Ym3lzH6IzDj0ZQQ4tFl1ONRN7XaOo8wSsK1kJLm61p8coBdE2nSo"/></a></figure><p id="b489b84e-f396-4b13-9d76-ea35318f9670" class="">sample-per-pixel rate=1, 2, 4, 8, 16, 64, and 1024:</p><figure id="6326ab21-4e95-454e-88e6-b8e09b1018fc" class="image"><a href="https://lh7-us.googleusercontent.com/GfMc11pnc3eCyOTZuk2jWEYnRIngU2yJrOkxuukpMglnJAs5L5TkYh38Pnyw-8Pj6Q-6Q2pEADMMZ9Dnvv0u4eBBljzz_0wToIQl5sitZUDcTvIhH218kDesUm2mmckF_Id9YKZiXn73upSitLsEdNE"><img style="width:480px" src="https://lh7-us.googleusercontent.com/GfMc11pnc3eCyOTZuk2jWEYnRIngU2yJrOkxuukpMglnJAs5L5TkYh38Pnyw-8Pj6Q-6Q2pEADMMZ9Dnvv0u4eBBljzz_0wToIQl5sitZUDcTvIhH218kDesUm2mmckF_Id9YKZiXn73upSitLsEdNE"/></a></figure><figure id="18c59fee-60a6-4e26-9cc0-1a56a41a60aa" class="image"><a href="https://lh7-us.googleusercontent.com/kDhXjKF9HEff5EuF1s-z0EAV5Yk9dymJdE_GFF8RqwQd87DF_Mv0gDEbQRje7skv7kksp_XvUe9LgVN59dMA3Ucu1nMOMIFfNDIi65Cqw7q8Ko_amxAF0pIzp7zNepg0rqp74RC94x7qtwYBzD2JHCs"><img style="width:480px" src="https://lh7-us.googleusercontent.com/kDhXjKF9HEff5EuF1s-z0EAV5Yk9dymJdE_GFF8RqwQd87DF_Mv0gDEbQRje7skv7kksp_XvUe9LgVN59dMA3Ucu1nMOMIFfNDIi65Cqw7q8Ko_amxAF0pIzp7zNepg0rqp74RC94x7qtwYBzD2JHCs"/></a></figure><figure id="67d0d4fe-acdb-4f3b-8a83-685712c037e9" class="image"><a href="https://lh7-us.googleusercontent.com/WXWOsWhw2rsW1LjWFAEwqaIVvf1HVzzOE4mmlw8JzNEqPDkti4PVoR9ycwhPGuYo1Jx8sB2fu4ES0ZuOP9H7EJzFIRlaiz_re9mcGCIPrU5P4gmFDYAQlcrHiTF8DAbFgYTfIbhbbwjuz1oV9d0hBaE"><img style="width:480px" src="https://lh7-us.googleusercontent.com/WXWOsWhw2rsW1LjWFAEwqaIVvf1HVzzOE4mmlw8JzNEqPDkti4PVoR9ycwhPGuYo1Jx8sB2fu4ES0ZuOP9H7EJzFIRlaiz_re9mcGCIPrU5P4gmFDYAQlcrHiTF8DAbFgYTfIbhbbwjuz1oV9d0hBaE"/></a></figure><figure id="99fee9af-c98d-4e3e-8ea7-7056c10f4f16" class="image"><a href="https://lh7-us.googleusercontent.com/wTrd7X-5HLTnYSSPDYdKhilkH8RTjLEgTIoQiCjqsNY5m7unwL5KX_ezkwoTj6ZyX4Ont45JcMb42-ZRkYl87KJVniI6maRljfN3yKpCWXsG29hFZ1ZlL0fcS7aDEOEqXnD-FxKEUjjAAwgFFqd2V5c"><img style="width:480px" src="https://lh7-us.googleusercontent.com/wTrd7X-5HLTnYSSPDYdKhilkH8RTjLEgTIoQiCjqsNY5m7unwL5KX_ezkwoTj6ZyX4Ont45JcMb42-ZRkYl87KJVniI6maRljfN3yKpCWXsG29hFZ1ZlL0fcS7aDEOEqXnD-FxKEUjjAAwgFFqd2V5c"/></a></figure><figure id="3150992f-1a9d-48aa-ac99-21ba1915217f" class="image"><a href="https://lh7-us.googleusercontent.com/DhW7vExNRhHQ_ElE4Dk2cbPbs9Om_COOmAMTXnkCVwvEmEKcr_lMSfPdWnlkO98wpEBFrSFaXlXY_uEsyh1BNMkDhSS6smX1ry5k86ucbGurdufuc8HggctM7J-tM4JkblwoSloVwRwA4gUGqqjSzB0"><img style="width:480px" src="https://lh7-us.googleusercontent.com/DhW7vExNRhHQ_ElE4Dk2cbPbs9Om_COOmAMTXnkCVwvEmEKcr_lMSfPdWnlkO98wpEBFrSFaXlXY_uEsyh1BNMkDhSS6smX1ry5k86ucbGurdufuc8HggctM7J-tM4JkblwoSloVwRwA4gUGqqjSzB0"/></a></figure><figure id="4638871e-8f28-4ff7-9c38-499b23f14f9b" class="image"><a href="https://lh7-us.googleusercontent.com/pQVKnxfJHe8aeErv92uFqttNiFfvXXTi1WLYl9P7tmdkGYTdTPJqj0NG-gctmaTZ2JzuAexjvJX2vDW982ymh-zuY8wevFJWHi47Q8xBiYSxKbjx6xU9eUrWXuHh2ko9zhI8kOdFgABJODqRBq0Dbj8"><img style="width:480px" src="https://lh7-us.googleusercontent.com/pQVKnxfJHe8aeErv92uFqttNiFfvXXTi1WLYl9P7tmdkGYTdTPJqj0NG-gctmaTZ2JzuAexjvJX2vDW982ymh-zuY8wevFJWHi47Q8xBiYSxKbjx6xU9eUrWXuHh2ko9zhI8kOdFgABJODqRBq0Dbj8"/></a></figure><figure id="63a61d1a-cb88-42bd-98bc-fe8053733988" class="image"><a href="https://lh7-us.googleusercontent.com/AdTlX37RzSkVnM-XDhvrNFuFAs1A8E2lpYOf0aR4hN4uoycT1IzSOk83n5Xi5z1KYidvVkrtlq0lo4g0xLhjfFI-X6e2lg9g063oNtYRxBEe6y5NDoL5GCYSp7imcjp9XQDTSYMqs-xgNqjXZrF22ag"><img style="width:480px" src="https://lh7-us.googleusercontent.com/AdTlX37RzSkVnM-XDhvrNFuFAs1A8E2lpYOf0aR4hN4uoycT1IzSOk83n5Xi5z1KYidvVkrtlq0lo4g0xLhjfFI-X6e2lg9g063oNtYRxBEe6y5NDoL5GCYSp7imcjp9XQDTSYMqs-xgNqjXZrF22ag"/></a></figure><h1 id="75e1c158-9e65-41fe-9d66-5b5ac0f6659a" class="">Part 5</h1><p id="1f75fc2d-7f87-4e1c-a514-0ddd51e093f0" class="">Adaptive sampling essentially “adapts” the number of samples required for a pixel to effectively de-noise the rendered image. Some pixels converge with only a small number of samples to render de-noised pixels. On the other hand, some pixels converge only after a large amount of samples to render de-noise pixels. Adaptive sampling allows each pixel to stop sampling after it has converged. This optimization reduces the amount of time required for ray tracing because the rendering time can be spent on the pixels that require more samples to converge and less time on the pixels that require less samples to converge. To evaluate convergence, we use a statistics-based method to confidently conclude whether a pixel has converged:</p><figure id="cc4fd036-59ec-4c2e-b0ae-d7627bd38865" class="image"><a href="https://lh7-us.googleusercontent.com/f4zsb0IU3yWfz82HefmkFDHJaSUuKglTVnio_D7-YdYMr_F6MbSGsXDoEHd0l_zNJtcyBwvJDJIeNpkYDVRkimFnf2dDbBjI_pQJWCVGCVgXVQ7ldgNIYuvEyw6Z05oadtrcZV6R6W0tPzIo_6cn6Vw"><img style="width:97px" src="https://lh7-us.googleusercontent.com/f4zsb0IU3yWfz82HefmkFDHJaSUuKglTVnio_D7-YdYMr_F6MbSGsXDoEHd0l_zNJtcyBwvJDJIeNpkYDVRkimFnf2dDbBjI_pQJWCVGCVgXVQ7ldgNIYuvEyw6Z05oadtrcZV6R6W0tPzIo_6cn6Vw"/></a></figure><figure id="a3dbae34-d860-4cbf-8376-ea9991ef74e1" class="image"><a href="https://lh7-us.googleusercontent.com/93iuEUvGecipZr4DefN4jwW--R22XUtSgVu_ZmFdctKU8-gB-PmyqfwWhldSGjuUmCoRdvmTQr64JHq0107nBspHZtVzcoOEkVWqx6F9uw-ZL9haIH4P-nhVMEo2x7A8gbaGuWV574PIfaxuPZ0NOXE"><img style="width:157px" src="https://lh7-us.googleusercontent.com/93iuEUvGecipZr4DefN4jwW--R22XUtSgVu_ZmFdctKU8-gB-PmyqfwWhldSGjuUmCoRdvmTQr64JHq0107nBspHZtVzcoOEkVWqx6F9uw-ZL9haIH4P-nhVMEo2x7A8gbaGuWV574PIfaxuPZ0NOXE"/></a></figure><p id="f0670d52-a08b-465b-886a-395f7fedf96a" class="">n is defined as the number of samples used for sampling the pixel, so far. maxTolerance is a variable we define as a measure of how rigid we define convergence to be.</p><p id="61f6e38f-6238-4826-b1a0-965a93809db7" class="">To get the mean and standard deviation of all samples, we first get the illumination vector like normal (See Part 1). We convert the illumination vector to a double then increment variables s1 by the illumination and s2 by the square of the illumination.</p><figure id="12535145-8dd0-4a1a-909d-da2b42a3a8b0" class="image"><a href="https://lh7-us.googleusercontent.com/UUKwmP8OLz5uoSc9vSJmz2fCy7_y1HZDMtzF-5ffGV8SQllJ7Tztiw2JlS-iaOUEpgxrx0FWONyEhNMP8dpj_c85jbKFbxSoCvbRtHBgOScEI05DrdFaM1IGuV4ux-_m4Wbi2HZ-d80rE-8uVyqc0QE"><img style="width:102px" src="https://lh7-us.googleusercontent.com/UUKwmP8OLz5uoSc9vSJmz2fCy7_y1HZDMtzF-5ffGV8SQllJ7Tztiw2JlS-iaOUEpgxrx0FWONyEhNMP8dpj_c85jbKFbxSoCvbRtHBgOScEI05DrdFaM1IGuV4ux-_m4Wbi2HZ-d80rE-8uVyqc0QE"/></a></figure><p id="58e895f7-cc9c-45b3-9f8c-b14ca09bbb41" class="">Then we check whether the current number of samples n is divisible by samplesPerBatch because we only want to check for convergence every samplesPerBatch times until we reach ns_aa, the maximum number of samples per pixel. If the current number of samples iterated is divisible by samplesPerBatch, we compute the mean and variance:</p><figure id="55f8f1d6-857b-47f1-8579-c2c347dfd221" class="image"><a href="https://lh7-us.googleusercontent.com/jXtpvTrVrXh8ulUIB607oQQZP7yVzvDENEKEf1u1Cfu5zNjvJUII7-ZhbLGetASKJ7Uo-0TzAjwIKh79FqP9f6rP0LmO6iIa_J9Zf_UN4usv_43goWqFqo2IAmzlN6Kh1ynfCsYch8XCh2vnarWpP3A"><img style="width:168px" src="https://lh7-us.googleusercontent.com/jXtpvTrVrXh8ulUIB607oQQZP7yVzvDENEKEf1u1Cfu5zNjvJUII7-ZhbLGetASKJ7Uo-0TzAjwIKh79FqP9f6rP0LmO6iIa_J9Zf_UN4usv_43goWqFqo2IAmzlN6Kh1ynfCsYch8XCh2vnarWpP3A"/></a></figure><p id="f679c213-c1c5-4054-af50-b7882eac87cf" class="">Then we evaluate whether the pixel has converged with n number of samples. If so, we set the number of samples to n, rather than ns_aa and break out of the loop. The sampleBuffer is updated and the sampleCountBuffer is updated with the actual number of samples.</p><p id="8f09dc25-fcf9-4dff-81bf-8e761735d0c5" class="">Adaptive Sampling De-Noising Example #1:</p><figure id="eaba047f-59bb-4877-8da5-dfbe5c92daa5" class="image"><a href="https://lh7-us.googleusercontent.com/rsEkA3h0timvpxtPhcAGbhWCQ70HTbrT0Ygebe8S9ieQhDFvZeEPqwZ_I8fYKWaiCtD6r-RupIfMWv7Oyu0A7-9DmUd58n9M3uU9AcGTk1LFVtZ7qZNGfbo6Mm9aPz8neOJsj0vbgLMxAOWFn1mZTHY"><img style="width:480px" src="https://lh7-us.googleusercontent.com/rsEkA3h0timvpxtPhcAGbhWCQ70HTbrT0Ygebe8S9ieQhDFvZeEPqwZ_I8fYKWaiCtD6r-RupIfMWv7Oyu0A7-9DmUd58n9M3uU9AcGTk1LFVtZ7qZNGfbo6Mm9aPz8neOJsj0vbgLMxAOWFn1mZTHY"/></a></figure><p id="31ef1d2f-38ae-4b54-b45d-b650ce94df69" class="">Adaptive Sampling Sample Rate #1:</p><figure id="b0c0c845-6189-49c4-9127-00b6255ef6b9" class="image"><a href="https://lh7-us.googleusercontent.com/ieKUtlXV5hOs1IFom4sclZTmUu5h8AeQr_6l6-bMcuZtviiwF_kreOwLwD_M1m8odaCQleL4ijS0yyIx2I4dI3Z2eFNAxm0lT8mfPmpznZROjszur8VCvqeIeU0G5ORhXbarwkij2I8PAOH6RZ2orXc"><img style="width:480px" src="https://lh7-us.googleusercontent.com/ieKUtlXV5hOs1IFom4sclZTmUu5h8AeQr_6l6-bMcuZtviiwF_kreOwLwD_M1m8odaCQleL4ijS0yyIx2I4dI3Z2eFNAxm0lT8mfPmpznZROjszur8VCvqeIeU0G5ORhXbarwkij2I8PAOH6RZ2orXc"/></a></figure><p id="11da48a1-1fe5-4f91-a6e3-4f7df7baf253" class="">Adaptive Sampling De-Noising Example #2:</p><figure id="b5b79619-9cdc-4555-8ca2-df72f111d50b" class="image"><a href="https://lh7-us.googleusercontent.com/ia08GU5PrjXsdkqKjD4N_NxkAL4sP6P2GgCugNjBAKPJAVccivX-13oJlmhp8z86ZcQSwPyF8D6S-qm2Te_kWevov8DTXsa3riEHAkquc_VnLsMauqJfm5tsCWAmpbTY1N87F_STC41XkDv2_ITbqDU"><img style="width:480px" src="https://lh7-us.googleusercontent.com/ia08GU5PrjXsdkqKjD4N_NxkAL4sP6P2GgCugNjBAKPJAVccivX-13oJlmhp8z86ZcQSwPyF8D6S-qm2Te_kWevov8DTXsa3riEHAkquc_VnLsMauqJfm5tsCWAmpbTY1N87F_STC41XkDv2_ITbqDU"/></a></figure><p id="ae35b350-e5ea-4631-91a5-1ff2576128a2" class="">Adaptive Sampling Sample Rate #2:</p><figure id="4ebed623-6767-4b1f-95bc-d2c9d61b6f53" class="image"><a href="https://lh7-us.googleusercontent.com/k09HADtRvQp1oT4iL1RSNrVDZjJlDbm8Z6cMEOxw6_ynpCf2Mbn9MnuTx2osrqj7WZ2XstrBufZaf-FyYfgVeIePljix0ssvtTVJ89MXiD0YWnDoDW_p16HyTJHeL0kU_usUqqQGCGN50WZ3GJRGcBQ"><img style="width:480px" src="https://lh7-us.googleusercontent.com/k09HADtRvQp1oT4iL1RSNrVDZjJlDbm8Z6cMEOxw6_ynpCf2Mbn9MnuTx2osrqj7WZ2XstrBufZaf-FyYfgVeIePljix0ssvtTVJ89MXiD0YWnDoDW_p16HyTJHeL0kU_usUqqQGCGN50WZ3GJRGcBQ"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
