@@ -1,7 +1,683 @@
-<html>
-	<head>
-	</head>
-	<body>
-		Homework 4 index.html here
-	</body>
-</html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS 184 HW 4 Write-Up</title><style>
+	/* cspell:disable-file */
+	/* webkit printing magic: print all background colors */
+	html {
+		-webkit-print-color-adjust: exact;
+	}
+	* {
+		box-sizing: border-box;
+		-webkit-print-color-adjust: exact;
+	}
+	
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	@media only screen {
+		body {
+			margin: 2em auto;
+			max-width: 900px;
+			color: rgb(55, 53, 47);
+		}
+	}
+	
+	body {
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+	
+	a,
+	a.visited {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	.pdf-relative-link-path {
+		font-size: 80%;
+		color: #444;
+	}
+	
+	h1,
+	h2,
+	h3 {
+		letter-spacing: -0.01em;
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-top: 0;
+		margin-bottom: 0.75em;
+	}
+	
+	h1 {
+		font-size: 1.875rem;
+		margin-top: 1.875rem;
+	}
+	
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 1.5rem;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin-top: 1.25rem;
+	}
+	
+	.source {
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		padding: 1.5em;
+		word-break: break-all;
+	}
+	
+	.callout {
+		border-radius: 3px;
+		padding: 1rem;
+	}
+	
+	figure {
+		margin: 1.25em 0;
+		page-break-inside: avoid;
+	}
+	
+	figcaption {
+		opacity: 0.5;
+		font-size: 85%;
+		margin-top: 0.5em;
+	}
+	
+	mark {
+		background-color: transparent;
+	}
+	
+	.indented {
+		padding-left: 1.5em;
+	}
+	
+	hr {
+		background: transparent;
+		display: block;
+		width: 100%;
+		height: 1px;
+		visibility: visible;
+		border: none;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+	}
+	
+	img {
+		max-width: 100%;
+	}
+	
+	@media only print {
+		img {
+			max-height: 100vh;
+			object-fit: contain;
+		}
+	}
+	
+	@page {
+		margin: 1in;
+	}
+	
+	.collection-content {
+		font-size: 0.875rem;
+	}
+	
+	.column-list {
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.column {
+		padding: 0 1em;
+	}
+	
+	.column:first-child {
+		padding-left: 0;
+	}
+	
+	.column:last-child {
+		padding-right: 0;
+	}
+	
+	.table_of_contents-item {
+		display: block;
+		font-size: 0.875rem;
+		line-height: 1.3;
+		padding: 0.125rem;
+	}
+	
+	.table_of_contents-indent-1 {
+		margin-left: 1.5rem;
+	}
+	
+	.table_of_contents-indent-2 {
+		margin-left: 3rem;
+	}
+	
+	.table_of_contents-indent-3 {
+		margin-left: 4.5rem;
+	}
+	
+	.table_of_contents-link {
+		text-decoration: none;
+		opacity: 0.7;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+	}
+	
+	table,
+	th,
+	td {
+		border: 1px solid rgba(55, 53, 47, 0.09);
+		border-collapse: collapse;
+	}
+	
+	table {
+		border-left: none;
+		border-right: none;
+	}
+	
+	th,
+	td {
+		font-weight: normal;
+		padding: 0.25em 0.5em;
+		line-height: 1.5;
+		min-height: 1.5em;
+		text-align: left;
+	}
+	
+	th {
+		color: rgba(55, 53, 47, 0.6);
+	}
+	
+	ol,
+	ul {
+		margin: 0;
+		margin-block-start: 0.6em;
+		margin-block-end: 0.6em;
+	}
+	
+	li > ol:first-child,
+	li > ul:first-child {
+		margin-block-start: 0.6em;
+	}
+	
+	ul > li {
+		list-style: disc;
+	}
+	
+	ul.to-do-list {
+		padding-inline-start: 0;
+	}
+	
+	ul.to-do-list > li {
+		list-style: none;
+	}
+	
+	.to-do-children-checked {
+		text-decoration: line-through;
+		opacity: 0.375;
+	}
+	
+	ul.toggle > li {
+		list-style: none;
+	}
+	
+	ul {
+		padding-inline-start: 1.7em;
+	}
+	
+	ul > li {
+		padding-left: 0.1em;
+	}
+	
+	ol {
+		padding-inline-start: 1.6em;
+	}
+	
+	ol > li {
+		padding-left: 0.2em;
+	}
+	
+	.mono ol {
+		padding-inline-start: 2em;
+	}
+	
+	.mono ol > li {
+		text-indent: -0.4em;
+	}
+	
+	.toggle {
+		padding-inline-start: 0em;
+		list-style-type: none;
+	}
+	
+	/* Indent toggle children */
+	.toggle > li > details {
+		padding-left: 1.7em;
+	}
+	
+	.toggle > li > details > summary {
+		margin-left: -1.1em;
+	}
+	
+	.selected-value {
+		display: inline-block;
+		padding: 0 0.5em;
+		background: rgba(206, 205, 202, 0.5);
+		border-radius: 3px;
+		margin-right: 0.5em;
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+		white-space: nowrap;
+	}
+	
+	.collection-title {
+		display: inline-block;
+		margin-right: 1em;
+	}
+	
+	.page-description {
+		margin-bottom: 2em;
+	}
+	
+	.simple-table {
+		margin-top: 1em;
+		font-size: 0.875rem;
+		empty-cells: show;
+	}
+	.simple-table td {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table th {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table-header-color {
+		background: rgb(247, 246, 243);
+		color: black;
+	}
+	.simple-table-header {
+		font-weight: 500;
+	}
+	
+	time {
+		opacity: 0.5;
+	}
+	
+	.icon {
+		display: inline-block;
+		max-width: 1.2em;
+		max-height: 1.2em;
+		text-decoration: none;
+		vertical-align: text-bottom;
+		margin-right: 0.5em;
+	}
+	
+	img.icon {
+		border-radius: 3px;
+	}
+	
+	.user-icon {
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 100%;
+		margin-right: 0.5rem;
+	}
+	
+	.user-icon-inner {
+		font-size: 0.8em;
+	}
+	
+	.text-icon {
+		border: 1px solid #000;
+		text-align: center;
+	}
+	
+	.page-cover-image {
+		display: block;
+		object-fit: cover;
+		width: 100%;
+		max-height: 30vh;
+	}
+	
+	.page-header-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+	
+	.page-header-icon-with-cover {
+		margin-top: -0.72em;
+		margin-left: 0.07em;
+	}
+	
+	.page-header-icon img {
+		border-radius: 3px;
+	}
+	
+	.link-to-page {
+		margin: 1em 0;
+		padding: 0;
+		border: none;
+		font-weight: 500;
+	}
+	
+	p > .user {
+		opacity: 0.5;
+	}
+	
+	td > .user,
+	td > time {
+		white-space: nowrap;
+	}
+	
+	input[type="checkbox"] {
+		transform: scale(1.5);
+		margin-right: 0.6em;
+		vertical-align: middle;
+	}
+	
+	p {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	.image {
+		border: none;
+		margin: 1.5em 0;
+		padding: 0;
+		border-radius: 0;
+		text-align: center;
+	}
+	
+	.code,
+	code {
+		background: rgba(135, 131, 120, 0.15);
+		border-radius: 3px;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 85%;
+		tab-size: 2;
+	}
+	
+	code {
+		color: #eb5757;
+	}
+	
+	.code {
+		padding: 1.5em 1em;
+	}
+	
+	.code-wrap {
+		white-space: pre-wrap;
+		word-break: break-all;
+	}
+	
+	.code > code {
+		background: none;
+		padding: 0;
+		font-size: 100%;
+		color: inherit;
+	}
+	
+	blockquote {
+		font-size: 1.25em;
+		margin: 1em 0;
+		padding-left: 1em;
+		border-left: 3px solid rgb(55, 53, 47);
+	}
+	
+	.bookmark {
+		text-decoration: none;
+		max-height: 8em;
+		padding: 0;
+		display: flex;
+		width: 100%;
+		align-items: stretch;
+	}
+	
+	.bookmark-title {
+		font-size: 0.85em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 1.75em;
+		white-space: nowrap;
+	}
+	
+	.bookmark-text {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.bookmark-info {
+		flex: 4 1 180px;
+		padding: 12px 14px 14px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.bookmark-image {
+		width: 33%;
+		flex: 1 1 180px;
+		display: block;
+		position: relative;
+		object-fit: cover;
+		border-radius: 1px;
+	}
+	
+	.bookmark-description {
+		color: rgba(55, 53, 47, 0.6);
+		font-size: 0.75em;
+		overflow: hidden;
+		max-height: 4.5em;
+		word-break: break-word;
+	}
+	
+	.bookmark-href {
+		font-size: 0.75em;
+		margin-top: 0.25em;
+	}
+	
+	.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+	.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+	.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+	.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+	.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+	.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+	.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+	.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+	.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+	.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+	.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+	.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+	.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.highlight-default {
+		color: rgba(55, 53, 47, 1);
+	}
+	.highlight-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.highlight-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.highlight-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.highlight-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.highlight-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.highlight-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.highlight-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.highlight-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.highlight-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.highlight-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.highlight-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.highlight-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.highlight-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.highlight-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.highlight-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.highlight-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.highlight-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.highlight-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.block-color-default {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.block-color-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.block-color-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.block-color-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.block-color-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.block-color-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.block-color-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.block-color-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.block-color-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.block-color-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.block-color-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.block-color-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.block-color-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.block-color-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.block-color-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.block-color-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.block-color-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.block-color-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+	.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+	.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+	.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+	.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+	.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+	.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+	.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+	.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+	.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+	.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+	.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+	.select-value-color-pageGlass { background-color: undefined; }
+	.select-value-color-washGlass { background-color: undefined; }
+	
+	.checkbox {
+		display: inline-flex;
+		vertical-align: text-bottom;
+		width: 16;
+		height: 16;
+		background-size: 16px;
+		margin-left: 2px;
+		margin-right: 5px;
+	}
+	
+	.checkbox-on {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+	
+	.checkbox-off {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+		
+	</style></head><body><article id="e6c6732c-802d-46b8-bbab-e57f27863153" class="page sans"><header><h1 class="page-title">CS 184 HW 4 Write-Up</h1><p class="page-description"></p></header><div class="page-body"><h1 id="9b246d90-b9d5-411d-94e4-5e9419e89d66" class="">Spring 2024</h1><h1 id="a48fa530-f1ad-4a92-8800-b4db4513a2c6" class="">Assignment 4 - ClothSim</h1><h1 id="70cc6223-997b-47b8-b3e9-d390914096d7" class="">Ayra Jafri, Jonathan Wang</h1><h1 id="038b7d76-4a9d-4d66-9378-498e4cd913ff" class="">Website Link:</h1><p id="6ce8c1e2-e4a5-49c9-8ff1-dde55a5f0223" class=""><a href="https://cal-cs184-student.github.io/hw-webpages-sp24-jfwang983/hw4/index.html">https://cal-cs184-student.github.io/hw-webpages-sp24-jfwang983/hw4/index.html</a></p><h1 id="7d53b0f3-acf5-434c-a7de-3d694d68c621" class="">Overview</h1><p id="96591bcb-efca-463d-9a39-6950a1fcace7" class="">In the following project, we simulated real-time cloth movement using a mass and spring based system, and implemented a variety of shaders.</p><p id="b2ff230b-6701-487d-b194-72bb2fe8b82b" class="">In part 1, we implemented a physics-based system to simulate a physical cloth to interact in an environment. To do this, we created a system of point masses, to represent physical mass, and springs, to represent connections between point masses. We evenly spread out the point masses and used structural, shearing, and bending springs to mimic different kinds of material behavior.</p><p id="0d943c4e-4699-486c-9708-0e3d8178d5ad" class="">In part 2, we simulated physically-based motion through numerical integration. To be more specific, we implement physical-based motion equations in the simulate function in order to apply the appropriate amount of force to each point mass in the cloth, given some timestep. To do this, we first calculate the total force applied to each point mass in the cloth via Hooke’s Law. We then use Verlet integration to calculate the position changes of all point masses. Finally, we constraint all position updates as per the method described in the SIGGRAPH 1995 Provot paper “Deformation Constraints in a Mass-Spring Model to Describe Rigid Cloth Behavior.</p><p id="4cf66cb8-20d3-4e7e-b619-c233e88f306c" class="">In part 3, we add in collision detection support, based on whether the cloth is colliding with a sphere or itself. We first implement sphere collision detection, where we detect whether a cloth’s point masses intersect a sphere, and adjust the point mass positions accordingly. We then implemented plane intersection support in a similar fashion, checking to see if a point mass at a given time point intersects the plane, and adjusting accordingly if so.</p><p id="2e0daa46-5178-4e3e-9a19-e669d37dfce0" class="">In part 4, we implemented self-collision to add further realism to the cloth physics simulation. Having added plane and sphere collision properties, self-collision was necessary to prevent the cloth from bunching up together in an extremely tight space. As a constraint, we used 2 * thickness as for the minimum distance between point masses. To optimize the simulation, we employed a hashing function based on 3D spaces comprising the cloth to minimize the amount of particle adjustment calculations. To do these corrections, we get the hashed key and only look at the point masses within the 3D space. All point masses with distances less than 2 * thickness then have their position moved to meet this constraint. In doing so, the cloth could now collide with itself.</p><p id="8449237a-5268-4dbe-a95b-162c573b4a33" class="">In part 5, we implemented shading to the cloth simulation. However, instead of using pure CPU processing, we implemented the shading with GLSL to utilize the parallel processing of the GPU. We had the opportunity to implement shading and texturing that are similar to ones we have implemented on previous homework assignments, including Diffuse Shading, Blinn-Phong Shading, and Texture Mapping. Furthermore, we had the opportunity to implement new texturing methods such as Bump Mapping, Displacement Mapping, and Reflections.</p><p id="8b7e29d7-f185-4502-b702-e63e05784fe2" class="">Overall, this assignment allowed us to explore how the physics behind cloth simulations are implemented, and how shaders are programmed and applied.</p><p id="9a7394d3-da7f-47fe-a766-7372661081d1" class="">
+	</p><h1 id="36061b14-847f-41b4-8a6f-c5bbc0fdb507" class="">Part 1 - Masses and springs</h1><p id="6332a9ea-1406-4a50-a1a1-05414dcb4b20" class="">In this part, we simulate cloth via a spring system. Pictured below are the wire-frames for the cloth model after this implementation.</p><p id="2d611496-69da-4213-95e9-81e6103d74bc" class="">Pictured below is the cloth wireframe (pinned at two points), with only structural constraints active:</p><figure id="9b5c8701-1cbb-43f2-9d7b-a5d76d2f2472" class="image"><a href="https://lh7-us.googleusercontent.com/kMpQC1ZZUVU4MxDiO4eDC7_13Xkn9kYupGuR5PuoTAEUqtNzd9iGKHMwSQNdQaznEzjyUbEn2fuisEP63sR-a_vcyi8a4Cdgcc9wl9izcEkfHlOk6lcj9mM03YFWRPF7WKexgMgL7beYrCsgx256qeA"><img style="width:624px" src="https://lh7-us.googleusercontent.com/kMpQC1ZZUVU4MxDiO4eDC7_13Xkn9kYupGuR5PuoTAEUqtNzd9iGKHMwSQNdQaznEzjyUbEn2fuisEP63sR-a_vcyi8a4Cdgcc9wl9izcEkfHlOk6lcj9mM03YFWRPF7WKexgMgL7beYrCsgx256qeA"/></a></figure><p id="6977dcec-82c1-42dd-85ba-9f705e3a1c2c" class="">Pictured below is the cloth wireframe (pinned at two points), with no shearing constraints active:</p><figure id="799d1a1b-cb9c-438b-aebd-2f8498164052" class="image"><a href="https://lh7-us.googleusercontent.com/MpOpx762YXOZizBQb7wSkie36rb-CAkSlJh8ROxMRK6QuMZ1FWGmLrTrUQsyFkNZZi0t2GCR-dcdIs50jQyYb8Eluam96leqK0yXAoIOagJLJvttt9tYUgb6gggIAT8ECALzlu0bOKG6C07eVlFSeO0"><img style="width:624px" src="https://lh7-us.googleusercontent.com/MpOpx762YXOZizBQb7wSkie36rb-CAkSlJh8ROxMRK6QuMZ1FWGmLrTrUQsyFkNZZi0t2GCR-dcdIs50jQyYb8Eluam96leqK0yXAoIOagJLJvttt9tYUgb6gggIAT8ECALzlu0bOKG6C07eVlFSeO0"/></a></figure><p id="7df49704-3a4b-477e-9eae-ae17b9ac80b0" class="">[ This looks identIcal to the first case pictured previously. ]</p><p id="8f1400a8-89f9-4003-8f1f-d86b4af5e56b" class="">Pictured below is the cloth wireframe (pinned at two points), with only shearing constraints active:</p><figure id="0eaacfc6-83a6-400a-8f39-95a0ca52e23c" class="image"><a href="https://lh7-us.googleusercontent.com/v2s0BYq4N2qqt4xxX_F4b0ILnauFBEydLrfODGHIwKFq73kcLCuCm8TG30qWC1SbmEf_ilbYMw33VX3ty0nndQZZyZph4JrrPeq2we6NH62RknM7qwsqiEkEMXunNH3WiNddT-QNZngHmLxyiugXNKc"><img style="width:624px" src="https://lh7-us.googleusercontent.com/v2s0BYq4N2qqt4xxX_F4b0ILnauFBEydLrfODGHIwKFq73kcLCuCm8TG30qWC1SbmEf_ilbYMw33VX3ty0nndQZZyZph4JrrPeq2we6NH62RknM7qwsqiEkEMXunNH3WiNddT-QNZngHmLxyiugXNKc"/></a></figure><p id="10ee5afe-73f8-4075-9641-664eecda19f5" class="">Pictured below is the cloth wireframe (pinned at two points), with all constraints active:</p><figure id="09410c54-7de2-4ac2-98a6-48cec5d00742" class="image"><a href="https://lh7-us.googleusercontent.com/WXwtffczXMt2JWuDE_kzcSLsP8l6s5rKl0HumIzwRuDlxQZxBfE_o5kH86RjERcZEgLq91LqTEwG_NgGYk6HGdd5BmwjPapBtjU1yT3JPupQ7X_5ryNQwxMWv1mkod9lNgczG6GDMiwC5MGwXKzWi_g"><img style="width:624px" src="https://lh7-us.googleusercontent.com/WXwtffczXMt2JWuDE_kzcSLsP8l6s5rKl0HumIzwRuDlxQZxBfE_o5kH86RjERcZEgLq91LqTEwG_NgGYk6HGdd5BmwjPapBtjU1yT3JPupQ7X_5ryNQwxMWv1mkod9lNgczG6GDMiwC5MGwXKzWi_g"/></a></figure><p id="ebb2e6db-2708-4f76-8438-7e3855ec385f" class="">An alternate angle to the above case:</p><figure id="ea98954e-b59d-4e9e-93ff-b8029e053cc7" class="image"><a href="https://lh7-us.googleusercontent.com/pVRzrHXMCnhPB0jvPebE56UPZlRTl59MSepxqdBQdHgxsrVf1tFnCzix6T-2Qq2OMatTBwuVaQbRAVq3FaEPJaRAJnrhNAEGBSpEwuMvSYjHCgIUYCqAGd8dbdmvQCD0LNlNpMyg-ABDqP0-vi8H3Mc"><img style="width:624px" src="https://lh7-us.googleusercontent.com/pVRzrHXMCnhPB0jvPebE56UPZlRTl59MSepxqdBQdHgxsrVf1tFnCzix6T-2Qq2OMatTBwuVaQbRAVq3FaEPJaRAJnrhNAEGBSpEwuMvSYjHCgIUYCqAGd8dbdmvQCD0LNlNpMyg-ABDqP0-vi8H3Mc"/></a></figure><p id="1942db13-e54d-4eae-bc34-3ccef8e28998" class="">
+	</p><h1 id="ae21d111-8180-4be2-8d10-b5f4084562a1" class="">Part 2 - Simulation via numerical integration</h1><p id="475cc13e-3b1d-497b-8006-7d65ac2f765b" class="">Pictured below is a simulation of a cloth pinned at two points, currently at rest. By default, the following parameters are set to:</p><ul id="15563ed3-2eed-4895-9d6b-eb25f63bd46a" class="bulleted-list"><li style="list-style-type:disc">Density: 15 g/cm^2<ul id="71d82473-eff1-4e1f-ade9-fa0aa1fb569b" class="bulleted-list"><li style="list-style-type:circle">The density of the cloth</li></ul></li></ul><ul id="d8216188-bb6e-4ecd-90f9-1fa0efd10e87" class="bulleted-list"><li style="list-style-type:disc">ks: 5000 N/m<ul id="12d23b04-c65e-4987-84c6-33f256c3e215" class="bulleted-list"><li style="list-style-type:circle">The spring constant, which determined the stiffness of the spring</li></ul></li></ul><ul id="03f3a403-ce77-4cf1-aa39-7415341e9b9f" class="bulleted-list"><li style="list-style-type:disc">Kd (Damping in the UI): 0.2%<ul id="f57905ae-0cb9-4d29-a5b3-9421cef1c5d4" class="bulleted-list"><li style="list-style-type:circle">Acts as a simple motion damping effect, applying a viscous drag to all motion in the cloth</li></ul></li></ul><figure id="38c2f1ad-9914-415b-a586-4d4d94c40f5a" class="image"><a href="https://lh7-us.googleusercontent.com/qQcmCGCb8frTHaLi0heXBAuexxoUv2REIED8ZgVq7ZXyUrxczorEUkRe1Cm8PizY37fsfCv8fFjkFOgcbzpcMeU70Miz3nc32ouW9TZ8Ge7DRHj0cQGcgLiQy4abHFZOPoJtk6i8LpY_j8_QQuclHXg"><img style="width:624px" src="https://lh7-us.googleusercontent.com/qQcmCGCb8frTHaLi0heXBAuexxoUv2REIED8ZgVq7ZXyUrxczorEUkRe1Cm8PizY37fsfCv8fFjkFOgcbzpcMeU70Miz3nc32ouW9TZ8Ge7DRHj0cQGcgLiQy4abHFZOPoJtk6i8LpY_j8_QQuclHXg"/></a></figure><figure id="e2408243-b961-41cf-9cc4-6f5413fe9d9e" class="image"><a href="https://lh7-us.googleusercontent.com/os6jAu69YiuxSQngTfAxvXduzvTrCruQ__k7IRT8PLUEe0MtJl6nSlDXiFOsibMjI3PKkVqENvpPIRLp_c3DFV0-RvHRjrDviJRT2aJpA-ox-wBZvl3HSgxMN8a6iO6jP5LRXez6AruFMWNXOOjzEYM"><img style="width:624px" src="https://lh7-us.googleusercontent.com/os6jAu69YiuxSQngTfAxvXduzvTrCruQ__k7IRT8PLUEe0MtJl6nSlDXiFOsibMjI3PKkVqENvpPIRLp_c3DFV0-RvHRjrDviJRT2aJpA-ox-wBZvl3HSgxMN8a6iO6jP5LRXez6AruFMWNXOOjzEYM"/></a></figure><p id="7bf78257-0b2e-4a84-a6bb-4509eed96320" class="">[ A cloth pinned at two points, with default settings specified. ]</p><p id="8fe5f066-7a0b-4e69-9ace-141bd5e43fa0" class="">Now, we adjust the constants one at a time to observe their effects on the simulation.</p><p id="00c9f757-2570-4d57-880c-395ac9269bac" class="">First, we adjust only the density of the cloth.</p><p id="4492261f-75ec-4d1d-b64b-2e95a9fbe431" class="">If the density is lower than the default (density = 2):</p><figure id="6bbce6bf-f3c8-49eb-910c-65443fca8d63" class="image"><a href="https://lh7-us.googleusercontent.com/lTPL2HpAN6O1uu_Jz0liw_K9rkmlFDjbX_gg-RyDm74jrCEnUNN2FTgwvrxYJubA1ZEIK7JwRzZodddt90YRrb4C7I177Y02x7VJGgApIHzZLKdVhazHVNDWaGlahjjLGN5hMBOaXMVhKSmXxrC6I5E"><img style="width:624px" src="https://lh7-us.googleusercontent.com/lTPL2HpAN6O1uu_Jz0liw_K9rkmlFDjbX_gg-RyDm74jrCEnUNN2FTgwvrxYJubA1ZEIK7JwRzZodddt90YRrb4C7I177Y02x7VJGgApIHzZLKdVhazHVNDWaGlahjjLGN5hMBOaXMVhKSmXxrC6I5E"/></a></figure><figure id="76163725-ce8d-4d67-a531-586a89db4e31" class="image"><a href="https://lh7-us.googleusercontent.com/3SW1z8NQsnlr5yqP28V5ErOII0j5oTSWWtlRfj18uggyu7m9w-l9n-wZm5NCzeBYLtFkruXu7qeZTB-0be_G_zdfQLAufFCqFZsxKnxyS1rYQlJXUkAYn7L76bMlX6IE99t5K5aq59BAjMTX9LzXVWk"><img style="width:624px" src="https://lh7-us.googleusercontent.com/3SW1z8NQsnlr5yqP28V5ErOII0j5oTSWWtlRfj18uggyu7m9w-l9n-wZm5NCzeBYLtFkruXu7qeZTB-0be_G_zdfQLAufFCqFZsxKnxyS1rYQlJXUkAYn7L76bMlX6IE99t5K5aq59BAjMTX9LzXVWk"/></a></figure><p id="6d81f281-348a-4af0-abc2-5b0feef3499a" class="">From start to rest, the cloth takes more time to fall, due to the decreased density resulting in a lighter, flowy cloth. At rest, the cloth has fewer wrinkles as well that are not as “deep”, due to the decreased density (and thus decreased weight) of the fabric, and is “shorter” in length, which is due to its decreased weight, causing the cloth to not be pulled downwards as much.</p><p id="dcbd8946-eaf8-471a-9141-da2240d1669d" class="">If the density is higher than the default (density = 75):</p><figure id="d30176a4-c33c-4450-9f7b-f3c826be206a" class="image"><a href="https://lh7-us.googleusercontent.com/F7z1a4j_hb9rRuE1MshCmL73VMEO3AZnuLjA-TY8YL889nqcMiqRapRC9f2SyYVBcCCBOTFj9vLEyUVAtNwWy2jU3eqBHeyzS5tGLHDwQz7OWk-6KewB_DjgFP-QaZepWIxHzWeEGnyzB7NGJ_RdJz0"><img style="width:624px" src="https://lh7-us.googleusercontent.com/F7z1a4j_hb9rRuE1MshCmL73VMEO3AZnuLjA-TY8YL889nqcMiqRapRC9f2SyYVBcCCBOTFj9vLEyUVAtNwWy2jU3eqBHeyzS5tGLHDwQz7OWk-6KewB_DjgFP-QaZepWIxHzWeEGnyzB7NGJ_RdJz0"/></a></figure><figure id="db21331a-ac8b-4778-bbb3-31198725fc4e" class="image"><a href="https://lh7-us.googleusercontent.com/IY-dv79GDfdewo5je-_XODvZgGUTJKHBc9aZdkwRDEgDm7A21tz7BgXfqhE3fSc6HHMhl63lw3Zl-Q9QBkhic_VNGmtwZIGzvq_aZFoL1cqCDElBFNyhymLjrzUpHKiW4JoqD7wIMHSRwJFFfQ140-g"><img style="width:624px" src="https://lh7-us.googleusercontent.com/IY-dv79GDfdewo5je-_XODvZgGUTJKHBc9aZdkwRDEgDm7A21tz7BgXfqhE3fSc6HHMhl63lw3Zl-Q9QBkhic_VNGmtwZIGzvq_aZFoL1cqCDElBFNyhymLjrzUpHKiW4JoqD7wIMHSRwJFFfQ140-g"/></a></figure><p id="be42f8d6-1059-43fc-9309-2f2081433683" class="">From start to rest, the cloth takes less time to fall in comparison to the default. It also has more pronounced wrinkles at rest, which is due to the change in tension at the pinned points. The wrinkles are also deeper, due to the increased density (and thus increased weight).</p><p id="61491c97-83fa-4bc4-848a-e350d4fa917b" class="">Now let us change only the spring constant ks:</p><p id="6136f961-a2f7-48bf-8bea-3acb9e417b9e" class="">If ks is lower than the default (ks = 500):</p><figure id="5ebfa151-ea02-4078-af81-3a01f4ecc8aa" class="image"><a href="https://lh7-us.googleusercontent.com/Bz-jqdFx_zrDGMzm1GeGKTWs7gjbttNqnKzXcAum2rgQkNuHc-E95MzCEs5C1Ulr9bhEw1l1Nmki6uY6-14LCslFOAs_xv99FAdQL8GM3bn_ADCC5CgsUwX73nlZi3kGb9CIiLW2BPvM4kkDr9s7uSA"><img style="width:624px" src="https://lh7-us.googleusercontent.com/Bz-jqdFx_zrDGMzm1GeGKTWs7gjbttNqnKzXcAum2rgQkNuHc-E95MzCEs5C1Ulr9bhEw1l1Nmki6uY6-14LCslFOAs_xv99FAdQL8GM3bn_ADCC5CgsUwX73nlZi3kGb9CIiLW2BPvM4kkDr9s7uSA"/></a></figure><figure id="3aaf6a64-cb06-4d68-9b6b-1af2790856cc" class="image"><a href="https://lh7-us.googleusercontent.com/FchaIBvfvNyJ_n9aYkQrhvc1ElnagNOmtyBUkVbpDTYcPOvxKl1Zup7evRqTPVhObo4QiUh2Mzx1PA1TOgJ-nxE-l2a5J0xQtFXkw4BjvG-YQzGelOcZvAJhOt_Y-37LHkI8uCLQLcGhFw3GiO7t6cg"><img style="width:624px" src="https://lh7-us.googleusercontent.com/FchaIBvfvNyJ_n9aYkQrhvc1ElnagNOmtyBUkVbpDTYcPOvxKl1Zup7evRqTPVhObo4QiUh2Mzx1PA1TOgJ-nxE-l2a5J0xQtFXkw4BjvG-YQzGelOcZvAJhOt_Y-37LHkI8uCLQLcGhFw3GiO7t6cg"/></a></figure><p id="16ddc069-90db-49a6-8408-9f27813e6206" class="">In comparison to the default, the cloth is far more “lax”, resulting in a droopier cloth, and thus more defined wrinkles. This makes sense, as decreasing ks decreases the stiffness of the springs, resulting in more elongated springs (which “loosens” the cloth). Note that this is slightly different from increasing the density; notice the fewer wrinkles on this render. Also note that the tension at the two pinned points results in the bottom of the cloth being curved to compensate for that.</p><p id="b32bcc4c-2df5-49bb-b60b-92ce959e8857" class="">If ks is higher than the default (ks = 25000):</p><figure id="830caefa-78dc-4524-8d29-0954274830e0" class="image"><a href="https://lh7-us.googleusercontent.com/QTw7AZJlVBUTrvxoaLg171W0fP-wSByRwoOPHBbBSWXNWB018Gq6WzVmLfXezGvOeGpZ9LKfSzTAlKBVY0AcDjcbuV3e6eM_yoG3MfGEWjMreeIGucD5RKz33bkRhsPNn-oNieCi0Okogw4asjuqth8"><img style="width:624px" src="https://lh7-us.googleusercontent.com/QTw7AZJlVBUTrvxoaLg171W0fP-wSByRwoOPHBbBSWXNWB018Gq6WzVmLfXezGvOeGpZ9LKfSzTAlKBVY0AcDjcbuV3e6eM_yoG3MfGEWjMreeIGucD5RKz33bkRhsPNn-oNieCi0Okogw4asjuqth8"/></a></figure><figure id="8721882d-0352-45dd-a587-8197e2961864" class="image"><a href="https://lh7-us.googleusercontent.com/OKU9aKvOjp5y5JSjbXF05FqXa-NLEGVTtC-cHY4qbebgpAvQdOiYLAFqShcz0HWyOqoxgLiUbpidIJMPg_8_jsH_79aGQY685WeRyGSntkLedUFsbAAtgUti843_2FhplMbeVfyaYB06Muhrw9ShlaA"><img style="width:624px" src="https://lh7-us.googleusercontent.com/OKU9aKvOjp5y5JSjbXF05FqXa-NLEGVTtC-cHY4qbebgpAvQdOiYLAFqShcz0HWyOqoxgLiUbpidIJMPg_8_jsH_79aGQY685WeRyGSntkLedUFsbAAtgUti843_2FhplMbeVfyaYB06Muhrw9ShlaA"/></a></figure><p id="4a43c90a-5599-4dad-8cae-bda0a07c5edd" class="">In comparison to the default, the cloth is stiffer, which makes sense due to the increased ks value. The wrinkles have also been de-emphasized, and the bottom of the cloth is less curved (almost straight in this case), due to fewer, shallower wrinkles. Overall, increasing ks results in a stiffer cloth.</p><p id="1d219b07-5a0f-4393-9580-0da47ad8a4db" class="">Finally, let us change only the damping coefficient kd:</p><p id="c0e9076c-86d3-4893-8bbd-fb24a6667e24" class="">If the damping parameter is lower than the default (Damping = 0.057):</p><figure id="515fe349-4f01-4652-9d79-55cf82438bf6" class="image"><a href="https://lh7-us.googleusercontent.com/S5Zm9fC25eVPjsbr5kf9d8i6g4IRyhet1B7eg97ZG8JQ3kcOINkNszP0ka8SzmzLn-VxQ5q8kpG3bc9Mb9jIR19D0YGPzYeuOwYkfPESk_SxUMSwP_fsfMvYxRHnEcuCovCJiYKx5gHnpaOh_6XHjlo"><img style="width:624px" src="https://lh7-us.googleusercontent.com/S5Zm9fC25eVPjsbr5kf9d8i6g4IRyhet1B7eg97ZG8JQ3kcOINkNszP0ka8SzmzLn-VxQ5q8kpG3bc9Mb9jIR19D0YGPzYeuOwYkfPESk_SxUMSwP_fsfMvYxRHnEcuCovCJiYKx5gHnpaOh_6XHjlo"/></a></figure><p id="4e528548-cb3e-4d78-87b3-d9eefd4e662a" class="">[ The cloth swinging backwards initially. It is very “floaty”. ]</p><figure id="84eb169c-b0ab-4817-a172-98bd359f14e3" class="image"><a href="https://lh7-us.googleusercontent.com/0OS9j9-sCw-naJIOhAnlYEQw9b1XtECw4Y2-23zEzRpq-UkfXLSGNdZ4OlzBDPxFW01MH3jOlU39632KdL4NXN8pUsgOxS4GfiN6GZ6n7kkncwhm4D5p2DzYg8XtWweaM5c--8e4rixWK44FSr8OaNI"><img style="width:624px" src="https://lh7-us.googleusercontent.com/0OS9j9-sCw-naJIOhAnlYEQw9b1XtECw4Y2-23zEzRpq-UkfXLSGNdZ4OlzBDPxFW01MH3jOlU39632KdL4NXN8pUsgOxS4GfiN6GZ6n7kkncwhm4D5p2DzYg8XtWweaM5c--8e4rixWK44FSr8OaNI"/></a></figure><p id="4170fe2c-77dd-4dd2-9553-ec12c577c5db" class="">[ The cloth swinging forwards after swinging back. ]</p><figure id="a752f8d0-33f0-4791-901c-4451ffaa4592" class="image"><a href="https://lh7-us.googleusercontent.com/mu6VtaaVBDf2mx35KhQvFlpoKEpWajHqHYlWd602uKjnlj4d7EjMofoTaepU8ybXwzQZUl4--JcwpaNSgr93zqseEA40XZFvNGcolC4NDPvcf40YYd8KguAyGdsD_8A3-MCKqvZzNGMft-ecr-EJQxQ"><img style="width:624px" src="https://lh7-us.googleusercontent.com/mu6VtaaVBDf2mx35KhQvFlpoKEpWajHqHYlWd602uKjnlj4d7EjMofoTaepU8ybXwzQZUl4--JcwpaNSgr93zqseEA40XZFvNGcolC4NDPvcf40YYd8KguAyGdsD_8A3-MCKqvZzNGMft-ecr-EJQxQ"/></a></figure><p id="aea6ccd8-79b1-4fc1-935b-7ab1e459dab3" class="">[ At rest. ]</p><p id="2029aaa6-3db1-462c-95be-da13d19a27e5" class="">The change is most noticeable when observing the cloth initially falling from start to rest. As the cloth falls, it swings back and forth more dramatically, almost like a swing. This makes sense, as the kd coefficient dampens the motion of the cloth, acting like a viscous drag. Thus, when this decreases, we see far more motion in the cloth when falling (swinging from left to right, taking longer to settle to its final resting position, etc.). As an aside, it seems as though kd, along with the density parameter, can help simulate air resistance in models.</p><p id="a541dd2f-f2ac-4d74-aa29-7e59da6bc5e6" class="">If the damping parameter is higher than the default (Damping = 0.517):</p><figure id="6859f086-0fd4-4b3c-8757-2369fefba47a" class="image"><a href="https://lh7-us.googleusercontent.com/7AZBJq-QhrmT240neAR0UMEKT0mMm1GSG4wZTyF6022hIYvck4y2jwBHKyLmmU2skoL0iAdfbVM4hn4t2U8bDMfq8OKV82ABTvIxfaoQV74jndPaB1HPO8GfoUm00slWnWD9_SvYhZ6aCdoUKTuA9wE"><img style="width:624px" src="https://lh7-us.googleusercontent.com/7AZBJq-QhrmT240neAR0UMEKT0mMm1GSG4wZTyF6022hIYvck4y2jwBHKyLmmU2skoL0iAdfbVM4hn4t2U8bDMfq8OKV82ABTvIxfaoQV74jndPaB1HPO8GfoUm00slWnWD9_SvYhZ6aCdoUKTuA9wE"/></a></figure><p id="0c706b22-0bf8-4ae1-80d0-6350f2bce7b5" class="">[ As the cloth first falls. Note that this fall happens very slowly. ]</p><figure id="947d367f-3a28-43d8-aa9d-3233f976915a" class="image"><a href="https://lh7-us.googleusercontent.com/YFhU73J7zQUpQo_-N0LrjK6JqAIsyies4DTHeu1dC1iSRy__qWHki6LWffQ5gLaJxw76kbgVMKQwwOVrp6VYd_ZFaKH9tVMzpSdseH78jMXRDKy4y3Tu-vut5uwxI2FkG09WQ2naXUL91czr26wK0QY"><img style="width:624px" src="https://lh7-us.googleusercontent.com/YFhU73J7zQUpQo_-N0LrjK6JqAIsyies4DTHeu1dC1iSRy__qWHki6LWffQ5gLaJxw76kbgVMKQwwOVrp6VYd_ZFaKH9tVMzpSdseH78jMXRDKy4y3Tu-vut5uwxI2FkG09WQ2naXUL91czr26wK0QY"/></a></figure><p id="f88cf452-ebe1-4448-b8f5-35caa57c7f45" class="">[ Near the end of the simulation. The cloth barely swings backwards. ]</p><figure id="b142f560-d350-498d-a6a5-911cdf959c3a" class="image"><a href="https://lh7-us.googleusercontent.com/Ps2FTlKHmDBvJI_qqQn2dDqtkWAGoQlKQuPi7BJeP8BnkWEorQdczgcE9xcORKNOVYNzdywJ445tTddtsiPHtV7P6iS52ok9Tq2sKSIi8XUuxeAz37EqymBUAz7cTetZCqS16i5EOon80bvakWoX3QY"><img style="width:624px" src="https://lh7-us.googleusercontent.com/Ps2FTlKHmDBvJI_qqQn2dDqtkWAGoQlKQuPi7BJeP8BnkWEorQdczgcE9xcORKNOVYNzdywJ445tTddtsiPHtV7P6iS52ok9Tq2sKSIi8XUuxeAz37EqymBUAz7cTetZCqS16i5EOon80bvakWoX3QY"/></a></figure><p id="7b80f95f-f0b4-4916-abda-078c1fddca7a" class="">[ The cloth at rest. ]</p><p id="e6d70a89-8078-45ed-a177-7482f33d1c5d" class="">Once again, the change is most noticeable when watching the cloth from start to rest. The cloth takes far longer to reach its resting position due to the fact that it simply falls very slowly. The cloth also barely swings backwards, unlike in the previous case. This makes sense, as kd dampens all motion, including the motion of the cloth falling. Thus, we often need to consider the tradeoffs of adjusting kd to suit the material we would want to simulate.</p><p id="76d18e32-82d0-440c-a72e-826c867759ec" class="">Now, let us see how a cloth pinned at four points is modeled:</p><figure id="2276c6bd-bf7a-4102-9e2a-c8b82b5a3583" class="image"><a href="https://lh7-us.googleusercontent.com/1jQx-YlYBwDjeevgewe4Fo1UG54chMbyhKh15UntHs8fqhjO9HT4EvvtBfoQL1VDzHTd9w0U5ucE4cLP5k_4z1-_tAgMOzv_NcEPdS8s2L72U7t8ZEkODAWxsSX_iF07p4ACGrm7JnYztVzugi41yEg"><img style="width:624px" src="https://lh7-us.googleusercontent.com/1jQx-YlYBwDjeevgewe4Fo1UG54chMbyhKh15UntHs8fqhjO9HT4EvvtBfoQL1VDzHTd9w0U5ucE4cLP5k_4z1-_tAgMOzv_NcEPdS8s2L72U7t8ZEkODAWxsSX_iF07p4ACGrm7JnYztVzugi41yEg"/></a></figure><figure id="ad53651b-99bb-4989-88f0-ee97ed3b04e8" class="image"><a href="https://lh7-us.googleusercontent.com/l30xz-UH0jlJLZLIYdjHEGFIGj6XJ0uNSWNPl-_2oCskMJW3mHF9M3EEgDQtOZomasWgzcnkG-BBnJYj1xTL_eeKsvkTHkdXzcoUM8WGrSMtXnWWKNzMzMlZ5INhMpTi2EB1jAbc4SLhOZIC2RtHqKo"><img style="width:624px" src="https://lh7-us.googleusercontent.com/l30xz-UH0jlJLZLIYdjHEGFIGj6XJ0uNSWNPl-_2oCskMJW3mHF9M3EEgDQtOZomasWgzcnkG-BBnJYj1xTL_eeKsvkTHkdXzcoUM8WGrSMtXnWWKNzMzMlZ5INhMpTi2EB1jAbc4SLhOZIC2RtHqKo"/></a></figure><p id="698a79d9-ca58-412b-99c4-6b5596bc0c03" class="">
+	</p><h1 id="ffac14e0-340b-47e7-bfae-23c88dff207a" class="">Part 3 - Handling collisions with other objects</h1><p id="987216ec-f91c-4dcd-81cc-7c0638de9c9f" class="">Pictured below is a screenshot of a shaded cloth resting on a sphere with ks = 5000 [the default value]:</p><figure id="7f02942f-aab6-44b6-8176-810ccf99c3f9" class="image"><a href="https://lh7-us.googleusercontent.com/De2KEmQPgUgkB4VZQyf4MaYRetF_ReQHYNma22p5A8UemAD1ILbVPtYFlygjDXoICXney36oXc8FJHZUWgBhIjD2csduyLCEmQVIi87oQkh4VC6clplVGmDdmFzUOe2ZVrjA0X43T2d88eurXD_Fz2s"><img style="width:624px" src="https://lh7-us.googleusercontent.com/De2KEmQPgUgkB4VZQyf4MaYRetF_ReQHYNma22p5A8UemAD1ILbVPtYFlygjDXoICXney36oXc8FJHZUWgBhIjD2csduyLCEmQVIi87oQkh4VC6clplVGmDdmFzUOe2ZVrjA0X43T2d88eurXD_Fz2s"/></a></figure><p id="53435007-d4d3-4d2b-aa33-67d067030a8c" class="">Pictured below is a screenshot of a shaded cloth resting on a sphere with ks = 500:</p><figure id="22fe69ea-28bc-4286-97de-63ab5c195f13" class="image"><a href="https://lh7-us.googleusercontent.com/fa1IVlEx48N4SVEG1U6lFAC0jEITcgDc-kPooMtM07HdlN2ndKdAUZEIdYoWu9sd4ikFXmAH2ELQvbJGVuSTJfCN3rtYAA4Fd-96sXqOmMM2cJ9iBpE-ycBlWj2UIXLMcWweb3--ZVp8h4yzM3pw5uA"><img style="width:624px" src="https://lh7-us.googleusercontent.com/fa1IVlEx48N4SVEG1U6lFAC0jEITcgDc-kPooMtM07HdlN2ndKdAUZEIdYoWu9sd4ikFXmAH2ELQvbJGVuSTJfCN3rtYAA4Fd-96sXqOmMM2cJ9iBpE-ycBlWj2UIXLMcWweb3--ZVp8h4yzM3pw5uA"/></a></figure><p id="4b692369-e6c2-4f79-8709-5e5e6f61b68c" class="">Pictured below is a screenshot of a shaded cloth resting on a sphere with ks = 50000:</p><figure id="01605002-4374-49bd-9d55-429aba1e077b" class="image"><a href="https://lh7-us.googleusercontent.com/A9il6VZ0MI6lK_8vHjYfulKd7TBxygJs5J9EjLom4CWxadZ61yZ_l42-yCryFpy7yQN-Z89iexGMVzBdjFYc01ysyjNVUBn_7TLM_kQcFWcpV98QC6VAHs4P9YUKO-IR2QodLCTCkSZ-S1CQbOHpH1A"><img style="width:624px" src="https://lh7-us.googleusercontent.com/A9il6VZ0MI6lK_8vHjYfulKd7TBxygJs5J9EjLom4CWxadZ61yZ_l42-yCryFpy7yQN-Z89iexGMVzBdjFYc01ysyjNVUBn_7TLM_kQcFWcpV98QC6VAHs4P9YUKO-IR2QodLCTCkSZ-S1CQbOHpH1A"/></a></figure><p id="94cb87d1-f15d-4acf-93e5-944e08bcfabb" class="">First, note that ks represents the spring coefficient, which adjusts the stiffness of the springs in the cloth. Thus, when ks is set to 500, we notice that the cloth is looser, which is directly due to the looser springs allowing the cloth to act more elastic, and it thus appears to “cling” to the sphere more. Of course, the cloth is not actually clinging to the sphere; the cloth is just less stiff when compared to when ks is 5000, and is less resistant to gravity. We also note that there are more wrinkles as a result. The cloth also appears to be “longer”, although this is due to the looseness of the cloth in comparison to the default ks value. When ks is set to 50000, the cloth is stiffer, resulting in fewer wrinkles and a tendency for the cloth to maintain its rigidity (it does not deform as much in shape when compared to the above results), as seen by how its edges hang off the sphere. The cloth also appears “shorter’ due to the same reason.</p><p id="440bcdbe-8328-4e60-a749-cff5473ea2ff" class="">Pictured below is a screenshot of a shaded cloth resting on a plane:</p><figure id="fd605dfb-b94d-4a65-83c5-c9fb36f57c7a" class="image"><a href="https://lh7-us.googleusercontent.com/jRWpIhkYgkQ7v5SmLTm5ic9EfEdSqT1uxMQvlNvx0TT3_W-DGJtAJvlurJSPR92CpfRcUz2dUqleg6ESGW6GaWyBQFiJI07bazTlm7tftoJCySTCcwOrLHy_UHxaZ2Z_VywX_cQIzAjaOBkH8Jv1hTs"><img style="width:624px" src="https://lh7-us.googleusercontent.com/jRWpIhkYgkQ7v5SmLTm5ic9EfEdSqT1uxMQvlNvx0TT3_W-DGJtAJvlurJSPR92CpfRcUz2dUqleg6ESGW6GaWyBQFiJI07bazTlm7tftoJCySTCcwOrLHy_UHxaZ2Z_VywX_cQIzAjaOBkH8Jv1hTs"/></a></figure><figure id="40f5de2c-94fa-4270-9580-2a3d3c378f03" class="image"><a href="https://lh7-us.googleusercontent.com/5Y0EL8lqdFyDAF8_JHhSortsL-oKNg49_eiw-9igfDmwbAsoSNXHQwsHG-Q2QnR1wOSoCcI7KwCxRI10gYx7AicWsJhZru8ms0JBwSSRMAscItMYU5YPaFCOoP_onT2K88bss_49n_p1Dmtq3ttwcD8"><img style="width:624px" src="https://lh7-us.googleusercontent.com/5Y0EL8lqdFyDAF8_JHhSortsL-oKNg49_eiw-9igfDmwbAsoSNXHQwsHG-Q2QnR1wOSoCcI7KwCxRI10gYx7AicWsJhZru8ms0JBwSSRMAscItMYU5YPaFCOoP_onT2K88bss_49n_p1Dmtq3ttwcD8"/></a></figure><p id="a3a6027b-4593-47b0-ae8a-0de3b1aef392" class="">
+	</p><h1 id="aef90a37-37df-4a8c-88da-1239b1d08bfd" class="">Part 4 - Handling self-collisions</h1><p id="e8aca3ed-75a1-4c1d-aeb1-09148cfa0717" class="">Pictured below is a cloth at its initial state. The simulation has not started yet.</p><figure id="02044b56-b569-45a0-9f3e-36c6a94b9fc2" class="image"><a href="https://lh7-us.googleusercontent.com/3o7fR7RrCO6fNWoAMNFLdNWdG9umzTxP_Q1webxgM-LWVpUMfCXC0U46MHkoHKr5Q2fTsWnlANePNGTJWB6T95VRkeSZsl9XdtDAUvV9Q_LgzhQkafVqO2e-tgdHbXIpjFNUL6yVRfjwLIkkmIItkk8"><img style="width:624px" src="https://lh7-us.googleusercontent.com/3o7fR7RrCO6fNWoAMNFLdNWdG9umzTxP_Q1webxgM-LWVpUMfCXC0U46MHkoHKr5Q2fTsWnlANePNGTJWB6T95VRkeSZsl9XdtDAUvV9Q_LgzhQkafVqO2e-tgdHbXIpjFNUL6yVRfjwLIkkmIItkk8"/></a></figure><p id="0f8172ae-eb71-4f5f-86ba-be6b072b8feb" class="">Pictured below is the cloth at the start of the simulation, as it begins to fall:</p><figure id="75c7ff7f-d70b-4e62-ba53-f5f4d511f431" class="image"><a href="https://lh7-us.googleusercontent.com/lpDaApmeu27poSIIYLXAStcVt_T4yE3-jv24FKmvBTucUeijLm1pTe4z5VPVmRUo0b730IEcOpu1kbkSGO6vM7AiaG5_dDfBMTNBro6WSdYSAwZ5OC_oSDPB32gO_4bOpanp5Ks5oxlkUt2fiEQfd3A"><img style="width:624px" src="https://lh7-us.googleusercontent.com/lpDaApmeu27poSIIYLXAStcVt_T4yE3-jv24FKmvBTucUeijLm1pTe4z5VPVmRUo0b730IEcOpu1kbkSGO6vM7AiaG5_dDfBMTNBro6WSdYSAwZ5OC_oSDPB32gO_4bOpanp5Ks5oxlkUt2fiEQfd3A"/></a></figure><p id="f5fbacb2-a919-404a-bdd8-9acc72bb370c" class="">Pictured below is the cloth further on in the simulation. Note how it folds on itself.</p><figure id="ca2b9b42-1948-4f7c-90f0-73f5e76d5530" class="image"><a href="https://lh7-us.googleusercontent.com/g8d-oiqOAY5puqqSW4X8anHf8CWfYIvC0TdMdQJwiJ6PjQU0UZu04ky5BUbkR_NH7Dy5Ba7Zra0xYn-0bc2h60qoFTQDfn3GszsxY5HmtzSY7ykC_bZCO3i2tnO-tGnrYmNBhxFyUo8Jsm0idfOMdb4"><img style="width:624px" src="https://lh7-us.googleusercontent.com/g8d-oiqOAY5puqqSW4X8anHf8CWfYIvC0TdMdQJwiJ6PjQU0UZu04ky5BUbkR_NH7Dy5Ba7Zra0xYn-0bc2h60qoFTQDfn3GszsxY5HmtzSY7ykC_bZCO3i2tnO-tGnrYmNBhxFyUo8Jsm0idfOMdb4"/></a></figure><p id="d1b19edf-a598-4044-8aba-0c34c96ff037" class="">The cloth, nearing the end of the simulation:</p><figure id="905d10b0-fcc1-4259-99a2-9c100be5ba20" class="image"><a href="https://lh7-us.googleusercontent.com/eVNb_mR1S30coiNVmf_fmIcip4dgusWlKb6OJyBQG66EKSBqsSjS_5gUe7jtUuGgvKeeInzsiWCewbHmtgR7hyWQKYuxwU6qAiYp5WuFAYrWXNRPu8dJAdaIISoSbdzObAIXotJpAzTm0I1hr41FhCI"><img style="width:624px" src="https://lh7-us.googleusercontent.com/eVNb_mR1S30coiNVmf_fmIcip4dgusWlKb6OJyBQG66EKSBqsSjS_5gUe7jtUuGgvKeeInzsiWCewbHmtgR7hyWQKYuxwU6qAiYp5WuFAYrWXNRPu8dJAdaIISoSbdzObAIXotJpAzTm0I1hr41FhCI"/></a></figure><p id="a5fc7620-b385-4c58-b23d-a4213baa3fe1" class="">The cloth, in a stable state at the end of the simulation:</p><figure id="eba2d5ba-b838-4ccc-8612-f2895131fca9" class="image"><a href="https://lh7-us.googleusercontent.com/o5Cuy9sXeZpjCILZhv6j7OikzqpdUrvnxaYZ8s3kkxSlMAG3WS5UMugt7kFW0_fKZuXc5sVED5sBi-V__TajhH6E4Z3JbDTB3et2I_fCKF8WA2otiDR_UtbZVypoJV2szNv5sNvSzed7_s4NOxRbnxQ"><img style="width:624px" src="https://lh7-us.googleusercontent.com/o5Cuy9sXeZpjCILZhv6j7OikzqpdUrvnxaYZ8s3kkxSlMAG3WS5UMugt7kFW0_fKZuXc5sVED5sBi-V__TajhH6E4Z3JbDTB3et2I_fCKF8WA2otiDR_UtbZVypoJV2szNv5sNvSzed7_s4NOxRbnxQ"/></a></figure><p id="26588b5e-4666-44f0-b26c-8c636e86dda0" class="">Now, we will adjust the density and ks parameters to observe their effects on the simulation.</p><p id="923e2f1f-c2a5-4f13-8b84-e02b2a3ceffb" class="">First, we will change only the density:</p><p id="9663c8c1-1de8-4f41-b45a-e99efcf0aa9d" class="">Density = 5:</p><figure id="8e1b19c7-0128-4df7-afc7-14fc796f191d" class="image"><a href="https://lh7-us.googleusercontent.com/gzh-LOi5q19nbGJH6SIo3rII5voq02l8QtfUv70houcn-pKjeP3p-1UsYCPWliNMR5UcUnEf8Bojv1z7JFexUFvSpPl0VcuWSCNyXBYxr8N10LZmPOnmgkdxFnn6Rarif3P_VbMUYIvrg6LUL-g_muc"><img style="width:624px" src="https://lh7-us.googleusercontent.com/gzh-LOi5q19nbGJH6SIo3rII5voq02l8QtfUv70houcn-pKjeP3p-1UsYCPWliNMR5UcUnEf8Bojv1z7JFexUFvSpPl0VcuWSCNyXBYxr8N10LZmPOnmgkdxFnn6Rarif3P_VbMUYIvrg6LUL-g_muc"/></a></figure><p id="bb696a48-f314-4bcf-88c4-0a2a56d3d8cf" class="">Density = 75:</p><figure id="1f45f970-ac4f-4008-aef6-388e0fcabac0" class="image"><a href="https://lh7-us.googleusercontent.com/LaqRhor_cNL5k128Piang8QLm9ULjxi-Q5IOHZaT9XYfgjmVXtCuAyxJluX8ttzR2mgK1ScqOwEdnfOdoM1Y8YN_smHLTxvTFWtoBFNQxfizjIwE0afKjGAGyDr5R9NMrYcHV0HFXjvJ4EAQgaD3evk"><img style="width:624px" src="https://lh7-us.googleusercontent.com/LaqRhor_cNL5k128Piang8QLm9ULjxi-Q5IOHZaT9XYfgjmVXtCuAyxJluX8ttzR2mgK1ScqOwEdnfOdoM1Y8YN_smHLTxvTFWtoBFNQxfizjIwE0afKjGAGyDr5R9NMrYcHV0HFXjvJ4EAQgaD3evk"/></a></figure><p id="a5e4a29d-f5df-441a-bea4-c1101c688d3d" class="">As we increased density, the amount of space between the folds as it collided with itself decreased. The more dense cloth left less room for space between folds. In the pictures you can see much more folds and cloth mass crumpled up together.</p><p id="202ed580-37ec-4cee-9165-951e3a594e05" class="">Next, we will change only ks:</p><p id="a953f723-5556-4eb4-ad3d-3f04422c943a" class="">Ks = 500:</p><figure id="8ab203a5-7675-46bc-8b6f-e24c0c373a98" class="image"><a href="https://lh7-us.googleusercontent.com/CPlv6N609K5z5OdziU3JGm6Kvi9pISncC7lHLAE_-qKM7H0UW69Md1lLcd3hD_mWmpm2q7TWt5g4SDha9-OUzlhR7FxbjyldFFdExTG2RDZ7aNZ0MMZlt8jtvVsgoIfb8DNJKjb7VWMmt1pDyeGrtnQ"><img style="width:624px" src="https://lh7-us.googleusercontent.com/CPlv6N609K5z5OdziU3JGm6Kvi9pISncC7lHLAE_-qKM7H0UW69Md1lLcd3hD_mWmpm2q7TWt5g4SDha9-OUzlhR7FxbjyldFFdExTG2RDZ7aNZ0MMZlt8jtvVsgoIfb8DNJKjb7VWMmt1pDyeGrtnQ"/></a></figure><p id="8ddf9bd7-3a0e-457a-be4a-8b7a0421fdfe" class="">Ks = 50,000:</p><figure id="03db05f9-3240-437b-81c9-117a12b1ec79" class="image"><a href="https://lh7-us.googleusercontent.com/z2rIRXe4SR5ulWYFx6enrjxr54p3AbAi2QfhFTOexzi1jaGugOhfor5929x1wHTUpJLkDLMtzyCIH8I8NemNvEvwf-43MnSv8pmJZ0r1UKEEDuU9D1b41FKFixyVN2hY3TSBeZ203HSYz6r44-15sbA"><img style="width:624px" src="https://lh7-us.googleusercontent.com/z2rIRXe4SR5ulWYFx6enrjxr54p3AbAi2QfhFTOexzi1jaGugOhfor5929x1wHTUpJLkDLMtzyCIH8I8NemNvEvwf-43MnSv8pmJZ0r1UKEEDuU9D1b41FKFixyVN2hY3TSBeZ203HSYz6r44-15sbA"/></a></figure><p id="cd41a069-eb0b-430d-8db4-9886d0ab19e4" class="">As we increased the spring coefficient, the amount of time for the cloth to “settle” and lay out flat on the plane decreased. In the pictures you can see the 50,000ks springs immediately flatten out and settle as soon as the entire cloth hit the plane. On the other hand, the 500ks springs still were jumbled together trying to settle even after a minute since the cloth hit the plane.</p><p id="9f833e72-efbb-4d59-9914-d9739f2cc2b4" class="">
+	</p><h1 id="e4a3999d-22de-44e3-a87e-18a7ed5ac27e" class="">Part 5 - Cloth Sim</h1><p id="e5ae11b8-8693-4c0f-ab95-2ddd960e92c5" class="">A shader program (typically written in GLSL) are GPU-based programs that run for different stages in the graphics pipeline. They are isolated programs designed to run in parallel, greatly increasing rendering speed. Although there are many shader stages in the OpenGL rendering pipeline, the ones used in this project were the vector and fragment shaders respectively.</p><p id="2a3f68b8-589d-464e-a7da-d75d67114d36" class="">Vector shaders are applied first in the pipeline and process vertices via transformations, often changing the positions, normal vectors, etc. and writing final positions. To be more specific, vertex shaders write the final gl_Position value for each vertex. Note that these values calculated by the vertex program (such as the vertex’s normal, position, etc.) are then used by the fragment shader. Fragment shaders are applied further down the pipeline after rasterization, and produce “fragments” from pixel samples from the vertex values outputted by the vertex shader (which are interpolated via barycentric coordinates before being passed in).  These fragments are then processed by the shader to compute write per-fragment values and output per-fragment colors.</p><p id="fd954ae1-2085-490e-9070-ce9f2af1ad3b" class="">We implemented the Blinn-Phong shader model in this project. The Blinn-Phong reflection model is a simple shading model, with three components, pictured below:</p><figure id="878d1d50-66b4-420d-9a40-9b0fb08d8f17" class="image"><a href="https://lh7-us.googleusercontent.com/2hvB8VYBmEs6RceourGAPUCgi0r4aGy5PoLz25dEQthPARgkFG8tCRzVnJMvaAuB_Mu0yqp4dEXbc5xlyx3d2YJxbo5bSxMo72BtwpjwbcqQlvyxOSJorBssfHA2iO4hQQC_oBB1qYYqCcRtz4AfoF0"><img style="width:624px" src="https://lh7-us.googleusercontent.com/2hvB8VYBmEs6RceourGAPUCgi0r4aGy5PoLz25dEQthPARgkFG8tCRzVnJMvaAuB_Mu0yqp4dEXbc5xlyx3d2YJxbo5bSxMo72BtwpjwbcqQlvyxOSJorBssfHA2iO4hQQC_oBB1qYYqCcRtz4AfoF0"/></a></figure><figure id="dd353ef5-a9ad-45af-b80a-efd777ea8dfa" class="image"><a href="https://lh7-us.googleusercontent.com/S0rtaw92vS_Q8R-My00QK04Ee4jwBl2LXb0UcDCloReBfoBJHwk3Lr1LsnZWA6Wv1AZuC6PQ0f8u3OlHF97gfzDkhHwExhpjffei-JLO_UAF5mf7K_tnReZUZNsdXWYWnHFsgPh8RrU82Nmdd98PD20"><img style="width:624px" src="https://lh7-us.googleusercontent.com/S0rtaw92vS_Q8R-My00QK04Ee4jwBl2LXb0UcDCloReBfoBJHwk3Lr1LsnZWA6Wv1AZuC6PQ0f8u3OlHF97gfzDkhHwExhpjffei-JLO_UAF5mf7K_tnReZUZNsdXWYWnHFsgPh8RrU82Nmdd98PD20"/></a></figure><p id="69c10023-1846-41d0-86cd-aad0cef376ad" class="">The light color for each fragment / pixel sample returned by this algorithm is the sum of the</p><p id="d1665f89-724e-4d57-bbaa-a37c8a9b88b7" class="">ambient light, the diffuse light, and the specular light at that fragment, represented as La, Ld, and Ls respectively.</p><figure id="7a9aed80-1104-4f5e-9c5d-3c2b913b69ee" class="image"><a href="https://lh7-us.googleusercontent.com/ja0IDjoWOosGXI_3ggXzQwZKlD_E8otGaet7ETHppSCmlyVPcUuf-wBCMkQmMnGEc7lk1DR1Novps7Hv3BzPCbQhDB4hr8uLFQT6eH4LcRVP6TJJIjWCT6TDpFN6PZtNQZjQiPaTY_2ueIAuLf0d0mk"><img style="width:624px" src="https://lh7-us.googleusercontent.com/ja0IDjoWOosGXI_3ggXzQwZKlD_E8otGaet7ETHppSCmlyVPcUuf-wBCMkQmMnGEc7lk1DR1Novps7Hv3BzPCbQhDB4hr8uLFQT6eH4LcRVP6TJJIjWCT6TDpFN6PZtNQZjQiPaTY_2ueIAuLf0d0mk"/></a></figure><p id="34f06727-4ad2-4556-9b3b-e690c5b199c0" class="">Ambient lighting refers to any shading that depends on no external factors aside from the external illumination. It is often a constant color scaled by a constant ka, the ambient coefficient, which is manually chosen. In this project, the illumination parameter Ia was also manually chosen. La then represents the color of the ambient light at the fragment.</p><figure id="e02825f5-7904-4f96-a80e-052b2dffc16a" class="image"><a href="https://lh7-us.googleusercontent.com/ivN_CqbJmsGGzQXCBRdnZuyA8kugpHGFyr1xJsG16ELB5R8KHZ6qAGRf8H3xlc81AkSgBNDTHlWsZEOYoCLJ6j4qRvj-MfMQs4DP-v5PQHE3JgqKKp4qwfLt-6yV5Sp-5XYDOrHTy5ScUAX4i-BvHNM"><img style="width:624px" src="https://lh7-us.googleusercontent.com/ivN_CqbJmsGGzQXCBRdnZuyA8kugpHGFyr1xJsG16ELB5R8KHZ6qAGRf8H3xlc81AkSgBNDTHlWsZEOYoCLJ6j4qRvj-MfMQs4DP-v5PQHE3JgqKKp4qwfLt-6yV5Sp-5XYDOrHTy5ScUAX4i-BvHNM"/></a></figure><p id="d34bee16-5a02-441c-a8b1-a918f8009f95" class="">Diffuse lighting refers to shading that does not depend on the view/camera direction. It consists of the illumination from the light source (the illumination of the light source scaled by its distance from the point of intersection) scaled by the diffuse coefficient (manually determined) and the angle between the normal of the current fragment/point of intersection and the light ray emitted from the light source. Note that we do not consider negative values when taking the dot product, as negative colors don’t make sense for our model, and this would imply that the normal and light source vectors are pointing in opposite directions, indicating no diffuse shadowing. Thus we take the max between this dot product and 0, and scale the illumination by it.</p><figure id="416d7e8b-732e-46ca-9cac-f46fb1d97747" class="image"><a href="https://lh7-us.googleusercontent.com/PKvt8ocVRdBG-i6HVN3BO-S32roHJUr3GHjYUccIXOJTIY6DQvGAJWcaGdUXRVG6UEHwbGenu7hA-nXzBliEbY7G6JCtFPxwd4Z7c75nRUzlXsh4BteELMnr-pwnSb1_4ccKRolulwAnfmKpvOiy2zc"><img style="width:624px" src="https://lh7-us.googleusercontent.com/PKvt8ocVRdBG-i6HVN3BO-S32roHJUr3GHjYUccIXOJTIY6DQvGAJWcaGdUXRVG6UEHwbGenu7hA-nXzBliEbY7G6JCtFPxwd4Z7c75nRUzlXsh4BteELMnr-pwnSb1_4ccKRolulwAnfmKpvOiy2zc"/></a></figure><p id="1b88cb60-3d16-49c9-a9c3-8ce0768efca2" class="">Specular lighting refers to specular highlights on an object, where the intensity of this lighting is dependent on the viewing/camera angle. To calculate specular lighting, we multiply the illumination from the light source by ks, the specular coefficient (manually chosen to increase/decrease shininess / intensity), and the max of the dot product between the normal vector of the surface at the intersection point and the halfway vector h, which is the vector that bisects the light ray and the view ray. Note that we take the max between 0 and this dot product for similar reasons as outlined above, and then take this quantity to the pth power, where p is manually chosen; a higher p will increase the intensity of the specular light.</p><figure id="c40d5758-bfa3-499a-b735-4800f26a8c95" class="image"><a href="https://lh7-us.googleusercontent.com/lKGBpw1HHf32ApAb1eF9mqBEeVMtEbOVoSajTyP7Ock19CiijVLij0wpBfrqorHwVSDDzPcKrAh8BCOGR4baLGLy3gFmgZ0X3tLShie-H4GmKpKXG8pEqat8dDlZCeN-bXeKSEzeAfCkhvfd7tZeOvo"><img style="width:624px" src="https://lh7-us.googleusercontent.com/lKGBpw1HHf32ApAb1eF9mqBEeVMtEbOVoSajTyP7Ock19CiijVLij0wpBfrqorHwVSDDzPcKrAh8BCOGR4baLGLy3gFmgZ0X3tLShie-H4GmKpKXG8pEqat8dDlZCeN-bXeKSEzeAfCkhvfd7tZeOvo"/></a></figure><p id="2607b32d-b691-42e1-bb02-f56b734f658a" class="">Finally, we sum of all of these components. This is the final color value calculated for the fragment passed into our Blinn-Phong shader. We calculate this value for each fragment to apply Blinn-Phong shading to the simulation.</p><p id="d49c170f-37a8-459e-9734-31a7193148c6" class="">Pictured below is the Blinn-Phong shader with only the ambient component:</p><figure id="be9fdab1-b59a-47e7-9e00-b01f997ccea5" class="image"><a href="https://lh7-us.googleusercontent.com/M_IvGHN-X8aa8IgycBtTs2qAklvFUvGlvIeuDUYfqSwGvybeDwPWa1b0unIs7FWt_zfBMA1HFPQRvdVn94xVg5lINVleY9PP07PkQwsQsRCrPO1V4qUJvkkOEKwnJUXiWfwXgyRtMHLjoTBVcSeYEgw"><img style="width:624px" src="https://lh7-us.googleusercontent.com/M_IvGHN-X8aa8IgycBtTs2qAklvFUvGlvIeuDUYfqSwGvybeDwPWa1b0unIs7FWt_zfBMA1HFPQRvdVn94xVg5lINVleY9PP07PkQwsQsRCrPO1V4qUJvkkOEKwnJUXiWfwXgyRtMHLjoTBVcSeYEgw"/></a></figure><p id="b14a9398-fcbb-4cc9-9326-ab311e1dfe4e" class="">Pictured below is the Blinn-Phong shader with only the diffuse component:</p><figure id="e36975ac-34d7-40f3-99d2-236dd7481809" class="image"><a href="https://lh7-us.googleusercontent.com/55ozplFshXLage19c7nApPEPZWUT8W07U25svBlJjzMEGV2X1ga3_5h8J2EU90soErNlvZIIFo-3ryHUz1MiZG986ZwLOJ-DVJZZFiTRZ1U9FfsHob3m61arr_u2P2oouGGflUYYkZO-DEgfrbIJ3AU"><img style="width:624px" src="https://lh7-us.googleusercontent.com/55ozplFshXLage19c7nApPEPZWUT8W07U25svBlJjzMEGV2X1ga3_5h8J2EU90soErNlvZIIFo-3ryHUz1MiZG986ZwLOJ-DVJZZFiTRZ1U9FfsHob3m61arr_u2P2oouGGflUYYkZO-DEgfrbIJ3AU"/></a></figure><p id="2b52c153-2872-45a9-baf3-a7290f53bbfe" class="">Pictured below is the Blinn-Phong shader with only the specular component:</p><figure id="944c23f6-6779-4ae9-8946-30b064ef7aee" class="image"><a href="https://lh7-us.googleusercontent.com/Cu_-ZRU4TwmZP4fRFcKuIajs5AJa9Hk3C9-VUl2F5Xma1I7U-ZIFa1hQ_A57JBYJYPbyfov6v40D2EM14jXeJyWI2XRQhOfEkHdp0vIl7xV1u0MWkebLlwe-KnV2bw6LpyrQo_j8jPawbBWz9eDx4-8"><img style="width:624px" src="https://lh7-us.googleusercontent.com/Cu_-ZRU4TwmZP4fRFcKuIajs5AJa9Hk3C9-VUl2F5Xma1I7U-ZIFa1hQ_A57JBYJYPbyfov6v40D2EM14jXeJyWI2XRQhOfEkHdp0vIl7xV1u0MWkebLlwe-KnV2bw6LpyrQo_j8jPawbBWz9eDx4-8"/></a></figure><p id="59aa2954-df7c-45ce-88a9-1ec07d624bd4" class="">Pictured below is the Blinn-Phong shader with all components:</p><figure id="4d81766d-9261-43ee-b50a-06f7e4413208" class="image"><a href="https://lh7-us.googleusercontent.com/YuuWR7mMDm80j4emQpPMqvFu9IHjFpz6V6e5RAzFiAR5GpYomfQPAnfTSDQVWbw00IAKYLhFhrZ8dNNqtH4LukEdWc8M9ufvArmn78ldgohb025Z5s5DzbNyZycYxL2GkhiGpRHrujdnVEiawIhhUAI"><img style="width:624px" src="https://lh7-us.googleusercontent.com/YuuWR7mMDm80j4emQpPMqvFu9IHjFpz6V6e5RAzFiAR5GpYomfQPAnfTSDQVWbw00IAKYLhFhrZ8dNNqtH4LukEdWc8M9ufvArmn78ldgohb025Z5s5DzbNyZycYxL2GkhiGpRHrujdnVEiawIhhUAI"/></a></figure><p id="ffd9ef87-063b-4277-97a7-29d3c56fe7a5" class="">We also implemented texture sampling in this project. Pictured below is the texture mapping shader, with a custom texture:</p><figure id="e24b2698-0113-4536-a464-976c7437ede7" class="image"><a href="https://lh7-us.googleusercontent.com/_50jOqbiuDmkwJjQnhYm9cp3sqwFM-VjfWpPFepym0b9DcriqmClf3kM38BC2wm3Q1J6wHEB98B599LcNKiywE4Ol5KAE099IQsejXDrf1bqAvL3e-f9rSfYu75pk0zAf_1y25D6K8UAkUWcrhZK4SA"><img style="width:624px" src="https://lh7-us.googleusercontent.com/_50jOqbiuDmkwJjQnhYm9cp3sqwFM-VjfWpPFepym0b9DcriqmClf3kM38BC2wm3Q1J6wHEB98B599LcNKiywE4Ol5KAE099IQsejXDrf1bqAvL3e-f9rSfYu75pk0zAf_1y25D6K8UAkUWcrhZK4SA"/></a></figure><figure id="90682490-1b01-400a-bd9c-da14a4bf2014" class="image"><a href="https://lh7-us.googleusercontent.com/Z5sXlGCGr-7ieMjxGFn6891tHn0C4-pTQnCHmnhp7CK7Dk-0oX72ajYH5C89eF-llEJpFCTQ1Co04LjxQdGnOdy9NPN22WSxF2o3J6ulFm39B9CAZfz0QJk6dSKmar1_D4biZsEDdQQM0tdfwAzFx2I"><img style="width:624px" src="https://lh7-us.googleusercontent.com/Z5sXlGCGr-7ieMjxGFn6891tHn0C4-pTQnCHmnhp7CK7Dk-0oX72ajYH5C89eF-llEJpFCTQ1Co04LjxQdGnOdy9NPN22WSxF2o3J6ulFm39B9CAZfz0QJk6dSKmar1_D4biZsEDdQQM0tdfwAzFx2I"/></a></figure><figure id="7ea8e755-4c12-442f-b179-796e2b14928a" class="image"><a href="https://lh7-us.googleusercontent.com/Kk8st91pwSXw2NGZq1FVp6wdUSeMlsUB65UE8ZFVgAM4nThoeQoa2-lMTXAkMz30ctgqL3tiwNuRAXw3yvasSJ_FJC5_ODoCYHpY-m_JKonZFAC-g5KMHX6dNrO4lRny9c_mQAsRQx_9YuavO9_CEE8"><img style="width:624px" src="https://lh7-us.googleusercontent.com/Kk8st91pwSXw2NGZq1FVp6wdUSeMlsUB65UE8ZFVgAM4nThoeQoa2-lMTXAkMz30ctgqL3tiwNuRAXw3yvasSJ_FJC5_ODoCYHpY-m_JKonZFAC-g5KMHX6dNrO4lRny9c_mQAsRQx_9YuavO9_CEE8"/></a></figure><p id="be803b8a-3a84-4914-a040-dc080f186b62" class="">Show a screenshot of bump mapping on the cloth and on the sphere. Show a screenshot of displacement mapping on the sphere. Use the same texture for both renders. You can either provide your own texture or use one of the ones in the textures directory, BUT choose one that&#x27;s not the default texture_2.png. Compare the two approaches and resulting renders in your own words. Compare how your two shaders react to the sphere by changing the sphere mesh&#x27;s coarseness by using -o 16 -a 16 and then -o 128 -a 128.</p><p id="e2684599-2e04-406c-8e79-f3208a291dd6" class="">Bump Mapping on Sphere:</p><figure id="b78cd848-3d38-4b36-89dd-fda993857e30" class="image"><a href="https://lh7-us.googleusercontent.com/BvX20NWZXkGHKrfUS8ZblD-zwaRCgdk0lxenip7zMpbewTewxmLALn-4OBYpdIR6c4mspKZ1hRSoRL9d8x_B6u1TsfWQDaBlKMcBBYqhvaznl98oGTtdx6CGvFKmZXePGBcQxSGPMRQaCmwoERU1bY0"><img style="width:624px" src="https://lh7-us.googleusercontent.com/BvX20NWZXkGHKrfUS8ZblD-zwaRCgdk0lxenip7zMpbewTewxmLALn-4OBYpdIR6c4mspKZ1hRSoRL9d8x_B6u1TsfWQDaBlKMcBBYqhvaznl98oGTtdx6CGvFKmZXePGBcQxSGPMRQaCmwoERU1bY0"/></a></figure><p id="9297f284-a987-4850-9cca-9b9e098baebd" class="">Bump Mapping on Cloth:</p><figure id="5f324f68-92dc-4ab3-bd70-28bed7d29a9e" class="image"><a href="https://lh7-us.googleusercontent.com/qgHDzVmy1jyN8qaUkjXpdVLcH3IM1XTxuuyzepOAFjlIbHzenCNjXoRYD84UCeR6aspKDaztQqA6pOnRtqp9b0E6jSl1jLYKFDQThdZGOZJnJC3ylZRH4KhIdAYVnVIIZxquQwJDBAKcCFxhu5p-aWI"><img style="width:624px" src="https://lh7-us.googleusercontent.com/qgHDzVmy1jyN8qaUkjXpdVLcH3IM1XTxuuyzepOAFjlIbHzenCNjXoRYD84UCeR6aspKDaztQqA6pOnRtqp9b0E6jSl1jLYKFDQThdZGOZJnJC3ylZRH4KhIdAYVnVIIZxquQwJDBAKcCFxhu5p-aWI"/></a></figure><p id="8820d4a9-0ce4-4ddb-a368-d4e23a7851fe" class="">Bump Mapping on Sphere (Lower Quality):</p><figure id="44dec27a-8b61-41dc-bd71-06d2dd60f48e" class="image"><a href="https://lh7-us.googleusercontent.com/wJdFD5TXJeYd_ihLCtbwX5oYJTcLK2KPa5bhbR6kTdqPjBjgwJ3jS5eZDnm3mYTaSeyHwevhvWAszEwqJ5JVlKJwIzsOrHaBmAbuTmMXo_m1CZHOsuXylrdQOWqQa0wHcUYgefP-EGcHqI-M9QmfZkU"><img style="width:624px" src="https://lh7-us.googleusercontent.com/wJdFD5TXJeYd_ihLCtbwX5oYJTcLK2KPa5bhbR6kTdqPjBjgwJ3jS5eZDnm3mYTaSeyHwevhvWAszEwqJ5JVlKJwIzsOrHaBmAbuTmMXo_m1CZHOsuXylrdQOWqQa0wHcUYgefP-EGcHqI-M9QmfZkU"/></a></figure><p id="c6a6f0ec-4b48-4843-9f68-597f88e98c04" class="">Bump Mapping on Sphere (Higher Quality):</p><figure id="b3074359-ca46-4657-aeb2-a159c82abdba" class="image"><a href="https://lh7-us.googleusercontent.com/yzParuuzDFaMqtjr49GMtUvrQ6p8_-EtrbQzDenW0KfOWQaCYx_OGq0b81sEYlBJUYlQLpr0SDRm36jz9RlTWOdod0GNye6pf4ZMjAIvVZjG4hiKI5EHhyV1QQkguqennaDnYrI71eIHr-Vv8v5pCBA"><img style="width:624px" src="https://lh7-us.googleusercontent.com/yzParuuzDFaMqtjr49GMtUvrQ6p8_-EtrbQzDenW0KfOWQaCYx_OGq0b81sEYlBJUYlQLpr0SDRm36jz9RlTWOdod0GNye6pf4ZMjAIvVZjG4hiKI5EHhyV1QQkguqennaDnYrI71eIHr-Vv8v5pCBA"/></a></figure><p id="07078011-adf9-4ac2-9d98-066d72b17ec1" class="">For bump mapping on the sphere, we can see that the lower quality render has more noticeable edges that comprise the sphere, whereas the higher quality render is more smooth. In this case, there was little to no difference between how the cloth fell onto these 2 different spheres.</p><p id="fb818758-13fd-4bfc-80ad-93b7f38fb6f1" class="">Displacement Mapping on Sphere (Lower Quality):</p><figure id="6a6241d0-e4f9-49e9-b468-d7186d1cefd8" class="image"><a href="https://lh7-us.googleusercontent.com/8TAzJhOjsCOGJr0FLza2nhdtES9QdsHkISzWp5GbQ1AuT7L5QIpRRH4TMdCQ788wYYevsRVjfYUdRd4kvpJElPTdvUNR1hvq1iAFc0vJnegX86Y0Rc6m5GfHLliaD1VgLcfF9Opb3iObqZfMerc-6z0"><img style="width:624px" src="https://lh7-us.googleusercontent.com/8TAzJhOjsCOGJr0FLza2nhdtES9QdsHkISzWp5GbQ1AuT7L5QIpRRH4TMdCQ788wYYevsRVjfYUdRd4kvpJElPTdvUNR1hvq1iAFc0vJnegX86Y0Rc6m5GfHLliaD1VgLcfF9Opb3iObqZfMerc-6z0"/></a></figure><p id="2ba4318a-067b-4249-a0f2-8825674578d3" class="">Bump Mapping on Sphere (Higher Quality):</p><figure id="8de783c9-7022-422d-be7b-97e199321d6c" class="image"><a href="https://lh7-us.googleusercontent.com/EI8MdYQV5kAd6u_yPQwwEuYa3IC1zD0kV1vdYZR02Qe2a142lnFfE0TAuLPAauDsEQjoZzWvxeAhkVCNHnh7EL4ZSYwk4ezA0LBtKk4OdmIKfCTll1gBz0F4yvtbYXtS3TjSpiCreibZ7cIWOQF8IsI"><img style="width:624px" src="https://lh7-us.googleusercontent.com/EI8MdYQV5kAd6u_yPQwwEuYa3IC1zD0kV1vdYZR02Qe2a142lnFfE0TAuLPAauDsEQjoZzWvxeAhkVCNHnh7EL4ZSYwk4ezA0LBtKk4OdmIKfCTll1gBz0F4yvtbYXtS3TjSpiCreibZ7cIWOQF8IsI"/></a></figure><p id="e934a411-c83f-4576-afa4-abb16718385a" class="">For displacement mapping on the sphere, we can see that the lower quality render has significantly noticeable edges that comprise the sphere, whereas the higher quality render is more smooth. This is likely due to less precision in rendering the sphere, with displacement mapping making the lack of precision easy to see. In this case, there was little to no difference between how the cloth fell onto these 2 different spheres.</p><p id="11e3b80d-b95d-48b5-9f7a-a9a849d76051" class="">Pictured below is the mirror shader implemented:</p><figure id="46bce802-3d70-4c4a-9f9d-fa0b4b825081" class="image"><a href="https://lh7-us.googleusercontent.com/V6ETGEuZoRuboBt5_9_pCjTLLoCCtAZhqk6ZBpqMbGplh5lV0K60hGApBfKoA6iCG39Bly_XXZYdw2Y6A3uRB2qFt9iJ70spnzC8MFaHhOaIN7dnV1zEPv8UsLqVEvHF5yQSml9UzCcUbxU6DOmnCgQ"><img style="width:624px" src="https://lh7-us.googleusercontent.com/V6ETGEuZoRuboBt5_9_pCjTLLoCCtAZhqk6ZBpqMbGplh5lV0K60hGApBfKoA6iCG39Bly_XXZYdw2Y6A3uRB2qFt9iJ70spnzC8MFaHhOaIN7dnV1zEPv8UsLqVEvHF5yQSml9UzCcUbxU6DOmnCgQ"/></a></figure><p id="85547039-f202-4f47-95f2-8c35a5136f7d" class="">[ Before simulating the cloth falling onto the sphere. ]</p><figure id="31b48671-0ce4-4d4c-a55c-494b8396de47" class="image"><a href="https://lh7-us.googleusercontent.com/ZUmmtoB74v0RmYTLOLK5YFN4OfxOT8rico9-Kaj4jCMlWoNBien6yoRHno3XWwKmKHWrdhXVYdukiTVj-Od7ZKWRidagVaAM0hZ9KW8g82IHVgZDSKQhxYJYR0IkVFEFRmAuZEsdTVNMSL0QuKd9GhE"><img style="width:624px" src="https://lh7-us.googleusercontent.com/ZUmmtoB74v0RmYTLOLK5YFN4OfxOT8rico9-Kaj4jCMlWoNBien6yoRHno3XWwKmKHWrdhXVYdukiTVj-Od7ZKWRidagVaAM0hZ9KW8g82IHVgZDSKQhxYJYR0IkVFEFRmAuZEsdTVNMSL0QuKd9GhE"/></a></figure><p id="2133494b-dc21-4ac8-9068-e1e24629a9da" class="">[ After the cloth drops. ]</p><h1 id="fed5e79e-a6dc-4632-b16c-03617caed376" class="">AI Use</h1><p id="8159adc5-0f76-496c-b4e9-025056b0f2a5" class="">Since we were new to the GLSL platform, we did not know how to implement some of the mathematical computations for the environment-mapped reflections. Thus, we started some code and asked ChatGPT (via Bing) for advice. The chatlog is linked below:</p><p id="8e0cc632-1d31-47a8-bbfc-10ab0aa75ab7" class=""><a href="https://sl.bing.net/dBcNwdxS1kq">https://sl.bing.net/dBcNwdxS1kq</a></p><p id="0a22b8d4-5ea9-443a-ae87-ffd255d15eb7" class="">Through this exchange, we learned of a reflect function available through GLSL and figured out how to use it with the help of AI. Overall, we learned how to use the reflect function and that GLSL documentation can be found via searching the internet.</p><p id="8c689a59-da1d-46a1-a3fa-0e49d02a15c9" class="">
+	</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
